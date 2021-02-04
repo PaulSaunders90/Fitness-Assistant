@@ -1,0 +1,26 @@
+/* General Containers */
+
+html, body {
+    position: relative;
+    font-family: 'Open Sans', sans-serif;
+    background-color: #222;
+}
+
+.generalcontainer {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Footer */
+
+#footer{
+    padding: 5px;
+    background-color:#222;
+    text-align: center;
+}
+
+#footer a{
+    color: white;
+    text-decoration: none; 
+    font-size: 14px;
+}

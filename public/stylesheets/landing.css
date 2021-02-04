@@ -1,0 +1,413 @@
+
+/* Calculator Backgrounds and Containers */
+
+#title{
+    color:#F8F8F8;
+    text-align: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin: auto;
+    padding: 15px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#caloriecalccontainer{
+    background-color: #2c384e; 
+}
+
+#caloriecalc{
+    display: flex;
+    padding: 25px;
+}
+
+#liftingcalccontainer{
+    background-color: #2A363B;
+    display: none;
+}
+
+@media(min-width: 100px){
+    #caloriecalccontainer{
+        display: inline-flex;
+        padding: 15px 0;
+    }
+    #caloriecalc{
+        padding: 0;
+        margin: auto;
+    }
+    #liftingcalccontainer{
+        padding: 15px 0;
+    }
+}
+@media(min-width: 550px){
+    #caloriecalccontainer{
+        display:  block;
+        padding: 15px;
+    }
+    #caloriecalc{
+        padding: 25px;
+    }
+    #liftingcalccontainer{
+        padding: 15px;
+    }
+}
+
+/* Toggler */
+
+#togglecontainer{
+    font-size: 14px;
+    padding: 15px;
+    text-align: center;
+}
+
+#togglecalorie{
+    margin: auto 25px;
+    padding: 5px;
+    display: inline-block;
+    color: #F8F8F8;
+    border-radius: 10px;
+    transition: all .6s cubic-bezier(0.25, 0.8, 0.25, 1);
+    cursor: pointer;
+    border: 1px solid rgb(90,90,90)
+}
+
+#togglelift{
+    margin: auto 25px;
+    padding: 5px;
+    display: inline-block;
+    color: #F8F8F8;
+    border-radius: 10px;
+    transition: all .6s cubic-bezier(0.25, 0.8, 0.25, 1);
+    cursor: pointer;
+    border: 1px solid rgb(90,90,90)
+}
+
+#togglecalorie:hover{
+   background-color: #333;
+}
+
+#togglelift:hover{
+    background-color: #333;
+}
+
+#calorieimage{
+    width: 50px;
+    height: 50px;
+    background-image: url('/img/food.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: auto;
+}
+
+#liftimage{
+    width: 50px;
+    height: 50px;
+    background-image: url('/img/lift.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: auto;
+}
+
+/* Calculator Input Design */
+  
+form {
+    width: auto;
+    margin: auto;
+    color: #BABECC;
+    border: 1px solid rgba(40, 44, 52, .1);
+    border-radius: 15px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    background-color: #333;
+}
+
+#caloriecalcform{
+    padding: 20px;
+}
+
+#caloriecalcformbutton{
+    display: block;
+    background-color: #333;
+}
+
+#liftingform{
+    padding: 5px;
+}
+
+input {
+    font-size: 12px;
+    padding: 10px;
+    background-color:inherit;
+    border: none;
+    border-bottom: 1px solid rgba(235,222,194, .1);
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button{
+    -webkit-appearance: none; 
+    margin: 0; 
+}
+
+.calorieinputs[type="number"]{
+    color: #BABECC;
+    width: 60px;
+}
+
+label {
+    display: block;
+    margin-bottom: 24px;
+}
+
+label p{
+    display: inline-block;
+    width: 75px;
+}
+
+#genderselection{
+    display: flex;
+}
+
+#genderselection p{
+    width: 75px;
+}
+
+#male, #female{
+    margin: 5px 15px;
+}
+  
+#inches{
+    margin-left: 15px;
+}
+
+select{
+    background-color:inherit;
+    padding: 12px;
+    border: none;
+    border-bottom: 1px solid rgba(235,222,194, .1);
+}
+  
+button {
+    color: #BABECC;
+    border: 0;
+    outline: 0;
+    padding: 16px;
+    border: 1px solid rgba(235,222,194, .1);
+    border-radius: 15px;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    font-weight: 600;
+    background-color: #222;
+}
+
+button:hover {
+    background-color: #333 !important;
+}
+
+button:active {
+    box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF !important;
+}
+
+button.submit {
+    width: 350px;
+    margin: 15px auto;
+    color: #BABECC;
+}
+
+#cm{
+    display: none;
+}
+
+#kg{
+    display: none;
+}
+
+option, .measurement, #activity{
+    color: #BABECC;
+    background-color: #333;
+}
+
+.measurement{
+    margin-top: 10px;
+}
+
+#liftingform label{
+    margin-bottom: 0;
+}
+
+/* Calorie Calc Results */
+
+#caloriecalcresults{
+    display: none;
+    text-align: center;
+    padding: 25px;
+    width: auto;
+    color: #BABECC;
+    margin: 0 auto;
+}
+
+#maintainweight{
+    width: 30%;
+    box-shadow:  2px 2px 5px rgba(0, 0, 0, 0.25), -5px -5px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    padding: 10px;
+    text-align: center;
+    margin: 10px auto;
+    background-color:#333;
+}
+
+.results{
+    display: inline-block;
+    margin: 10px;
+    background-color:#333;
+}
+
+.resultstitle{
+    text-align: center;
+    font-size: 14px;
+    padding: 10px;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(235,222,194, .1);
+}
+
+.resultsnumber{
+    font-size: 16px;
+    padding: 10px;
+}
+
+.resultslabel{
+    display: block;
+    font-size: 14px;
+    text-align: center;
+}
+
+#weightlossresults{ 
+    width: 30%;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25), -5px -5px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    padding: 20px;
+}
+
+#weightgainresults{
+    width: 30%;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25),  -5px -5px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    padding: 20px;
+}
+
+#caloriecalcresults button{
+    margin: 15px auto;
+}
+
+/* Lifting Program Specific */
+
+#liftingcalc{
+    display: flex;
+    padding: 25px;
+    text-align: center;
+}
+
+#programcontainer{
+    display: block;
+    text-align: center;
+    margin: 20px 0;
+}
+
+#program{
+    border-radius: 0;
+    color: #BABECC;
+}
+
+.lifts{
+    display: inline-flex;
+    text-align: center;
+    margin: auto;
+}
+
+.lifts p{
+    margin-top: 25px;
+}
+
+.lifts label{
+    margin: 15px;
+}
+
+#liftingcalc button{
+    margin: 25px auto;
+}
+
+#liftingcalcresults{
+    display: none;
+    text-align: center;
+    padding: 25px;
+    width: auto;
+    color: #BABECC;
+    margin: 0 auto;
+}
+
+#instruction{
+    display: none;
+    text-align: center;
+    font-weight: bold;
+}
+
+#squats{
+    display: none;
+}
+
+#bench{
+    display: none;
+}
+
+#deadlift{
+    display: none;
+}
+
+#bbellrow{
+    display: none;
+}
+
+#incbench{
+    display: none;
+}
+
+#powerclean{
+    display: none;
+}
+
+#ohp{
+    display: none;
+}
+
+#liftprogramsubmit{
+    background-color: #333;
+    display: none;
+}
+
+/* Lifting Results */
+
+.maxresults{
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25), -5px -5px 10px rgba(0, 0, 0, 0.25);
+    padding: 10px;
+    text-align: center;
+    margin: 10px auto;
+    background-color:#333;
+}
+
+.liftmax{
+    font-weight: bold;
+    border-bottom: 1px solid rgba(235,222,194, .1);
+}
+
+#liftreset{
+    display: block;
+}
+
+#liftprogramlayout{
+    display: none;
+    text-align: center;
+    padding: 25px;
+    width: auto;
+    color: #BABECC;
+    margin: 0 auto;
+}
