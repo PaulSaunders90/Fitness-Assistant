@@ -146,16 +146,16 @@ function checkCalorieForm() {
     var kgInputFilled = (!isNaN(parseInt(DOM["kgWeightMeasurement"].value)) && (parseInt(DOM["kgWeightMeasurement"].value) > 0))
     if (selection == 0 && activitySelection != 0 && ageInputFilled && footInputFilled && inchInputFilled && poundInputFilled) {
         DOM["calorieCalcFormButton"].disabled = false
-        DOM["calorieCalcFormButton"].style.backgroundColor = "#222";
+        DOM["calorieCalcFormButton"].style.backgroundColor = "#e5e1e1";
         return true
     } else if (selection == 1 && activitySelection != 0 && ageInputFilled && cmInputFilled && kgInputFilled) {
         DOM["calorieCalcFormButton"].disabled = false
-        DOM["calorieCalcFormButton"].style.backgroundColor = "#222";
+        DOM["calorieCalcFormButton"].style.backgroundColor = "#e5e1e1";
         return true
     } else {
         console.log("CALORIE FORM ERROR FILL OUT THE FORM")
         DOM["calorieCalcFormButton"].disabled = true
-        DOM["calorieCalcFormButton"].style.backgroundColor = "#333";
+        DOM["calorieCalcFormButton"].style.backgroundColor = "#FFF";
         return false
     }
 };
@@ -249,7 +249,7 @@ function resetCalories() {
     DOM["kgWeightMeasurement"].value = "";
     DOM["calorieMeasurementSelector"].selectedIndex = 0;
     DOM["activityMeasurementSelector"].selectedIndex = 0;
-    DOM["calorieCalcFormButton"].style.backgroundColor = "#333";
+    DOM["calorieCalcFormButton"].style.backgroundColor = "#FFF";
     personalHealthData = {};
 };
 
@@ -334,21 +334,21 @@ function checkLiftingForm() {
         && (!isNaN(parseInt(DOM["powerCleanRepInput"].value)) && (DOM["powerCleanRepInput"].value) > 0))
     if ((liftingSelection == 1) && squatInputFilled && benchInputFilled && deadliftInputFilled && powerCleanInputFilled) {
         DOM["liftSubmitButton"].disabled = false
-        DOM["liftSubmitButton"].style.backgroundColor = "#222";
+        DOM["liftSubmitButton"].style.backgroundColor = "#e5e1e1";
         return true
     } else if ((liftingSelection == 2) && squatInputFilled && benchInputFilled && 
         deadliftInputFilled && rowInputFilled && incBenchInputFilled) {
         DOM["liftSubmitButton"].disabled = false
-        DOM["liftSubmitButton"].style.backgroundColor = "#222";
+        DOM["liftSubmitButton"].style.backgroundColor = "#e5e1e1";
         return true
     } else if ((liftingSelection == 3) && squatInputFilled && benchInputFilled && deadliftInputFilled && rowInputFilled) {
         DOM["liftSubmitButton"].disabled = false
-        DOM["liftSubmitButton"].style.backgroundColor = "#222";
+        DOM["liftSubmitButton"].style.backgroundColor = "#e5e1e1";
     }
     else {
         console.log("LIFTING FORM ERROR FILL OUT THE FORM")
         DOM["liftSubmitButton"].disabled = true
-        DOM["liftSubmitButton"].style.backgroundColor = "#333";
+        DOM["liftSubmitButton"].style.backgroundColor = "#FFF";
         return false
     }
 };
@@ -512,7 +512,7 @@ function resetLifts() {
     DOM["incBenchRepInput"].value = ""
     DOM["powerCleanWeightInput"].value = ""
     DOM["powerCleanRepInput"].value = ""
-    DOM["liftSubmitButton"].style.backgroundColor = "#333";
+    DOM["liftSubmitButton"].style.backgroundColor = "#FFF";
     DOM["liftingProgramSelector"].selectedIndex = 0;
     DOM["liftingMeasurementSelector"].selectedIndex = 0;
     personalStrengthData = {};

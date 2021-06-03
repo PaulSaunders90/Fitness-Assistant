@@ -3,7 +3,8 @@
 html, body {
     position: relative;
     font-family: 'Open Sans', sans-serif;
-    background-color: #222;
+    font-weight: bold;
+    background-color: #fff
 }
 
 .generalcontainer {
@@ -15,12 +16,13 @@ html, body {
 
 #footer{
     padding: 5px;
-    background-color:#222;
+    background-color:#fff;
     text-align: center;
+    color: #07c;
 }
 
 #footer a{
-    color: white;
+    color: #07c;
     text-decoration: none; 
     font-size: 14px;
 }
