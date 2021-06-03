@@ -19,10 +19,11 @@ html, body {
     background-color:#fff;
     text-align: center;
     color: #07c;
+    font-size: 10px;
+
 }
 
 #footer a{
     color: #07c;
     text-decoration: none; 
-    font-size: 14px;
 }

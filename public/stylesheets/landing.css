@@ -10,16 +10,11 @@
     user-select: none;
     margin: auto;
     padding: 15px;
-    font-size: 30px;
+    font-size: 22px;
 }
 
 #caloriecalccontainer{
     background-color:#fff;
-}
-
-#caloriecalc{
-    display: flex;
-    padding: 25px;
 }
 
 #liftingcalccontainer{
@@ -27,42 +22,15 @@
     display: none;
 }
 
-@media(min-width: 100px){
-    #caloriecalccontainer{
-        display: inline-flex;
-        padding: 15px 0;
-    }
-    #caloriecalc{
-        padding: 0;
-        margin: auto;
-    }
-    #liftingcalccontainer{
-        padding: 15px 0;
-    }
-}
-@media(min-width: 550px){
-    #caloriecalccontainer{
-        display:  block;
-        padding: 15px;
-    }
-    #caloriecalc{
-        padding: 25px;
-    }
-    #liftingcalccontainer{
-        padding: 15px;
-    }
-}
-
 /* Toggler */
 
 #togglecontainer{
-    font-size: 14px;
-    padding: 5px;
+    font-size: 12px;
     text-align: center;
 }
 
 #togglecalorie{
-    margin: auto 25px;
+    margin: auto 15px;
     padding: 5px;
     display: inline-block;
     color: #07c;
@@ -74,7 +42,7 @@
 }
 
 #togglelift{
-    margin: auto 25px;
+    margin: auto 15px;
     padding: 5px;
     display: inline-block;
     color: #07c;
@@ -112,6 +80,11 @@
 }
 
 /* Calculator Input Design */
+
+#caloriecalc{
+    margin-top: 10px;
+    display: flex;
+}
   
 form {
     width: auto;
@@ -124,6 +97,7 @@ form {
 }
 
 #caloriecalcform{
+    font-size: 12px;
     padding: 20px;
 }
 
@@ -136,7 +110,7 @@ form {
 }
 
 input {
-    font-size: 12px;
+    font-size: 10px;
     padding: 10px;
     background-color:inherit;
     border: none;
@@ -156,7 +130,7 @@ input[type="number"]::-webkit-outer-spin-button{
 
 label {
     display: block;
-    margin-bottom: 24px;
+    margin-bottom: 15px;
 }
 
 label p{
@@ -173,7 +147,7 @@ label p{
 }
 
 #male, #female{
-    margin: 5px 15px;
+    margin: 2px 15px;
 }
   
 #inches{
@@ -196,7 +170,6 @@ button {
     border-radius: 15px;
     transition: all 0.2s ease-in-out;
     cursor: pointer;
-    font-weight: 600;
     background-color: #FFF;
 }
 
@@ -233,7 +206,8 @@ option, .measurement, #activity{
 }
 
 #liftingform label{
-    margin-bottom: 0;
+    display: flex;
+    justify-content: center;
 }
 
 /* Calorie Calc Results */
@@ -265,20 +239,19 @@ option, .measurement, #activity{
 
 .resultstitle{
     text-align: center;
-    font-size: 14px;
+    font-size: 12px;
     padding: 10px;
-    font-weight: 600;
     border-bottom: 1px solid rgba(204, 200, 200, .8);
 }
 
 .resultsnumber{
-    font-size: 16px;
+    font-size: 14px;
     padding: 10px;
 }
 
 .resultslabel{
     display: block;
-    font-size: 14px;
+    font-size: 10px;
     text-align: center;
 }
 
@@ -303,9 +276,9 @@ option, .measurement, #activity{
 /* Lifting Program Specific */
 
 #liftingcalc{
+    margin-top: 10px;
+    font-size: 12px;
     display: flex;
-    padding: 25px;
-    text-align: center;
 }
 
 #programcontainer{
@@ -330,11 +303,11 @@ option, .measurement, #activity{
 }
 
 .lifts label{
-    margin: 15px;
+    margin: 5px 15px;
 }
 
 #liftingcalc button{
-    margin: 25px auto;
+    margin: 15px auto;
 }
 
 #liftingcalcresults{
@@ -396,7 +369,6 @@ option, .measurement, #activity{
 }
 
 .liftmax{
-    font-weight: bold;
     border-bottom: 1px solid rgba(235,222,194, .1);
 }
 
