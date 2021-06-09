@@ -1,230 +1,218 @@
 <%- include ('partials/header') %>
 
-<div class="generalcontainer">
-    <div id="title">Fitness Assistant</div>
-    <div id="togglecontainer">
-        <div id="togglecalorie">
-            <div id="calorieimage"></div>Calorie Calculator
-        </div>
-        <div id="togglelift">
-            <div id=liftimage></div>Lifting Calculator
-        </div>
-    </div>
-    <div id="caloriecalccontainer">
-        <div id="caloriecalc">
-            <form id="caloriecalcform">
-                <label>
-                    <select class="measurement" name="measurement">
-                        <option selected="true" value="us">U.S. Measurements</option>
-                        <option value="kg">Measurements Used by Everyone Else</option>
-                    </select>
-                </label>
-                <div id="genderselection">
-                    <p>Gender:</p>
-                    <input class="calorieinputs" type="radio" id="male" name="gender" value="male" required>
-                    <label for="male">Male</label>
-                    <input class="calorieinputs" type="radio" id="female" name="gender" value="female">
-                    <label for="female">Female</label>
-                </div>
-                <label>
-                    <p>Age:</p>
-                    <input class="calorieinputs" type="number" placeholder="Years" id="age" min="1" max="115"
-                        required />
-                </label>
-                <label>
-                    <p>Height:</p>
-                    <input class="calorieinputs" type="number" placeholder="Feet" id="feet" min="1" max="8" required />
-                    <input class="calorieinputs" type="number" placeholder="Inches" id="inches" min="1" max="11"
-                        required />
-                    <input class="calorieinputs" type="number" placeholder="cm" id="cm" min="1" max="250" required />
-                </label>
-                <label>
-                    <p>Weight:</p>
-                    <input class="calorieinputs" type="number" placeholder="Pounds" id="lbs" min="1" required />
-                    <input class="calorieinputs" type="number" placeholder="kg" id="kg" min="1" required />
-                </label>
-                <label>
-                    <select id="activity" name="activity" required>
-                        <option selected="true" disabled="true">Select Activity Level</option>
-                        <option>Basal Metabolic Rate (BMR)</option>
-                        <option>Sedentary: Little to No Exercise</option>
-                        <option>Light: 1-3 times/week</option>
-                        <option>Moderate: 4-5 times/week</option>
-                        <option>Active: Daily Exercise or Intensely 3-4 times/week</option>
-                        <option>Very Active: Intense Exercise 6-7 times/week</option>
-                        <option>Extra Active: Very Intense Exercise Daily or Physical Job</option>
-                    </select>
-                </label>
-                <button class="submit" type="button" id="caloriecalcformbutton">Submit</button>
-            </form>
-        </div>
-        <div id="caloriecalcresults">
-            <div id="maintainweight">
-                <p class="resultstitle">Maintain Weight</p>
-                <p class="resultsnumber"></p>
+    <div class="generalcontainer">
+        <div id="title">Fitness Assistant</div>
+        <div id="togglecontainer">
+            <div id="togglecalorie">
+                <div id="calorieimage"></div>Calorie Calculator
             </div>
-            <div id="weightlossresults" class="results">
-                <div class="resultstitle">Weight Loss Results</div>
-                <div id="mildweightloss">
+            <div id="togglelift">
+                <div id=liftimage></div>Lifting Calculator
+            </div>
+        </div>
+        <div id="caloriecalccontainer">
+            <div id="caloriecalc">
+                <form id="caloriecalcform">
+                    <label>
+                        <select class="measurement" name="measurement">
+                            <option selected="true" value="us">U.S. Measurements</option>
+                            <option value="kg">Measurements Used by Everyone Else</option>
+                        </select>
+                    </label>
+                    <div id="genderselection">
+                        <p>Gender:</p>
+                        <input class="calorieinputs" type="radio" id="male" name="gender" value="male" required>
+                        <label for="male">Male</label>
+                        <input class="calorieinputs" type="radio" id="female" name="gender" value="female">
+                        <label for="female">Female</label>
+                    </div>
+                    <label>
+                        <p>Age:</p>
+                        <input class="calorieinputs" type="number" placeholder="Years" id="age" min="1" max="115"
+                            required />
+                    </label>
+                    <label>
+                        <p>Height:</p>
+                        <input class="calorieinputs" type="number" placeholder="Feet" id="feet" min="1" max="8"
+                            required />
+                        <input class="calorieinputs" type="number" placeholder="Inches" id="inches" min="1" max="11"
+                            required />
+                        <input class="calorieinputs" type="number" placeholder="cm" id="cm" min="1" max="250"
+                            required />
+                    </label>
+                    <label>
+                        <p>Weight:</p>
+                        <input class="calorieinputs" type="number" placeholder="Pounds" id="lbs" min="1" required />
+                        <input class="calorieinputs" type="number" placeholder="kg" id="kg" min="1" required />
+                    </label>
+                    <label>
+                        <select id="activity" name="activity" required>
+                            <option selected="true" disabled="true">Select Activity Level</option>
+                            <option>Basal Metabolic Rate (BMR)</option>
+                            <option>Sedentary: Little to No Exercise</option>
+                            <option>Light: 1-3 times/week</option>
+                            <option>Moderate: 4-5 times/week</option>
+                            <option>Active: Daily Exercise or Intensely 3-4 times/week</option>
+                            <option>Very Active: Intense Exercise 6-7 times/week</option>
+                            <option>Extra Active: Very Intense Exercise Daily or Physical Job</option>
+                        </select>
+                    </label>
+                    <button class="submit" type="button" id="caloriecalcformbutton">Submit</button>
+                </form>
+            </div>
+            <div id="caloriecalcresults">
+                <div id="maintainweight">
+                    <p class="resultstitle">Maintain Weight</p>
                     <p class="resultsnumber"></p>
-                    <p class="resultslabel"><em>Mild Weight Loss - 0.5 lb/week</em></p>
                 </div>
-                <div id="weightloss">
-                    <p class="resultsnumber">1,800 calories</p>
-                    <p class="resultslabel"><em>Weight Loss - 1 lb/week</em></p>
+                <div id="weightlossresults" class="results">
+                    <div class="resultstitle">Weight Loss Results</div>
+                    <div id="mildweightloss">
+                        <p class="resultsnumber"></p>
+                        <p class="resultslabel"><em>Mild Weight Loss - 0.5 lb/week</em></p>
+                    </div>
+                    <div id="weightloss">
+                        <p class="resultsnumber">1,800 calories</p>
+                        <p class="resultslabel"><em>Weight Loss - 1 lb/week</em></p>
+                    </div>
+                    <div id="majorweightloss">
+                        <p class="resultsnumber">1,500 calories</p>
+                        <p class="resultslabel"><em>Major Weight Loss - 2 lb/week</em></p>
+                    </div>
                 </div>
-                <div id="majorweightloss">
-                    <p class="resultsnumber">1,500 calories</p>
-                    <p class="resultslabel"><em>Major Weight Loss - 2 lb/week</em></p>
+                <div id="weightgainresults" class="results">
+                    <div class="resultstitle">Weight Gain Results</div>
+                    <div id="mildweightgain">
+                        <p class="resultsnumber">2,500 calories</p>
+                        <p class="resultslabel"><em>Mild Weight Gain - 0.5 lb/week</em></p>
+                    </div>
+                    <div id="weightgain">
+                        <p class="resultsnumber">2,800 calories</p>
+                        <p class="resultslabel"><em>Weight Gain - 1 lb/week</em></p>
+                    </div>
+                    <div id="majorweightgain">
+                        <p class="resultsnumber">3,000 calories</p>
+                        <p class="resultslabel"><em>Major Weight Gain - 2 lb/week</em></p>
+                    </div>
                 </div>
+                <button class="submit" type="button" id="caloriereset">Reset</button>
             </div>
-            <div id="weightgainresults" class="results">
-                <div class="resultstitle">Weight Gain Results</div>
-                <div id="mildweightgain">
-                    <p class="resultsnumber">2,500 calories</p>
-                    <p class="resultslabel"><em>Mild Weight Gain - 0.5 lb/week</em></p>
-                </div>
-                <div id="weightgain">
-                    <p class="resultsnumber">2,800 calories</p>
-                    <p class="resultslabel"><em>Weight Gain - 1 lb/week</em></p>
-                </div>
-                <div id="majorweightgain">
-                    <p class="resultsnumber">3,000 calories</p>
-                    <p class="resultslabel"><em>Major Weight Gain - 2 lb/week</em></p>
-                </div>
+        </div>
+        <div id="liftingcalccontainer">
+            <div id="liftingcalc">
+                <form id="liftingform">
+                    <div id="programcontainer">
+                        <select id="program" name="program">
+                            <option selected="true" disabled="true">Select Strength Program</option>
+                            <option value="SS">Starting Strength</option>
+                            <option value="5x5">Stronglifts 5x5</option>
+                            <option value="madcow">Madcow 5x5</option>
+                        </select>
+                    </div>
+                    <div id="instruction">Enter Your Last Heaviest Lift</div>
+                    <label>
+                        <select class="measurement" name="measurement">
+                            <option selected="true" value="us">U.S. Measurements</option>
+                            <option value="kg">Measurements Used by Everyone Else</option>
+                        </select>
+                    </label>
+                    <div class="lifts">
+                        <div id="squats">
+                            <p>Squats</p>
+                            <label>
+                                <input type="number" placeholder="Weight" class="weightinput" />
+                            </label>
+                            <label>
+                                <input type="number" placeholder="Reps" class="repinput" />
+                            </label>
+                        </div>
+                    </div>
+                    <div class="lifts">
+                        <div id="bench">
+                            <p>Bench Press</p>
+                            <label>
+                                <input type="number" placeholder="Weight" class="weightinput" />
+                            </label>
+                            <label>
+                                <input type="number" placeholder="Reps" class="repinput" />
+                            </label>
+                        </div>
+                    </div>
+                    <div class="lifts">
+                        <div id="deadlift">
+                            <p>Deadlift</p>
+                            <label>
+                                <input type="number" placeholder="Weight" class="weightinput" />
+                            </label>
+                            <label>
+                                <input type="number" placeholder="Reps" class="repinput" />
+                            </label>
+                        </div>
+                    </div>
+                    <div class="lifts">
+                        <div id="bbellrow">
+                            <p>Barbell Row</p>
+                            <label>
+                                <input type="number" placeholder="Weight" class="weightinput" />
+                            </label>
+                            <label>
+                                <input type="number" placeholder="Reps" class="repinput" />
+                            </label>
+                        </div>
+                    </div>
+                    <div class="lifts">
+                        <div id="powerclean">
+                            <p>Power Clean</p>
+                            <label>
+                                <input type="number" placeholder="Weight" class="weightinput" />
+                            </label>
+                            <label>
+                                <input type="number" placeholder="Reps" class="repinput" />
+                            </label>
+                        </div>
+                    </div>
+                    <div class="lifts">
+                        <div id="ohp">
+                            <p>Overhead Press</p>
+                            <label>
+                                <input type="number" placeholder="Weight" class="weightinput" />
+                            </label>
+                            <label>
+                                <input type="number" placeholder="Reps" class="repinput" />
+                            </label>
+                        </div>
+                    </div>
+                    <button id="liftprogramsubmit" class="submit" type="button">Submit</button>
+                </form>
             </div>
-            <button class="submit" type="button" id="caloriereset">Reset</button>
+            <div id="liftingcalcresults">
+                <div class="maxresults">Squat Max
+                    <div class="liftmax"></div>
+                </div>
+                <div class="maxresults">Bench Max
+                    <div class="liftmax"></div>
+                </div>
+                <div class="maxresults">Deadlift Max
+                    <div class="liftmax"></div>
+                </div>
+                <div class="maxresults">Barbell Row Max
+                    <div class="liftmax"></div>
+                </div>
+                <div class="maxresults">Power Clean Max
+                    <div class="liftmax"></div>
+                </div>
+                <div class="maxresults">Overhead Press Max
+                    <div class="liftmax"></div>
+                </div>
+                <div id="liftingprogramlayout">
+                </div>
+                <button id="liftreset" class="submit" type="button">Reset</button>
+            </div>
         </div>
     </div>
-    <div id="liftingcalccontainer">
-        <div id="liftingcalc">
-            <form id="liftingform">
-                <div id="programcontainer">
-                    <select id="program" name="program">
-                        <option selected="true" disabled="true">Select Strength Program</option>
-                        <option value="SS">Starting Strength</option>
-                        <option value="5x5">Intermediate 5x5</option>
-                        <option value="madcow">Madcow 5x5</option>
-                    </select>
-                </div>
-                <div id="instruction">Enter Your Last Heaviest Lift</div>
-                <label>
-                    <select class="measurement" name="measurement">
-                        <option selected="true" value="us">U.S. Measurements</option>
-                        <option value="kg">Measurements Used by Everyone Else</option>
-                    </select>
-                </label>
-                <div class="lifts">
-                    <div id="squats">
-                        <p>Squats</p>
-                        <label>
-                            <input type="number" placeholder="Weight" class="weightinput" />
-                        </label>
-                        <label>
-                            <input type="number" placeholder="Reps" class="repinput" />
-                        </label>
-                    </div>
-                </div>
-                <div class="lifts">
-                    <div id="bench">
-                        <p>Bench Press</p>
-                        <label>
-                            <input type="number" placeholder="Weight" class="weightinput" />
-                        </label>
-                        <label>
-                            <input type="number" placeholder="Reps" class="repinput" />
-                        </label>
-                    </div>
-                </div>
-                <div class="lifts">
-                    <div id="deadlift">
-                        <p>Deadlift</p>
-                        <label>
-                            <input type="number" placeholder="Weight" class="weightinput" />
-                        </label>
-                        <label>
-                            <input type="number" placeholder="Reps" class="repinput" />
-                        </label>
-                    </div>
-                </div>
-                <div class="lifts">
-                    <div id="bbellrow">
-                        <p>Barbell Row</p>
-                        <label>
-                            <input type="number" placeholder="Weight" class="weightinput" />
-                        </label>
-                        <label>
-                            <input type="number" placeholder="Reps" class="repinput" />
-                        </label>
-                    </div>
-                </div>
-                <div class="lifts">
-                    <div id="incbench">
-                        <p>Incline Bench</p>
-                        <label>
-                            <input type="number" placeholder="Weight" class="weightinput" />
-                        </label>
-                        <label>
-                            <input type="number" placeholder="Reps" class="repinput" />
-                        </label>
-                    </div>
-                </div>
-                <div class="lifts">
-                    <div id="powerclean">
-                        <p>Power Clean</p>
-                        <label>
-                            <input type="number" placeholder="Weight" class="weightinput" />
-                        </label>
-                        <label>
-                            <input type="number" placeholder="Reps" class="repinput" />
-                        </label>
-                    </div>
-                </div>
-                <div class="lifts">
-                    <div id="ohp">
-                        <p>Overhead Press</p>
-                        <label>
-                            <input type="number" placeholder="Weight" class="weightinput" />
-                        </label>
-                        <label>
-                            <input type="number" placeholder="Reps" class="repinput" />
-                        </label>
-                    </div>
-                </div>
-                <button id="liftprogramsubmit" class="submit" type="button">Submit</button>
-            </form>
-        </div>
-        <div id="liftingcalcresults">
-            <div class="maxresults">Squat Max
-                <div class="liftmax"></div>
-            </div>
-            <div class="maxresults">Bench Max
-                <div class="liftmax"></div>
-            </div>
-            <div class="maxresults">Deadlift Max
-                <div class="liftmax"></div>
-            </div>
-            <div class="maxresults">Barbell Row Max
-                <div class="liftmax"></div>
-            </div>
-            <div class="maxresults">Incline Bench Max
-                <div class="liftmax"></div>
-            </div>
-            <div class="maxresults">Power Clean Max
-                <div class="liftmax"></div>
-            </div>
-            <div class="maxresults">Overhead Press Max
-                <div class="liftmax"></div>
-            </div>
-            <div id="liftingprogramlayout">
-            </div>
-            <button id="liftreset" class="submit" type="button">Reset</button>
-        </div>
-    </div>
-</div>
 
 
 
-<script src="/scripts/landingscripts.js"></script>
+    <script src="/scripts/landingscripts.js"></script>
 
-<%- include ('partials/footer') %>
+    <%- include ('partials/footer') %>

@@ -45,21 +45,18 @@ const DOM = {
     benchInput: document.getElementById("bench"),
     deadliftInput: document.getElementById("deadlift"),
     bbellRowInput: document.getElementById("bbellrow"),
-    incBenchInput: document.getElementById("incbench"),
     powerCleanInput: document.getElementById("powerclean"),
     ohpInput: document.getElementById("ohp"),
     squatWeightInput: document.getElementById("squats").getElementsByClassName("weightinput")[0],
     benchWeightInput: document.getElementById("bench").getElementsByClassName("weightinput")[0],
     deadliftWeightInput: document.getElementById("deadlift").getElementsByClassName("weightinput")[0],
     bbellRowWeightInput: document.getElementById("bbellrow").getElementsByClassName("weightinput")[0],
-    incBenchWeightInput: document.getElementById("incbench").getElementsByClassName("weightinput")[0],
     powerCleanWeightInput: document.getElementById("powerclean").getElementsByClassName("weightinput")[0],
-    ohpWeightInput: document.getElementById("incbench").getElementsByClassName("ohp")[0],
+    ohpWeightInput: document.getElementById("ohp").getElementsByClassName("weightinput")[0],
     squatRepInput: document.getElementById("squats").getElementsByClassName("repinput")[0],
     benchRepInput: document.getElementById("bench").getElementsByClassName("repinput")[0],
     deadliftRepInput: document.getElementById("deadlift").getElementsByClassName("repinput")[0],
     bbellRowRepInput: document.getElementById("bbellrow").getElementsByClassName("repinput")[0],
-    incBenchRepInput: document.getElementById("incbench").getElementsByClassName("repinput")[0],
     powerCleanRepInput: document.getElementById("powerclean").getElementsByClassName("repinput")[0],
     ohpRepInput: document.getElementById("ohp").getElementsByClassName("repinput")[0],
     liftSubmitButton: document.getElementById("liftprogramsubmit"),
@@ -69,21 +66,20 @@ const DOM = {
     benchMaxContainer: document.getElementsByClassName("maxresults")[1],
     deadliftMaxContainer: document.getElementsByClassName("maxresults")[2],
     rowMaxContainer: document.getElementsByClassName("maxresults")[3],
-    incBenchMaxContainer: document.getElementsByClassName("maxresults")[4],
-    powerCleanMaxContainer: document.getElementsByClassName("maxresults")[5],
+    powerCleanMaxContainer: document.getElementsByClassName("maxresults")[4],
     ohpMaxContainer: document.getElementsByClassName("maxresults")[5],
     squatMaxInput: document.getElementsByClassName("liftmax")[0],
     benchMaxInput: document.getElementsByClassName("liftmax")[1],
     deadliftMaxInput: document.getElementsByClassName("liftmax")[2],
     rowMaxInput: document.getElementsByClassName("liftmax")[3],
-    incBenchMaxInput: document.getElementsByClassName("liftmax")[4],
-    powerCleanMaxInput: document.getElementsByClassName("liftmax")[5],
-    ohpMaxInput: document.getElementsByClassName("liftmax")[6],
+    powerCleanMaxInput: document.getElementsByClassName("liftmax")[4],
+    ohpMaxInput: document.getElementsByClassName("liftmax")[5],
     liftCalcResultsReset: document.getElementById("liftreset"),
     calorieCalcInputs: document.getElementById("caloriecalcform").querySelectorAll("input"),
     calorieCalcSelects: document.getElementById("caloriecalcform").querySelectorAll("select"),
     liftingCalcInputs: document.getElementById("liftingform").querySelectorAll("input"),
-    liftingCalcSelects: document.getElementById("liftingform").querySelectorAll("select")
+    liftingCalcSelects: document.getElementById("liftingform").querySelectorAll("select"),
+    liftDataRows: document.getElementsByClassName("lifts"),
 };
 
 // Calorie Calculator Forumlas //
@@ -107,6 +103,7 @@ for (i = 0; i < DOM["calorieCalcSelects"].length; i++) {
 DOM["calorieCalcFormButton"].disabled = true;
 
 // Calorie Calculator Display Functions //
+// Toggle Calorie Calculator Function //
 
 function toggleCalc() {
     DOM["calorieCalcContainer"].style.display = DOM["calorieCalcContainer"].style.display == 'block' ? 'none' : 'block';
@@ -115,6 +112,8 @@ function toggleCalc() {
     DOM["calorieCalcFormButton"].disabled = true;
     DOM["title"].innerHTML = "Calorie Calculator";
 };
+
+// Unit Measurement Style Selection Formula //
 
 function measurementCheck() {
     var selection = DOM["calorieMeasurementSelector"].selectedIndex
@@ -134,6 +133,8 @@ function measurementCheck() {
         return false;
     }
 };
+
+// Function Checking Every Form is Filled on Calorie Calculator //
 
 function checkCalorieForm() {
     var selection = DOM["calorieMeasurementSelector"].selectedIndex
@@ -161,6 +162,7 @@ function checkCalorieForm() {
 };
 
 // Calorie Calculator Calculation Functions //
+// Calorie Calculator Master Measurement Function //
 
 function measureCalories() {
     checkCalorieForm()
@@ -171,6 +173,8 @@ function measureCalories() {
     DOM["calorieCalc"].style.display = "none"
     DOM["calorieCalcResults"].style.display = "block"
 };
+
+// Formula Standardizing Personal Metric Data into the Calorie Data Object //
 
 function personalMetrics() {
     var selection = DOM["calorieMeasurementSelector"].selectedIndex
@@ -188,6 +192,8 @@ function personalMetrics() {
     }
 };
 
+// Formula for Calcuating Calorie Data per Gender //
+
 function genderCheck() {
     if (document.getElementById('male').checked) {
         // male( BMR = 10W + 6.25H - 5A + 5)
@@ -204,6 +210,8 @@ function genderCheck() {
         return false;
     }
 };
+
+// Activity Level Multiplier Function //
 
 function activityLevelCheck() {
     var activitySelection = DOM["activityMeasurementSelector"].selectedIndex
@@ -228,6 +236,8 @@ function activityLevelCheck() {
     }
 };
 
+// Calorie Data Results Population Function //
+
 function populateResults() {
     DOM["maintainWeightResults"].innerHTML = Math.round(calorieResults) + " calories"
     DOM["mildWeightLossResults"].innerHTML = (Math.round(calorieResults) - 250) + " calories"
@@ -237,6 +247,8 @@ function populateResults() {
     DOM["mildWeightGainResults"].innerHTML = (Math.round(calorieResults) + 250) + " calories"
     DOM["majorWeightGainResults"].innerHTML = (Math.round(calorieResults) + 1000) + " calories"
 };
+
+// Form Reset Function //
 
 function resetCalories() {
     DOM["calorieCalc"].style.display = "flex";
@@ -256,7 +268,7 @@ function resetCalories() {
 // Lifting Calculator Event Listeners // 
 
 DOM["liftToggle"].addEventListener("click", toggleLift)
-DOM["liftingProgramSelector"].addEventListener("click", selectLiftingProgram)
+DOM["liftingProgramSelector"].addEventListener("change", selectLiftingProgram)
 DOM["liftSubmitButton"].addEventListener("click", calculateProgram)
 DOM["liftCalcResultsReset"].addEventListener("click", resetLifts)
 
@@ -264,8 +276,11 @@ for (i = 0; i < DOM["liftingCalcInputs"].length; i++) {
     DOM["liftingCalcInputs"][i].addEventListener("input", checkLiftingForm)
 };
 
+// Lifting Program Selector Variable //
+
 
 // Lifting Calculator Display Functions //
+// Toggle Lifting Calculator Function //
 
 function toggleLift() {
     DOM["liftingCalcContainer"].style.display = DOM["liftingCalcContainer"].style.display == 'block' ? 'none' : 'block';
@@ -273,77 +288,83 @@ function toggleLift() {
     DOM["calorieCalcContainer"].style.display = DOM["calorieCalcContainer"].style.display == 'block' ? 'none' : 'none';
     DOM["title"].innerHTML = "Lifting Calculator";
     DOM["liftSubmitButton"].disabled = true;
+    for (i = 0; i < DOM["liftDataRows"].length; i++) {
+        DOM["liftDataRows"][i].style.display = "none";
+    }
     selectLiftingProgram();
 };
 
+// Lifting Program Selection Function //
+
 function selectLiftingProgram() {
-    var liftingSelection = DOM["liftingProgramSelector"].selectedIndex
+    const liftingSelection = DOM["liftingProgramSelector"].selectedIndex
     // If Starting Strength //
     if (liftingSelection == 1) {
         DOM["liftingMeasurementSelector"].style.display = "inline"
         DOM["squatInput"].style.display = "block"
+        DOM["squatInput"].parentNode.style.display = "inline-flex"
         DOM["benchInput"].style.display = "block"
+        DOM["benchInput"].parentNode.style.display = "inline-flex"
         DOM["deadliftInput"].style.display = "block"
-        DOM["incBenchInput"].style.display = "none"
-        DOM["bbellRowInput"].style.display = "none"
+        DOM["deadliftInput"].parentNode.style.display = "inline-flex"
+        DOM["bbellRowInput"].style.display = "block"
+        DOM["bbellRowInput"].parentNode.style.display = "inline-flex"
         DOM["powerCleanInput"].style.display = "block"
+        DOM["powerCleanInput"].parentNode.style.display = "inline-flex"
+        DOM["ohpInput"].style.display = "block"
+        DOM["ohpInput"].parentNode.style.display = "block"
         DOM["liftSubmitButton"].style.display = "block"
         DOM["instructionText"].style.display = "block"
     }
-    // If Intermediate 5x5 //
-    else if (liftingSelection == 2) {
+    // If Stronglifts or Madcow //
+    else if (liftingSelection == 2 || liftingSelection == 3) {
         DOM["liftingMeasurementSelector"].style.display = "inline"
         DOM["squatInput"].style.display = "block"
+        DOM["squatInput"].parentNode.style.display = "inline-flex"
         DOM["benchInput"].style.display = "block"
+        DOM["benchInput"].parentNode.style.display = "inline-flex"
         DOM["deadliftInput"].style.display = "block"
+        DOM["deadliftInput"].parentNode.style.display = "inline-flex"
         DOM["bbellRowInput"].style.display = "block"
-        DOM["incBenchInput"].style.display = "block"
+        DOM["bbellRowInput"].parentNode.style.display = "inline-flex"
         DOM["powerCleanInput"].style.display = "none"
+        DOM["powerCleanInput"].parentNode.style.display = "none"
+        DOM["ohpInput"].style.display = "block"
+        DOM["ohpInput"].parentNode.style.display = "inline-flex"
         DOM["liftSubmitButton"].style.display = "block"
         DOM["instructionText"].style.display = "block"
     }
-    // If Madcow 5x5 //
-    else if (liftingSelection == 3) {
-        DOM["liftingMeasurementSelector"].style.display = "inline"
-        DOM["squatInput"].style.display = "block"
-        DOM["benchInput"].style.display = "block"
-        DOM["deadliftInput"].style.display = "block"
-        DOM["bbellRowInput"].style.display = "block"
-        DOM["incBenchInput"].style.display = "none"
-        DOM["powerCleanInput"].style.display = "none"
-        DOM["liftSubmitButton"].style.display = "block"
-        DOM["instructionText"].style.display = "block"
-    } else {
+    else {
         DOM["liftingMeasurementSelector"].style.display = "none"
     }
 };
 
+// Function Checking if All Lifting Form Fields are Filled //
+
 function checkLiftingForm() {
-    var liftingSelection = DOM["liftingProgramSelector"].selectedIndex
-    var squatInputFilled = (!isNaN(parseInt(DOM["squatWeightInput"].value)) && (parseInt(DOM["squatWeightInput"].value) > 0)
+    const liftingSelection = DOM["liftingProgramSelector"].selectedIndex
+    const squatInputFilled = (!isNaN(parseInt(DOM["squatWeightInput"].value)) && (parseInt(DOM["squatWeightInput"].value) > 0)
         && (!isNaN(parseInt(DOM["squatRepInput"].value)) && (DOM["squatRepInput"].value) > 0))
-    var benchInputFilled = (!isNaN(parseInt(DOM["benchWeightInput"].value)) && (parseInt(DOM["benchWeightInput"].value) > 0)
+    const benchInputFilled = (!isNaN(parseInt(DOM["benchWeightInput"].value)) && (parseInt(DOM["benchWeightInput"].value) > 0)
         && (!isNaN(parseInt(DOM["benchRepInput"].value)) && (DOM["benchRepInput"].value) > 0))
-    var deadliftInputFilled = (!isNaN(parseInt(DOM["deadliftWeightInput"].value)) && (parseInt(DOM["deadliftWeightInput"].value) > 0)
+    const deadliftInputFilled = (!isNaN(parseInt(DOM["deadliftWeightInput"].value)) && (parseInt(DOM["deadliftWeightInput"].value) > 0)
         && (!isNaN(parseInt(DOM["deadliftRepInput"].value)) && (DOM["deadliftRepInput"].value) > 0))
-    var rowInputFilled = (!isNaN(parseInt(DOM["bbellRowWeightInput"].value)) && (parseInt(DOM["bbellRowWeightInput"].value) > 0)
+    const rowInputFilled = (!isNaN(parseInt(DOM["bbellRowWeightInput"].value)) && (parseInt(DOM["bbellRowWeightInput"].value) > 0)
         && (!isNaN(parseInt(DOM["bbellRowRepInput"].value)) && (DOM["bbellRowRepInput"].value) > 0))
-    var incBenchInputFilled = (!isNaN(parseInt(DOM["incBenchWeightInput"].value)) && (parseInt(DOM["incBenchWeightInput"].value) > 0)
-        && (!isNaN(parseInt(DOM["incBenchRepInput"].value)) && (DOM["incBenchRepInput"].value) > 0))
-    var powerCleanInputFilled = (!isNaN(parseInt(DOM["powerCleanWeightInput"].value)) && (parseInt(DOM["powerCleanWeightInput"].value) > 0)
+    const powerCleanInputFilled = (!isNaN(parseInt(DOM["powerCleanWeightInput"].value)) && (parseInt(DOM["powerCleanWeightInput"].value) > 0)
         && (!isNaN(parseInt(DOM["powerCleanRepInput"].value)) && (DOM["powerCleanRepInput"].value) > 0))
-    if ((liftingSelection == 1) && squatInputFilled && benchInputFilled && deadliftInputFilled && powerCleanInputFilled) {
+    const ohpInputFilled = (!isNaN(parseInt(DOM["ohpWeightInput"].value)) && (parseInt(DOM["ohpWeightInput"].value) > 0)
+        && (!isNaN(parseInt(DOM["ohpRepInput"].value)) && (DOM["ohpRepInput"].value) > 0))
+    if ((liftingSelection == 1) && squatInputFilled && benchInputFilled && deadliftInputFilled 
+    && powerCleanInputFilled && ohpInputFilled) {
         DOM["liftSubmitButton"].disabled = false
         DOM["liftSubmitButton"].style.backgroundColor = "#e5e1e1";
         return true
-    } else if ((liftingSelection == 2) && squatInputFilled && benchInputFilled && 
-        deadliftInputFilled && rowInputFilled && incBenchInputFilled) {
+    } else if ((liftingSelection == 2 || liftingSelection == 3) && squatInputFilled && benchInputFilled &&
+        deadliftInputFilled && rowInputFilled && ohpInputFilled) {
         DOM["liftSubmitButton"].disabled = false
         DOM["liftSubmitButton"].style.backgroundColor = "#e5e1e1";
         return true
-    } else if ((liftingSelection == 3) && squatInputFilled && benchInputFilled && deadliftInputFilled && rowInputFilled) {
-        DOM["liftSubmitButton"].disabled = false
-        DOM["liftSubmitButton"].style.backgroundColor = "#e5e1e1";
     }
     else {
         console.log("LIFTING FORM ERROR FILL OUT THE FORM")
@@ -354,68 +375,66 @@ function checkLiftingForm() {
 };
 
 // Lifting Calculator Calculation Functions //
+// Lifting Calculator Master Function //
 
 function calculateProgram() {
+    const liftingSelection = DOM["liftingProgramSelector"].selectedIndex
     determineProgramVariables()
     determineMeasurement()
     determineMaxRep()
     populateMaxRep()
+    if (liftingSelection == 1) {
+        startingStrength()
+    }
     DOM["liftingCalc"].style.display = "none"
     DOM["liftingCalcResults"].style.display = "block"
 };
 
+// Function Converting Lifting Inputs into Calculable Integers //
+
 function determineProgramVariables() {
-    var liftingSelection = DOM["liftingProgramSelector"].selectedIndex
+    const liftingSelection = DOM["liftingProgramSelector"].selectedIndex
     // If Starting Strength //
     if (liftingSelection == 1) {
-        personalStrengthData["squatsWeight"] = (parseInt(DOM["squatWeightInput"].value))
-        personalStrengthData["squatsRep"] = (parseInt(DOM["squatRepInput"].value))
+        personalStrengthData["squatWeight"] = (parseInt(DOM["squatWeightInput"].value))
+        personalStrengthData["squatRep"] = (parseInt(DOM["squatRepInput"].value))
         personalStrengthData["benchWeight"] = (parseInt(DOM["benchWeightInput"].value))
         personalStrengthData["benchRep"] = (parseInt(DOM["benchRepInput"].value))
         personalStrengthData["deadliftWeight"] = (parseInt(DOM["deadliftWeightInput"].value))
         personalStrengthData["deadliftRep"] = (parseInt(DOM["deadliftRepInput"].value))
         personalStrengthData["powerCleanWeight"] = (parseInt(DOM["powerCleanWeightInput"].value))
         personalStrengthData["powerCleanRep"] = (parseInt(DOM["powerCleanRepInput"].value))
+        personalStrengthData["ohpWeight"] = (parseInt(DOM["ohpWeightInput"].value))
+        personalStrengthData["ohpRep"] = (parseInt(DOM["ohpRepInput"].value))
     }
-    // If Intermediate 5x5 //
-    else if (liftingSelection == 2) {
-        personalStrengthData["squatsWeight"] = (parseInt(DOM["squatWeightInput"].value))
-        personalStrengthData["squatsRep"] = (parseInt(DOM["squatRepInput"].value))
+    // If Stronglifts or Madcow //
+    else if (liftingSelection == 2 || liftingSelection == 3) {
+        personalStrengthData["squatWeight"] = (parseInt(DOM["squatWeightInput"].value))
+        personalStrengthData["squatRep"] = (parseInt(DOM["squatRepInput"].value))
         personalStrengthData["benchWeight"] = (parseInt(DOM["benchWeightInput"].value))
         personalStrengthData["benchRep"] = (parseInt(DOM["benchRepInput"].value))
         personalStrengthData["deadliftWeight"] = (parseInt(DOM["deadliftWeightInput"].value))
         personalStrengthData["deadliftRep"] = (parseInt(DOM["deadliftRepInput"].value))
         personalStrengthData["rowWeight"] = (parseInt(DOM["bbellRowWeightInput"].value))
         personalStrengthData["rowRep"] = (parseInt(DOM["bbellRowRepInput"].value))
-        personalStrengthData["incbenchWeight"] = (parseInt(DOM["incBenchWeightInput"].value))
-        personalStrengthData["incbenchRep"] = (parseInt(DOM["incBenchRepInput"].value))
-    }
-    // If Madcow 5x5 //
-    else if (liftingSelection == 3) {
-        personalStrengthData["squatsWeight"] = (parseInt(DOM["squatWeightInput"].value))
-        personalStrengthData["squatsRep"] = (parseInt(DOM["squatRepInput"].value))
-        personalStrengthData["benchWeight"] = (parseInt(DOM["benchWeightInput"].value))
-        personalStrengthData["benchRep"] = (parseInt(DOM["benchRepInput"].value))
-        personalStrengthData["deadliftWeight"] = (parseInt(DOM["deadliftWeightInput"].value))
-        personalStrengthData["deadliftRep"] = (parseInt(DOM["deadliftRepInput"].value))
-        personalStrengthData["rowWeight"] = (parseInt(DOM["bbellRowWeightInput"].value))
-        personalStrengthData["rowRep"] = (parseInt(DOM["bbellRowRepInput"].value))
+        personalStrengthData["ohpWeight"] = (parseInt(DOM["ohpWeightInput"].value))
+        personalStrengthData["ohpRep"] = (parseInt(DOM["ohpRepInput"].value))
     }
 };
 
+// Unit Measurement Style Selection Formula //
+
 function determineMeasurement() {
-    var selection = DOM["liftingMeasurementSelector"].selectedIndex
-    if (selection == 0) {
+    const unitSelection = DOM["liftingMeasurementSelector"].selectedIndex
+    if (unitSelection == 0) {
         return
-    } else if (selection == 1) {
-        personalStrengthData["squatsWeight"] = (personalStrengthData["squatsWeight"] * 2.20462)
+    } else if (unitSelection == 1) {
+        personalStrengthData["squatWeight"] = (personalStrengthData["squatWeight"] * 2.20462)
         personalStrengthData["benchWeight"] = (personalStrengthData["benchWeight"] * 2.20462)
         personalStrengthData["deadliftWeight"] = (personalStrengthData["deadliftWeight"] * 2.20462)
+        personalStrengthData["ohpWeight"] = (personalStrengthData["ohpWeight"] * 2.20462)
         if (personalStrengthData["rowWeight"]) {
             personalStrengthData["rowWeight"] = (personalStrengthData["rowWeight"] * 2.20462)
-        }
-        if (personalStrengthData["deadliftWeight"]) {
-            personalStrengthData["deadliftWeight"] = (personalStrengthData["deadliftWeight"] * 2.20462)
         }
         if (personalStrengthData["powerCleanWeight"]) {
             personalStrengthData["powerCleanWeight"] = (personalStrengthData["powerCleanWeight"] * 2.20462)
@@ -423,70 +442,108 @@ function determineMeasurement() {
     };
 };
 
+// One Rep Max Calculation Formula Based on User Input  //
+
 function determineMaxRep() {
-    var liftingSelection = DOM["liftingProgramSelector"].selectedIndex
+    const liftingSelection = DOM["liftingProgramSelector"].selectedIndex
     // If Starting Strength //
     if (liftingSelection == 1) {
-        personalStrengthData["squatsMax"] = (parseInt(DOM["squatWeightInput"].value) / (1.0278 - (.0278 * (parseInt(DOM["squatRepInput"].value)))))
+        personalStrengthData["squatMax"] = (parseInt(DOM["squatWeightInput"].value) / (1.0278 - (.0278 * (parseInt(DOM["squatRepInput"].value)))))
         personalStrengthData["benchMax"] = (parseInt(DOM["benchWeightInput"].value) / (1.0278 - (.0278 * (parseInt(DOM["benchRepInput"].value)))))
         personalStrengthData["deadliftMax"] = (parseInt(DOM["deadliftWeightInput"].value) / (1.0278 - (.0278 * (parseInt(DOM["deadliftRepInput"].value)))))
-        personalStrengthData["powerCleanMax"] = (parseInt(DOM["powerCleanWeightInput"].value) / (1.0278 - (.0278 * (parseInt(DOM["deadliftRepInput"].value)))))
+        personalStrengthData["powerCleanMax"] = (parseInt(DOM["powerCleanWeightInput"].value) / (1.0278 - (.0278 * (parseInt(DOM["powerCleanRepInput"].value)))))
+        personalStrengthData["ohpMax"] = (parseInt(DOM["ohpWeightInput"].value) / (1.0278 - (.0278 * (parseInt(DOM["ohpRepInput"].value)))))
+
     }
-    // If Intermediate 5x5 //
-    else if (liftingSelection == 2) {
-        personalStrengthData["squatsMax"] = (parseInt(DOM["squatWeightInput"].value) / (1.0278 - (.0278 * (parseInt(DOM["squatRepInput"].value)))))
+    // If Stronglifts or Madcow //
+    else if (liftingSelection != 1) {
+        personalStrengthData["squatMax"] = (parseInt(DOM["squatWeightInput"].value) / (1.0278 - (.0278 * (parseInt(DOM["squatRepInput"].value)))))
         personalStrengthData["benchMax"] = (parseInt(DOM["benchWeightInput"].value) / (1.0278 - (.0278 * (parseInt(DOM["benchRepInput"].value)))))
         personalStrengthData["deadliftMax"] = (parseInt(DOM["deadliftWeightInput"].value) / (1.0278 - (.0278 * (parseInt(DOM["deadliftRepInput"].value)))))
         personalStrengthData["rowMax"] = (parseInt(DOM["bbellRowWeightInput"].value) / (1.0278 - (.0278 * (parseInt(DOM["bbellRowRepInput"].value)))))
-        personalStrengthData["incBenchMax"] = (parseInt(DOM["incBenchWeightInput"].value) / (1.0278 - (.0278 * (parseInt(DOM["incBenchRepInput"].value)))))
-    }
-    // If Madcow 5x5 //
-    else if (liftingSelection == 3) {
-        personalStrengthData["squatsMax"] = (parseInt(DOM["squatWeightInput"].value) / (1.0278 - (.0278 * (parseInt(DOM["squatRepInput"].value)))))
-        personalStrengthData["benchMax"] = (parseInt(DOM["benchWeightInput"].value) / (1.0278 - (.0278 * (parseInt(DOM["benchRepInput"].value)))))
-        personalStrengthData["deadliftMax"] = (parseInt(DOM["deadliftWeightInput"].value) / (1.0278 - (.0278 * (parseInt(DOM["deadliftRepInput"].value)))))
-        personalStrengthData["rowMax"] = parseInt(DOM["bbellRowWeightInput"].value)(parseInt(DOM["bbellRowWeightInput"].value) / (1.0278 - (.0278 * (parseInt(DOM["bbellRowRepInput"].value)))))
+        personalStrengthData["ohpMax"] = (parseInt(DOM["ohpWeightInput"].value) / (1.0278 - (.0278 * (parseInt(DOM["ohpRepInput"].value)))))
+
     }
 };
 
+// Population of One Rep Max Results Function //
+
 function populateMaxRep() {
-    var squatMax = ((Math.ceil(personalStrengthData["squatsMax"] / 5) * 5))
-    var benchMax = ((Math.ceil(personalStrengthData["benchMax"] / 5) * 5))
-    var deadliftMax = ((Math.ceil(personalStrengthData["deadliftMax"] / 5) * 5))
-    var rowMax = ((Math.ceil(personalStrengthData["rowMax"] / 5) * 5))
-    var incBenchMax = ((Math.ceil(personalStrengthData["incBenchMax"] / 5) * 5))
-    var powerCleanMax = ((Math.ceil(personalStrengthData["powerCleanMax"] / 5) * 5))
-    DOM["squatMaxContainer"].style.display = "none"
-    DOM["benchMaxContainer"].style.display = "none"
-    DOM["deadliftMaxContainer"].style.display = "none"
-    DOM["rowMaxContainer"].style.display = "none"
-    DOM["incBenchMaxContainer"].style.display = "none"
-    DOM["powerCleanMaxContainer"].style.display = "none"
-    if (!isNaN(squatMax)) {
-        DOM["squatMaxInput"].innerHTML = squatMax
-        DOM["squatMaxContainer"].style.display = "inline-block"
+    const liftingSelection = DOM["liftingProgramSelector"].selectedIndex
+    const squatMax = ((Math.ceil(personalStrengthData["squatMax"] / 5) * 5))
+    const benchMax = ((Math.ceil(personalStrengthData["benchMax"] / 5) * 5))
+    const deadliftMax = ((Math.ceil(personalStrengthData["deadliftMax"] / 5) * 5))
+    const rowMax = ((Math.ceil(personalStrengthData["rowMax"] / 5) * 5))
+    const powerCleanMax = ((Math.ceil(personalStrengthData["powerCleanMax"] / 5) * 5))
+    const ohpMax = ((Math.ceil(personalStrengthData["ohpMax"] / 5) * 5))
+    DOM["squatMaxInput"].innerHTML = squatMax
+    DOM["squatMaxContainer"].style.display = "inline-block"
+    DOM["benchMaxInput"].innerHTML = benchMax
+    DOM["benchMaxContainer"].style.display = "inline-block"
+    DOM["deadliftMaxInput"].innerHTML = deadliftMax
+    DOM["deadliftMaxContainer"].style.display = "inline-block"
+    DOM["ohpMaxInput"].innerHTML = ohpMax
+    DOM["ohpMaxContainer"].style.display = "inline-block"
+    if (liftingSelection == 1) {
+        DOM["powerCleanMaxInput"].innerHTML = powerCleanMax
+        DOM["powerCleanMaxContainer"].style.display = "inline-block"
+        DOM["rowMaxInput"].innerHTML = null
+        DOM["rowMaxContainer"].style.display = "none"
     }
-    if (!isNaN(benchMax)) {
-        DOM["benchMaxInput"].innerHTML = squatMax
-        DOM["benchMaxContainer"].style.display = "inline-block"
-    }
-    if (!isNaN(deadliftMax)) {
-        DOM["deadliftMaxInput"].innerHTML = deadliftMax
-        DOM["deadliftMaxContainer"].style.display = "inline-block"
-    }
-    if (!isNaN(rowMax)) {
+    else if (liftingSelection == 2 || liftingSelection == 3) {
+        DOM["powerCleanMaxInput"].innerHTML = null
+        DOM["powerCleanMaxContainer"].style.display = "none"
         DOM["rowMaxInput"].innerHTML = rowMax
         DOM["rowMaxContainer"].style.display = "inline-block"
     }
-    if (!isNaN(incBenchMax)) {
-        DOM["incBenchMaxInput"].innerHTML = incBenchMax
-        DOM["incBenchMaxContainer"].style.display = "inline-block"
-    }
-    if (!isNaN(powerCleanMax)) {
-        DOM["powerCleanMaxInput"].innerHTML = powerCleanMax
-        DOM["powerCleanMaxContainer"].style.display = "inline-block"
-    }
+
 };
+
+// Lifting Program Calculations //
+
+// Starting Strength - increase 5-10 lbs a week.//
+// Starting Strength Master Function //
+
+function startingStrength() {
+    getFiveRepMax()
+    createStartingWeight()
+}
+
+// Function Calculating 5 Rep Max from 1 Rep Max//
+
+function getFiveRepMax() {
+    personalStrengthData["squat5RMax"] = (personalStrengthData["squatMax"] * .8578);
+    personalStrengthData["bench5RMax"] = (personalStrengthData["benchMax"] * .8578);
+    personalStrengthData["deadlift5RMax"] = (personalStrengthData["deadliftMax"] * .8578);
+    personalStrengthData["row5RMax"] = (personalStrengthData["rowMax"] * .8578);
+    personalStrengthData["ohp5RMax"] = (personalStrengthData["ohpMax"] * .8578);
+}
+
+// Function Creating Starting Weight for Lifts from 5 Rep Max Rounded Up //
+
+function createStartingWeight() {
+    personalStrengthData["startingSquat"] = Math.ceil(((personalStrengthData["squat5RMax"] * .8) / 5) * 5);
+    personalStrengthData["startingBench"] = Math.ceil(((personalStrengthData["bench5RMax"] * .8) / 5) * 5);
+    personalStrengthData["startingDead"] = Math.ceil(((personalStrengthData["deadlift5RMax"] * .8) / 5) * 5);
+    personalStrengthData["startingRow"] = Math.ceil(((personalStrengthData["row5RMax"] * .8) / 5) * 5);
+    personalStrengthData["startingOhp"] = Math.ceil(((personalStrengthData["ohp5RMax"] * .8) / 5) * 5);
+}
+
+// Stronglifts 5x5 - Workout A and B of compound lifts alternated back and forth //
+// A - 5x5 of Squats, Bench and Bbell rows //
+// B - 5x5 of Squats and OHP, 1x5 of Deadlift //
+// Start with 50% of 1RM and increase each lift on each success //
+// Squat - 5lbs, Bench, Rows, & OHP - 2.5lbs, Deadlift - 10lbs//
+
+// Madcow 5x5 -  //
+// Assistance: Day 1 - 3 compounds at 5x5, 2 sets Weighted Hyper Extension, 4 sets weighted situps //
+// Day 2 - 3 different compounds at 4x5; 3 sets situps; Day 3 - Day 1 Compounds at 4x5, 
+// 1x3, 1x8; Assitance 3 sets weighted dips(5-8 reps), 
+// 3 sets bbell curls & tricep extensions (8 reps) // 
+
+// Populate Lifting Program Function //
+
+// Reset Lifting Calculator Function //
 
 function resetLifts() {
     DOM["liftingCalc"].style.display = "flex"
@@ -494,12 +551,15 @@ function resetLifts() {
     DOM["squatInput"].style.display = "none"
     DOM["benchInput"].style.display = "none"
     DOM["deadliftInput"].style.display = "none"
-    DOM["incBenchInput"].style.display = "none"
     DOM["bbellRowInput"].style.display = "none"
     DOM["powerCleanInput"].style.display = "none"
+    DOM["ohpInput"].style.display = "none"
     DOM["liftSubmitButton"].style.display = "none"
     DOM["instructionText"].style.display = "none"
     DOM["liftingMeasurementSelector"].style.display = "none"
+    for (i = 0; i < DOM["liftDataRows"].length; i++) {
+        DOM["liftDataRows"][i].style.display = "none";
+    }
     DOM["squatWeightInput"].value = ""
     DOM["squatRepInput"].value = ""
     DOM["benchWeightInput"].value = ""
@@ -508,10 +568,10 @@ function resetLifts() {
     DOM["deadliftRepInput"].value = ""
     DOM["bbellRowWeightInput"].value = ""
     DOM["bbellRowRepInput"].value = ""
-    DOM["incBenchWeightInput"].value = ""
-    DOM["incBenchRepInput"].value = ""
     DOM["powerCleanWeightInput"].value = ""
     DOM["powerCleanRepInput"].value = ""
+    DOM["ohpWeightInput"].value = ""
+    DOM["ohpRepInput"].value = ""
     DOM["liftSubmitButton"].style.backgroundColor = "#FFF";
     DOM["liftingProgramSelector"].selectedIndex = 0;
     DOM["liftingMeasurementSelector"].selectedIndex = 0;

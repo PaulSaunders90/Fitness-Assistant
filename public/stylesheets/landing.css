@@ -293,7 +293,6 @@ option, .measurement, #activity{
 }
 
 .lifts{
-    display: inline-flex;
     text-align: center;
     margin: auto;
 }
