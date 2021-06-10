@@ -4,6 +4,9 @@
 
 var personalHealthData = {},
     personalStrengthData = {},
+    startingStrengthData = "",
+    strongLiftsData = "",
+    madcowData = "",
     genderedFormulaResult = 0;
 
 // DOM Variables //
@@ -80,6 +83,18 @@ const DOM = {
     liftingCalcInputs: document.getElementById("liftingform").querySelectorAll("input"),
     liftingCalcSelects: document.getElementById("liftingform").querySelectorAll("select"),
     liftDataRows: document.getElementsByClassName("lifts"),
+    liftingProgramLayout: document.getElementById("liftingprogramlayout"),
+    week1Container: document.getElementById("week1"),
+    week2Container: document.getElementById("week2"),
+    week3Container: document.getElementById("week3"),
+    week4Container: document.getElementById("week4"),
+    week5Container: document.getElementById("week5"),
+    week6Container: document.getElementById("week6"),
+    week7Container: document.getElementById("week7"),
+    week8Container: document.getElementById("week8"),
+    day1Containers: document.getElementsByClassName("day1"),
+    day2Container: document.getElementsByClassName("day2"),
+    day3Container: document.getElementsByClassName("day2"),
 };
 
 // Calorie Calculator Forumlas //
@@ -307,12 +322,12 @@ function selectLiftingProgram() {
         DOM["benchInput"].parentNode.style.display = "inline-flex"
         DOM["deadliftInput"].style.display = "block"
         DOM["deadliftInput"].parentNode.style.display = "inline-flex"
-        DOM["bbellRowInput"].style.display = "block"
-        DOM["bbellRowInput"].parentNode.style.display = "inline-flex"
+        DOM["bbellRowInput"].style.display = "none"
+        DOM["bbellRowInput"].parentNode.style.display = "none"
         DOM["powerCleanInput"].style.display = "block"
         DOM["powerCleanInput"].parentNode.style.display = "inline-flex"
-        DOM["ohpInput"].style.display = "block"
-        DOM["ohpInput"].parentNode.style.display = "block"
+        DOM["ohpInput"].style.display = "none"
+        DOM["ohpInput"].parentNode.style.display = "none"
         DOM["liftSubmitButton"].style.display = "block"
         DOM["instructionText"].style.display = "block"
     }
@@ -355,8 +370,8 @@ function checkLiftingForm() {
         && (!isNaN(parseInt(DOM["powerCleanRepInput"].value)) && (DOM["powerCleanRepInput"].value) > 0))
     const ohpInputFilled = (!isNaN(parseInt(DOM["ohpWeightInput"].value)) && (parseInt(DOM["ohpWeightInput"].value) > 0)
         && (!isNaN(parseInt(DOM["ohpRepInput"].value)) && (DOM["ohpRepInput"].value) > 0))
-    if ((liftingSelection == 1) && squatInputFilled && benchInputFilled && deadliftInputFilled 
-    && powerCleanInputFilled && ohpInputFilled) {
+    if ((liftingSelection == 1) && squatInputFilled && benchInputFilled && deadliftInputFilled
+        && powerCleanInputFilled) {
         DOM["liftSubmitButton"].disabled = false
         DOM["liftSubmitButton"].style.backgroundColor = "#e5e1e1";
         return true
@@ -404,8 +419,6 @@ function determineProgramVariables() {
         personalStrengthData["deadliftRep"] = (parseInt(DOM["deadliftRepInput"].value))
         personalStrengthData["powerCleanWeight"] = (parseInt(DOM["powerCleanWeightInput"].value))
         personalStrengthData["powerCleanRep"] = (parseInt(DOM["powerCleanRepInput"].value))
-        personalStrengthData["ohpWeight"] = (parseInt(DOM["ohpWeightInput"].value))
-        personalStrengthData["ohpRep"] = (parseInt(DOM["ohpRepInput"].value))
     }
     // If Stronglifts or Madcow //
     else if (liftingSelection == 2 || liftingSelection == 3) {
@@ -432,12 +445,14 @@ function determineMeasurement() {
         personalStrengthData["squatWeight"] = (personalStrengthData["squatWeight"] * 2.20462)
         personalStrengthData["benchWeight"] = (personalStrengthData["benchWeight"] * 2.20462)
         personalStrengthData["deadliftWeight"] = (personalStrengthData["deadliftWeight"] * 2.20462)
-        personalStrengthData["ohpWeight"] = (personalStrengthData["ohpWeight"] * 2.20462)
         if (personalStrengthData["rowWeight"]) {
             personalStrengthData["rowWeight"] = (personalStrengthData["rowWeight"] * 2.20462)
         }
         if (personalStrengthData["powerCleanWeight"]) {
             personalStrengthData["powerCleanWeight"] = (personalStrengthData["powerCleanWeight"] * 2.20462)
+        }
+        if (personalStrengthData["ohpWeight"]) {
+            personalStrengthData["ohpWeight"] = (personalStrengthData["ohpWeight"] * 2.20462)
         }
     };
 };
@@ -452,8 +467,6 @@ function determineMaxRep() {
         personalStrengthData["benchMax"] = (parseInt(DOM["benchWeightInput"].value) / (1.0278 - (.0278 * (parseInt(DOM["benchRepInput"].value)))))
         personalStrengthData["deadliftMax"] = (parseInt(DOM["deadliftWeightInput"].value) / (1.0278 - (.0278 * (parseInt(DOM["deadliftRepInput"].value)))))
         personalStrengthData["powerCleanMax"] = (parseInt(DOM["powerCleanWeightInput"].value) / (1.0278 - (.0278 * (parseInt(DOM["powerCleanRepInput"].value)))))
-        personalStrengthData["ohpMax"] = (parseInt(DOM["ohpWeightInput"].value) / (1.0278 - (.0278 * (parseInt(DOM["ohpRepInput"].value)))))
-
     }
     // If Stronglifts or Madcow //
     else if (liftingSelection != 1) {
@@ -482,31 +495,35 @@ function populateMaxRep() {
     DOM["benchMaxContainer"].style.display = "inline-block"
     DOM["deadliftMaxInput"].innerHTML = deadliftMax
     DOM["deadliftMaxContainer"].style.display = "inline-block"
-    DOM["ohpMaxInput"].innerHTML = ohpMax
-    DOM["ohpMaxContainer"].style.display = "inline-block"
     if (liftingSelection == 1) {
         DOM["powerCleanMaxInput"].innerHTML = powerCleanMax
         DOM["powerCleanMaxContainer"].style.display = "inline-block"
         DOM["rowMaxInput"].innerHTML = null
         DOM["rowMaxContainer"].style.display = "none"
+        DOM["ohpMaxInput"].innerHTML = null
+        DOM["ohpMaxContainer"].style.display = "none"
     }
     else if (liftingSelection == 2 || liftingSelection == 3) {
         DOM["powerCleanMaxInput"].innerHTML = null
         DOM["powerCleanMaxContainer"].style.display = "none"
         DOM["rowMaxInput"].innerHTML = rowMax
         DOM["rowMaxContainer"].style.display = "inline-block"
+        DOM["ohpMaxInput"].innerHTML = ohpMax
+        DOM["ohpMaxContainer"].style.display = "inline-block"
     }
 
 };
 
 // Lifting Program Calculations //
 
-// Starting Strength - increase 5-10 lbs a week.//
+// Starting Strength - Day A and Day B; increase 5-10 lbs a week, Slightly Change During Phases//
 // Starting Strength Master Function //
 
 function startingStrength() {
     getFiveRepMax()
     createStartingWeight()
+    buildSSProgression()
+    populateStartingStrengthProgram()
 }
 
 // Function Calculating 5 Rep Max from 1 Rep Max//
@@ -515,19 +532,81 @@ function getFiveRepMax() {
     personalStrengthData["squat5RMax"] = (personalStrengthData["squatMax"] * .8578);
     personalStrengthData["bench5RMax"] = (personalStrengthData["benchMax"] * .8578);
     personalStrengthData["deadlift5RMax"] = (personalStrengthData["deadliftMax"] * .8578);
-    personalStrengthData["row5RMax"] = (personalStrengthData["rowMax"] * .8578);
-    personalStrengthData["ohp5RMax"] = (personalStrengthData["ohpMax"] * .8578);
+    personalStrengthData["powerClean5RMax"] = (personalStrengthData["powerCleanMax"] * .8578);
 }
 
 // Function Creating Starting Weight for Lifts from 5 Rep Max Rounded Up //
 
 function createStartingWeight() {
-    personalStrengthData["startingSquat"] = Math.ceil(((personalStrengthData["squat5RMax"] * .8) / 5) * 5);
-    personalStrengthData["startingBench"] = Math.ceil(((personalStrengthData["bench5RMax"] * .8) / 5) * 5);
-    personalStrengthData["startingDead"] = Math.ceil(((personalStrengthData["deadlift5RMax"] * .8) / 5) * 5);
-    personalStrengthData["startingRow"] = Math.ceil(((personalStrengthData["row5RMax"] * .8) / 5) * 5);
-    personalStrengthData["startingOhp"] = Math.ceil(((personalStrengthData["ohp5RMax"] * .8) / 5) * 5);
+    var unroundedSquat = (personalStrengthData["squat5RMax"] * .8);
+    var unroundedBench = (personalStrengthData["bench5RMax"] * .8);
+    var unroundedDead = (personalStrengthData["deadlift5RMax"] * .8);
+    var unroundedPowerClean = (personalStrengthData["powerClean5RMax"] * .8);
+    personalStrengthData["startingSquat"] = (unroundedSquat % 5) >= 2.5 ? parseInt(unroundedSquat / 5) * 5 + 5 : parseInt(unroundedSquat / 5) * 5;
+    personalStrengthData["startingBench"] = (unroundedBench % 5) >= 2.5 ? parseInt(unroundedBench / 5) * 5 + 5 : parseInt(unroundedBench / 5) * 5;
+    personalStrengthData["startingDead"] = (unroundedDead % 5) >= 2.5 ? parseInt(unroundedDead / 5) * 5 + 5 : parseInt(unroundedDead / 5) * 5;
+    personalStrengthData["startingPowerClean"] = (unroundedPowerClean % 5) >= 2.5 ? parseInt(unroundedPowerClean / 5) * 5 + 5 : parseInt(unroundedPowerClean / 5) * 5;
 }
+
+// Function Structuring Starting Strength Progression //
+
+function buildSSProgression() {
+    phase1()
+    phase2()
+    // Day A and B are the same in phase 1: Squats and Bench 5 Reps 
+    // for 3 Sets; Deadlift 5 Reps for 1 Set //
+}
+
+function phase1() {
+    // 3x5 & 1x5 //
+    startingStrengthData += "<div id='startingnumbers'>"
+    startingStrengthData += "<p>" + "First Day Starting Numbers" + "</p>"
+    startingStrengthData += "Squat " + personalStrengthData["startingSquat"]
+    startingStrengthData += " Bench " + personalStrengthData["startingBench"]
+    startingStrengthData += " Deadlifts " + personalStrengthData["startingDead"]
+    startingStrengthData += "</div>"
+    startingStrengthData += "<div class= 'phase1'>"
+    startingStrengthData += "Phase 1"
+    for (i = 1; i < 4; i++) {
+        startingStrengthData += "<div id='week" + i + "'>"
+        startingStrengthData += "Working Week " + i
+        startingStrengthData += "<br>"
+        for (x = 1; x < 4; x++) {
+            startingStrengthData += "Day " + x 
+            startingStrengthData += "<div class= 'phase1day'> "
+            startingStrengthData += "Squat" + "<br>"
+            for (y = 0; y < 3; y++) {
+                startingStrengthData += (personalStrengthData["startingSquat"] + (10 * (x * i))) + " x 5" + "<br>"
+            }
+            startingStrengthData += "Bench" + "<br>"
+            for (y = 0; y < 3; y++) {
+                startingStrengthData += (personalStrengthData["startingBench"] + (5 * (x * i))) + " x 5" + "<br>"
+            }
+            startingStrengthData += "Deadlift" + "<br>"
+            startingStrengthData += (personalStrengthData["startingDead"] + (10 * (x * i))) + " x 5" + "<br>"
+
+            startingStrengthData += "</div>"
+            startingStrengthData += "</div>"
+        }
+        startingStrengthData += "</div>"
+    }
+    startingStrengthData += "</div>"
+}
+
+function phase2() {
+    // console.log(personalStrengthData["startingSquat"])
+    // console.log(personalStrengthData["startingBench"])
+    // console.log(personalStrengthData["startingDead"])
+    // console.log(personalStrengthData["startingPowerClean"])
+    // Day A stays the same 3x5, 1x5; Day B replaces Deads with Power Cleans, 3 reps for 5 sets //
+}
+
+// Function Populating the Lifting Program //
+
+function populateStartingStrengthProgram() {
+    DOM["liftingProgramLayout"].innerHTML = startingStrengthData;
+}
+
 
 // Stronglifts 5x5 - Workout A and B of compound lifts alternated back and forth //
 // A - 5x5 of Squats, Bench and Bbell rows //
