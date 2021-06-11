@@ -4,7 +4,8 @@
 
 var personalHealthData = {},
     personalStrengthData = {},
-    startingStrengthData = "",
+    lowerProgression = 10,
+    upperProgression = 5,
     strongLiftsData = "",
     madcowData = "",
     genderedFormulaResult = 0;
@@ -523,8 +524,7 @@ function startingStrength() {
     getFiveRepMax()
     createStartingWeight()
     buildSSProgression()
-    populateStartingStrengthProgram()
-}
+};
 
 // Function Calculating 5 Rep Max from 1 Rep Max//
 
@@ -533,7 +533,7 @@ function getFiveRepMax() {
     personalStrengthData["bench5RMax"] = (personalStrengthData["benchMax"] * .8578);
     personalStrengthData["deadlift5RMax"] = (personalStrengthData["deadliftMax"] * .8578);
     personalStrengthData["powerClean5RMax"] = (personalStrengthData["powerCleanMax"] * .8578);
-}
+};
 
 // Function Creating Starting Weight for Lifts from 5 Rep Max Rounded Up //
 
@@ -546,54 +546,63 @@ function createStartingWeight() {
     personalStrengthData["startingBench"] = (unroundedBench % 5) >= 2.5 ? parseInt(unroundedBench / 5) * 5 + 5 : parseInt(unroundedBench / 5) * 5;
     personalStrengthData["startingDead"] = (unroundedDead % 5) >= 2.5 ? parseInt(unroundedDead / 5) * 5 + 5 : parseInt(unroundedDead / 5) * 5;
     personalStrengthData["startingPowerClean"] = (unroundedPowerClean % 5) >= 2.5 ? parseInt(unroundedPowerClean / 5) * 5 + 5 : parseInt(unroundedPowerClean / 5) * 5;
-}
+};
 
 // Function Structuring Starting Strength Progression //
 
 function buildSSProgression() {
     phase1()
     phase2()
-    // Day A and B are the same in phase 1: Squats and Bench 5 Reps 
-    // for 3 Sets; Deadlift 5 Reps for 1 Set //
-}
+};
 
 function phase1() {
-    var lowerProgression = 10;
-    var upperProgression = 5;
-    for (i = 1; i < 4; i++) {
-        var week = DOM[`week${i}Container`]
-        for (x = 1; x < 4; x++) {
-            var day = (x - 1)
-            if (x == 1 && i == 1) {
+    for (weekNum = 0; weekNum < 3; weekNum++) {
+        var week = DOM[`week${weekNum + 1}Container`]
+        for (dayNum = 0; dayNum < 3; dayNum++) {
+            if (dayNum == 0 && weekNum == 0) {
                 lowerProgression = 0;
                 upperProgression = 0;
             } else {
                 lowerProgression = (lowerProgression + 10);
-                upperProgression = (upperProgression + 5 );
+                upperProgression = (upperProgression + 5);
             }
-            week.children[day].innerHTML = `Day ${x}`
+            week.children[dayNum].innerHTML = `Day ${dayNum + 1}`
                 + `<br>Squat - ${(personalStrengthData["startingSquat"] + lowerProgression)} x 5 reps x 3 sets`
                 + `<br>Bench Press - ${(personalStrengthData["startingBench"] + upperProgression)} x 5 reps x 3 sets`
                 + `<br>Deadlift - ${(personalStrengthData["startingDead"] + lowerProgression)} x 5 reps x 1 set`
         }
-    }
-}
+    };
+};
 
 function phase2() {
-    // console.log(personalStrengthData["startingSquat"])
-    // console.log(personalStrengthData["startingBench"])
-    // console.log(personalStrengthData["startingDead"])
-    // console.log(personalStrengthData["startingPowerClean"])
-    // Day A stays the same 3x5, 1x5; Day B replaces Deads with Power Cleans, //
-    // 3 reps for 5 sets with smaller progressions being made, 2.5 and 5 lb intervals//
-}
-
-// Function Populating the Lifting Program //
-
-function populateStartingStrengthProgram() {
-    // DOM["liftingProgramLayout"].innerHTML = startingStrengthData;
-}
-
+    var cleanProgression = 0
+    for (weekNum = 0; weekNum < 5; weekNum++) {
+        var week = DOM[`week${weekNum + 4}Container`]
+        for (dayNum = 0; dayNum < 3; dayNum++) {
+            lowerProgression = (lowerProgression + 5);
+            upperProgression = (upperProgression + 5);
+            if (dayNum == 1 && weekNum == 0) {
+                week.children[dayNum].innerHTML = `Day ${dayNum + 1}`
+                    + `<br>Squat - ${(personalStrengthData["startingSquat"] + lowerProgression)} x 5 reps x 3 sets`
+                    + `<br>Bench Press - ${(personalStrengthData["startingBench"] + upperProgression)} x 5 reps x 3 sets`
+                    + `<br>Power Clean - ${(personalStrengthData["startingPowerClean"])} x 5 reps x 1 set`
+            }
+            else if (dayNum == 1 && weekNum != 0) {
+                cleanProgression += 10
+                week.children[dayNum].innerHTML = `Day ${dayNum + 1}`
+                    + `<br>Squat - ${(personalStrengthData["startingSquat"] + lowerProgression)} x 5 reps x 3 sets`
+                    + `<br>Bench Press - ${(personalStrengthData["startingBench"] + upperProgression)} x 5 reps x 3 sets`
+                    + `<br>Power Clean - ${(personalStrengthData["startingPowerClean"] + cleanProgression)} x 5 reps x 1 set`
+            }
+            else {
+                week.children[dayNum].innerHTML = `Day ${dayNum + 1}`
+                    + `<br>Squat - ${(personalStrengthData["startingSquat"] + lowerProgression)} x 5 reps x 3 sets`
+                    + `<br>Bench Press - ${(personalStrengthData["startingBench"] + upperProgression)} x 5 reps x 3 sets`
+                    + `<br>Deadlift - ${(personalStrengthData["startingDead"] + lowerProgression)} x 5 reps x 1 set`
+            }
+        };
+    };
+};
 
 // Stronglifts 5x5 - Workout A and B of compound lifts alternated back and forth //
 // A - 5x5 of Squats, Bench and Bbell rows //
