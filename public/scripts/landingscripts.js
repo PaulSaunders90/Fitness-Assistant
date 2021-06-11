@@ -92,9 +92,9 @@ const DOM = {
     week6Container: document.getElementById("week6"),
     week7Container: document.getElementById("week7"),
     week8Container: document.getElementById("week8"),
-    day1Containers: document.getElementsByClassName("day1"),
+    day1Container: document.getElementsByClassName("day1"),
     day2Container: document.getElementsByClassName("day2"),
-    day3Container: document.getElementsByClassName("day2"),
+    day3Container: document.getElementsByClassName("day3"),
 };
 
 // Calorie Calculator Forumlas //
@@ -558,39 +558,25 @@ function buildSSProgression() {
 }
 
 function phase1() {
-    // 3x5 & 1x5 //
-    startingStrengthData += "<div id='startingnumbers'>"
-    startingStrengthData += "<p>" + "First Day Starting Numbers" + "</p>"
-    startingStrengthData += "Squat " + personalStrengthData["startingSquat"]
-    startingStrengthData += " Bench " + personalStrengthData["startingBench"]
-    startingStrengthData += " Deadlifts " + personalStrengthData["startingDead"]
-    startingStrengthData += "</div>"
-    startingStrengthData += "<div class= 'phase1'>"
-    startingStrengthData += "Phase 1"
+    var lowerProgression = 10;
+    var upperProgression = 5;
     for (i = 1; i < 4; i++) {
-        startingStrengthData += "<div id='week" + i + "'>"
-        startingStrengthData += "Working Week " + i
-        startingStrengthData += "<br>"
+        var week = DOM[`week${i}Container`]
         for (x = 1; x < 4; x++) {
-            startingStrengthData += "Day " + x 
-            startingStrengthData += "<div class= 'phase1day'> "
-            startingStrengthData += "Squat" + "<br>"
-            for (y = 0; y < 3; y++) {
-                startingStrengthData += (personalStrengthData["startingSquat"] + (10 * (x * i))) + " x 5" + "<br>"
+            var day = (x - 1)
+            if (x == 1 && i == 1) {
+                lowerProgression = 0;
+                upperProgression = 0;
+            } else {
+                lowerProgression = (lowerProgression + 10);
+                upperProgression = (upperProgression + 5 );
             }
-            startingStrengthData += "Bench" + "<br>"
-            for (y = 0; y < 3; y++) {
-                startingStrengthData += (personalStrengthData["startingBench"] + (5 * (x * i))) + " x 5" + "<br>"
-            }
-            startingStrengthData += "Deadlift" + "<br>"
-            startingStrengthData += (personalStrengthData["startingDead"] + (10 * (x * i))) + " x 5" + "<br>"
-
-            startingStrengthData += "</div>"
-            startingStrengthData += "</div>"
+            week.children[day].innerHTML = `Day ${x}`
+                + `<br>Squat - ${(personalStrengthData["startingSquat"] + lowerProgression)} x 5 reps x 3 sets`
+                + `<br>Bench Press - ${(personalStrengthData["startingBench"] + upperProgression)} x 5 reps x 3 sets`
+                + `<br>Deadlift - ${(personalStrengthData["startingDead"] + lowerProgression)} x 5 reps x 1 set`
         }
-        startingStrengthData += "</div>"
     }
-    startingStrengthData += "</div>"
 }
 
 function phase2() {
@@ -598,13 +584,14 @@ function phase2() {
     // console.log(personalStrengthData["startingBench"])
     // console.log(personalStrengthData["startingDead"])
     // console.log(personalStrengthData["startingPowerClean"])
-    // Day A stays the same 3x5, 1x5; Day B replaces Deads with Power Cleans, 3 reps for 5 sets //
+    // Day A stays the same 3x5, 1x5; Day B replaces Deads with Power Cleans, //
+    // 3 reps for 5 sets with smaller progressions being made, 2.5 and 5 lb intervals//
 }
 
 // Function Populating the Lifting Program //
 
 function populateStartingStrengthProgram() {
-    DOM["liftingProgramLayout"].innerHTML = startingStrengthData;
+    // DOM["liftingProgramLayout"].innerHTML = startingStrengthData;
 }
 
 
