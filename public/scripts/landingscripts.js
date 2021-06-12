@@ -6,8 +6,6 @@ var personalHealthData = {},
     personalStrengthData = {},
     lowerProgression = 10,
     upperProgression = 5,
-    strongLiftsData = "",
-    madcowData = "",
     genderedFormulaResult = 0;
 
 // DOM Variables //
@@ -555,6 +553,8 @@ function buildSSProgression() {
     phase2()
 };
 
+// Starting Strength Phase 1 Function //
+
 function phase1() {
     for (weekNum = 0; weekNum < 3; weekNum++) {
         var week = DOM[`week${weekNum + 1}Container`]
@@ -574,6 +574,8 @@ function phase1() {
     };
 };
 
+// Starting Strength Phase 2 Function //
+
 function phase2() {
     var cleanProgression = 0
     for (weekNum = 0; weekNum < 5; weekNum++) {
@@ -586,21 +588,19 @@ function phase2() {
                     + `<br>Squat - ${(personalStrengthData["startingSquat"] + lowerProgression)} x 5 reps x 3 sets`
                     + `<br>Bench Press - ${(personalStrengthData["startingBench"] + upperProgression)} x 5 reps x 3 sets`
                     + `<br>Power Clean - ${(personalStrengthData["startingPowerClean"])} x 5 reps x 1 set`
-            }
-            else if (dayNum == 1 && weekNum != 0) {
+            } else if (dayNum == 1 && weekNum != 0) {
                 cleanProgression += 10
                 week.children[dayNum].innerHTML = `Day ${dayNum + 1}`
                     + `<br>Squat - ${(personalStrengthData["startingSquat"] + lowerProgression)} x 5 reps x 3 sets`
                     + `<br>Bench Press - ${(personalStrengthData["startingBench"] + upperProgression)} x 5 reps x 3 sets`
                     + `<br>Power Clean - ${(personalStrengthData["startingPowerClean"] + cleanProgression)} x 5 reps x 1 set`
-            }
-            else {
+            } else {
                 week.children[dayNum].innerHTML = `Day ${dayNum + 1}`
                     + `<br>Squat - ${(personalStrengthData["startingSquat"] + lowerProgression)} x 5 reps x 3 sets`
                     + `<br>Bench Press - ${(personalStrengthData["startingBench"] + upperProgression)} x 5 reps x 3 sets`
                     + `<br>Deadlift - ${(personalStrengthData["startingDead"] + lowerProgression)} x 5 reps x 1 set`
             }
-        };
+        }
     };
 };
 
