@@ -399,6 +399,8 @@ function calculateProgram() {
     populateMaxRep()
     if (liftingSelection == 1) {
         startingStrength()
+    } else if (liftingSelection == 2) {
+        strongLifts()
     }
     DOM["liftingCalc"].style.display = "none"
     DOM["liftingCalcResults"].style.display = "block"
@@ -515,7 +517,7 @@ function populateMaxRep() {
 
 // Lifting Program Calculations //
 
-// Starting Strength - Day A and Day B; increase 5-10 lbs a week, Slightly Change During Phases//
+// Starting Strength //
 // Starting Strength Master Function //
 
 function startingStrength() {
@@ -604,11 +606,75 @@ function phase2() {
     };
 };
 
-// Stronglifts 5x5 - Workout A and B of compound lifts alternated back and forth //
-// A - 5x5 of Squats, Bench and Bbell rows //
-// B - 5x5 of Squats and OHP, 1x5 of Deadlift //
-// Start with 50% of 1RM and increase each lift on each success //
-// Squat - 5lbs, Bench, Rows, & OHP - 2.5lbs, Deadlift - 10lbs//
+// Stronglifts //
+// Stronglifts Master Function //
+
+function strongLifts() {
+    getStrongliftStartRep()
+    strongliftPropagation()
+}
+
+// Function to Determine the Day 1 Starting Point for All Relevant Lifts //
+
+function getStrongliftStartRep() {
+    unroundedSquat = (personalStrengthData["squatMax"] * .5);
+    unroundedBench = (personalStrengthData["benchMax"] * .5);
+    unroundedDead = (personalStrengthData["deadliftMax"] * .5);
+    unroundedRow = (personalStrengthData["rowMax"] * .5);
+    unroundedOHP = (personalStrengthData["ohpMax"] * .5);
+    personalStrengthData["squatSLStart"] = (unroundedSquat % 5) >= 2.5 ? parseInt(unroundedSquat / 5) * 5 + 5 : parseInt(unroundedSquat / 5) * 5;
+    personalStrengthData["benchSLStart"] = (unroundedBench % 5) >= 2.5 ? parseInt(unroundedBench / 5) * 5 + 5 : parseInt(unroundedBench / 5) * 5;
+    personalStrengthData["deadliftSLStart"] = (unroundedDead % 5) >= 2.5 ? parseInt(unroundedDead / 5) * 5 + 5 : parseInt(unroundedDead / 5) * 5;
+    personalStrengthData["rowSLStart"] = (unroundedRow % 5) >= 2.5 ? parseInt(unroundedRow / 5) * 5 + 5 : parseInt(unroundedRow / 5) * 5;
+    personalStrengthData["ohpSLStart"] = (unroundedOHP % 5) >= 2.5 ? parseInt(unroundedOHP / 5) * 5 + 5 : parseInt(unroundedOHP / 5) * 5;
+}
+
+// Stronglift Build Propagation //
+
+function strongliftPropagation() {
+    var dailyProgression = 5;
+    var deadProgression = 10;
+    for (weekNum = 0; weekNum < 8; weekNum++) {
+        var week = DOM[`week${weekNum + 1}Container`]
+        for (dayNum = 0; dayNum < 3; dayNum++) {
+            if ((dayNum == 0 || dayNum == 1) && weekNum == 0) {
+                dailyProgression = 0;
+                deadProgression = 0;
+            } else {
+                dailyProgression = (dailyProgression + 5);
+                deadProgression = (deadProgression + 10);
+            }
+            // Odd Weeks Go ABA, Even Weeks Go BAB // 
+            if (weekNum % 2 == 0) {
+                if (dayNum == 0 || dayNum == 2) {
+                    week.children[dayNum].innerHTML = `Day ${dayNum + 1}`
+                        + `<br>Squat - ${(personalStrengthData["squatSLStart"] + dailyProgression)} x 5 reps x 3 sets`
+                        + `<br>Barbell Row - ${(personalStrengthData["rowSLStart"] + dailyProgression)} x 5 reps x 3 sets`
+                        + `<br>Overhead Press - ${(personalStrengthData["ohpSLStart"] + dailyProgression)} x 5 reps x 3 sets`
+                }
+                else {
+                    week.children[dayNum].innerHTML = `Day ${dayNum + 1}`
+                        + `<br>Squat - ${(personalStrengthData["squatSLStart"] + dailyProgression)} x 5 reps x 3 sets`
+                        + `<br>Bench Press - ${(personalStrengthData["benchSLStart"] + dailyProgression)} x 5 reps x 3 sets`
+                        + `<br>Deadlift - ${(personalStrengthData["deadliftSLStart"] + deadProgression)} x 5 reps x 1 set`
+                }
+            } else {
+                if (dayNum == 0 || dayNum == 2) {
+                    week.children[dayNum].innerHTML = `Day ${dayNum + 1}`
+                        + `<br>Squat - ${(personalStrengthData["squatSLStart"] + dailyProgression)} x 5 reps x 3 sets`
+                        + `<br>Bench Press - ${(personalStrengthData["benchSLStart"] + dailyProgression)} x 5 reps x 3 sets`
+                        + `<br>Deadlift - ${(personalStrengthData["deadliftSLStart"] + deadProgression)} x 5 reps x 1 set`
+                }
+                else {
+                    week.children[dayNum].innerHTML = `Day ${dayNum + 1}`
+                        + `<br>Squat - ${(personalStrengthData["squatSLStart"] + dailyProgression)} x 5 reps x 3 sets`
+                        + `<br>Barbell Row - ${(personalStrengthData["rowSLStart"] + dailyProgression)} x 5 reps x 3 sets`
+                        + `<br>Overhead Press - ${(personalStrengthData["ohpSLStart"] + dailyProgression)} x 5 reps x 3 sets`
+                }
+            }
+        }
+    };
+};
 
 // Madcow 5x5 -  //
 // Assistance: Day 1 - 3 compounds at 5x5, 2 sets Weighted Hyper Extension, 4 sets weighted situps //
