@@ -482,6 +482,27 @@ function determineMaxRep() {
     }
 };
 
+// Function Calculating 5 Rep Max from 1 Rep Max//
+
+function getFiveRepMax() {
+    const liftingSelection = DOM["liftingProgramSelector"].selectedIndex
+    // If Starting Strength //
+    if (liftingSelection == 1) {
+        personalStrengthData["squat5RMax"] = (personalStrengthData["squatMax"] * .8578);
+        personalStrengthData["bench5RMax"] = (personalStrengthData["benchMax"] * .8578);
+        personalStrengthData["deadlift5RMax"] = (personalStrengthData["deadliftMax"] * .8578);
+        personalStrengthData["powerClean5RMax"] = (personalStrengthData["powerCleanMax"] * .8578);
+    }
+    // If Stronglifts or Madcow //
+    else if (liftingSelection != 1) {
+        personalStrengthData["squat5RMax"] = (personalStrengthData["squatMax"] * .8578);
+        personalStrengthData["bench5RMax"] = (personalStrengthData["benchMax"] * .8578);
+        personalStrengthData["deadlift5RMax"] = (personalStrengthData["deadliftMax"] * .8578);
+        personalStrengthData["row5RMax"] = (personalStrengthData["rowMax"] * .8578);
+        personalStrengthData["ohp5RMax"] = (personalStrengthData["ohpMax"] * .8578);
+    }
+};
+
 // Population of One Rep Max Results Function //
 
 function populateMaxRep() {
@@ -526,17 +547,6 @@ function startingStrength() {
     getFiveRepMax()
     createStartingWeight()
     buildSSProgression()
-};
-
-// Function Calculating 5 Rep Max from 1 Rep Max//
-
-function getFiveRepMax() {
-    personalStrengthData["squat5RMax"] = (personalStrengthData["squatMax"] * .8578);
-    personalStrengthData["bench5RMax"] = (personalStrengthData["benchMax"] * .8578);
-    personalStrengthData["deadlift5RMax"] = (personalStrengthData["deadliftMax"] * .8578);
-    personalStrengthData["row5RMax"] = (personalStrengthData["rowMax"] * .8578);
-    personalStrengthData["powerClean5RMax"] = (personalStrengthData["powerCleanMax"] * .8578);
-    personalStrengthData["ohp5RMax"] = (personalStrengthData["ohpMax"] * .8578);
 };
 
 // Function Creating Starting Weight for Lifts from 5 Rep Max Rounded Up //
@@ -610,7 +620,7 @@ function phase2() {
     };
 };
 
-// Stronglifts //
+// Stronglifts 5x5//
 // Stronglifts Master Function //
 
 function strongLifts() {
@@ -683,53 +693,67 @@ function strongliftPropagation() {
     };
 };
 
-// Madcow -  //
+// Madcow 5x5 //
 // Madcow Master Function //
 
 function madCow() {
-    getMadCowStartingWeight()
-    madCowPropagation()
-}
-
-// Function to Determine the MadCow Starting Weight //
-
-function getMadCowStartingWeight() {
     getFiveRepMax()
-    personalStrengthData["squat5RMax"]
-    personalStrengthData["bench5RMax"]
-    personalStrengthData["deadlift5RMax"]
-    personalStrengthData["row5RMax"]
-    personalStrengthData["ohp5RMax"] 
+    madCowPropagation()
 }
 
 // Populate Lifting Program Function //
 
 function madCowPropagation() {
-    // https://github.com/StevenAston/intermediate-5-by-5/blob/master/script.js#L4 //
-    var increasePercent = .125;
+    var intervalPercent = .125;
+    var gainPercent = .025;
+    personalStrengthData["madCowLift"] = {};
     for (weekNum = 0; weekNum < 8; weekNum++) {
+        var week = DOM[`week${weekNum + 1}Container`]
         for (dayNum = 0; dayNum < 3; dayNum++) {
-            if (dayNum == 0) {
-                for (lifts = 0; lifts < 5; lifts++){
-                // 3 compounds at 5x5
-                // Day 1 has a starting weight for Squat, Bench, Row and each set it goes up a fixed weight //
+            week.children[dayNum].innerHTML = `Day ${dayNum + 1}`
+            for (lifts = 0; lifts < 3; lifts++) {
+                if (dayNum == 0) {
+                    personalStrengthData["madCowLift"][0].name = "Squat"
+                    personalStrengthData["madCowLift"][0].weight = personalStrengthData["squat5RMax"]
+                    personalStrengthData["madCowLift"][1].name = "Bench"
+                    personalStrengthData["madCowLift"][1].weight = personalStrengthData["bench5RMax"]
+                    personalStrengthData["madCowLift"][2].name = "Row"
+                    personalStrengthData["madCowLift"][2].weight = personalStrengthData["row5RMax"]
+                    // 3 compounds at 5x5
+                    // Day 1 has a starting weight for Squat, Bench, Row and each set it goes up a fixed weight //
+                    week.children[dayNum].innerHTML = + `<br> ${personalStrengthData["madCowLift"][lifts].name}`
+                    for (sets = 0; sets < 5; sets++) {
+                        + `${(personalStrengthData["madCowLift"][lifts].weight + (intervalPercent * sets))} x 5`
+                    }
+                    //  Assistance - 2 sets Weighted Hyper Extension (8-12), 4 sets weighted situps(8-15) //
+                } else if (dayNum == 1) {
+                    personalStrengthData["madCowLift"][0].name = "Squat"
+                    personalStrengthData["madCowLift"][0].weight = personalStrengthData["squat5RMax"]
+                    personalStrengthData["madCowLift"][1].name = "Overhead Press"
+                    personalStrengthData["madCowLift"][0].weight = personalStrengthData["ohp5RMax"]
+                    personalStrengthData["madCowLift"][2].name = "Deadlift"
+                    personalStrengthData["madCowLift"][0].weight = personalStrengthData["deadlift5RMax"]
+                    // 3 different compounds at 4x5
+                    // Day 2 has starting weight for Squat which has the same fixed weight on the 3rd and 4th set, 
+                    // and for OHP and Dead has a starting weight and increases a fixed weight each set //
+                    for (sets = 0; sets < 4; sets++) {
+                    }
+                    // Assistance - 3 sets situps (8-15) //
+                } else if (dayNum == 2) {
+                    personalStrengthData["madCowLift"][0].name = "Squat"
+                    personalStrengthData["madCowLift"][0].weight = personalStrengthData["squat5RMax"]
+                    personalStrengthData["madCowLift"][1].name = "Bench"
+                    personalStrengthData["madCowLift"][1].weight = personalStrengthData["bench5RMax"]
+                    personalStrengthData["madCowLift"][2].name = "Row"
+                    personalStrengthData["madCowLift"][2].weight = personalStrengthData["row5RMax"]
+                    for (sets = 0; sets < 6; sets++) {
+                        // Day 1 Compounds at 4x5 1x3, 1x8
+                        // Day 3 has a starting weight for Squat, Bench, and Row that goes up a fixed weight until,
+                        // it hits the new heavier starting weight for 3 reps then drops to an earlier set weight for 8,
+                        // reps. This new weight performed 3 times becomes the new end weight on the next Day 1 //
+                    }
+                    // Assitance 3 sets weighted dips(5-8 reps), 3 sets bbell curls & tricep extensions (8-12 reps) //
                 }
-                //  Assistance - 2 sets Weighted Hyper Extension (8-12), 4 sets weighted situps(8-15) //
-            } else if (dayNum == 1) {
-                for (lifts = 0; lifts < 5; lifts++){
-                // 3 different compounds at 4x5
-                // Day 2 has starting weight for Squat which has the same fixed weight on the 3rd and 4th set, 
-                // and for OHP and Dead has a starting weight and increases a fixed weight each set //
-            }
-                // Assistance - 3 sets situps (8-15) //
-            } else if (dayNum == 2) {
-                for (lifts = 0; lifts < 5; lifts++){
-                // Day 1 Compounds at 4x5 1x3, 1x8
-                // Day 3 has a starting weight for Squat, Bench, and Row that goes up a fixed weight until,
-                // it hits the new heavier starting weight for 3 reps then drops to an earlier set weight for 8,
-                // reps. This new weight performed 3 times becomes the new end weight on the next Day 1 //
-                }
-                // Assitance 3 sets weighted dips(5-8 reps), 3 sets bbell curls & tricep extensions (8-12 reps) // 
             }
         }
     }
