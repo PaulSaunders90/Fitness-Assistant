@@ -699,14 +699,12 @@ function strongliftPropagation() {
 
 function madCow() {
     getFiveRepMax()
-    createStartingWeight()
     madCowPropagation()
 }
 
 // Populate Lifting Program Function //
 
 function madCowPropagation() {
-    var gainPercent = .025;
     personalStrengthData["madCowLift"] = {};
     personalStrengthData["madCowLift"][0] = {};
     personalStrengthData["madCowLift"][1] = {};
@@ -717,47 +715,65 @@ function madCowPropagation() {
             week.children[dayNum].innerHTML += `Day ${dayNum + 1}`
             for (lifts = 0; lifts < 3; lifts++) {
                 if (dayNum == 0) {
-                    personalStrengthData["madCowLift"][0].name = "Squat"
-                    personalStrengthData["madCowLift"][0].weight = personalStrengthData["startingSquat"]
-                    personalStrengthData["madCowLift"][0].interval 
-                    personalStrengthData["madCowLift"][1].name = "Bench"
-                    personalStrengthData["madCowLift"][1].weight = personalStrengthData["startingBench"]
-                    personalStrengthData["madCowLift"][2].name = "Barbell Row"
-                    personalStrengthData["madCowLift"][2].weight = personalStrengthData["startingRow"]
+                    personalStrengthData["madCowLift"][0].name = "Squat";
+                    personalStrengthData["madCowLift"][1].name = "Bench";
+                    personalStrengthData["madCowLift"][2].name = "Barbell Row";
+                    if (weekNum != 0) {
+                        personalStrengthData["madCowLift"][0].weight = personalStrengthData["madCowLift"][0].newWeight
+                        personalStrengthData["madCowLift"][1].weight = personalStrengthData["madCowLift"][1].newWeight
+                        personalStrengthData["madCowLift"][2].weight = personalStrengthData["madCowLift"][2].newWeight
+                    } else if (weekNum == 0) {
+                        personalStrengthData["madCowLift"][0].weight = personalStrengthData["squat5RMax"];
+                        personalStrengthData["madCowLift"][1].weight = personalStrengthData["bench5RMax"];
+                        personalStrengthData["madCowLift"][2].weight = personalStrengthData["row5RMax"];
+                    }
                     week.children[dayNum].innerHTML += `<br> ${personalStrengthData["madCowLift"][lifts].name}`
                     for (sets = 0; sets < 5; sets++) {
-                        // 3 compounds at 5x5
-                        // monday % of the 5RM goes 50, 62.5, 75, 87.5, 100 //
-                        increaseWeight = intervalWeight * sets
-                        rawWeight = personalStrengthData["madCowLift"][lifts].weight + increaseWeight
+                        increaseInterval = (.5 + (.125 * sets))
+                        rawWeight = personalStrengthData["madCowLift"][lifts].weight * increaseInterval
                         roundedWeight = (rawWeight % 5) >= 2.5 ? parseInt(rawWeight / 5) * 5 + 5 : parseInt(rawWeight / 5) * 5;
                         week.children[dayNum].innerHTML += `<br> ${roundedWeight} x 5 reps`
                     }
                 } else if (dayNum == 1) {
                     personalStrengthData["madCowLift"][0].name = "Squat"
-                    personalStrengthData["madCowLift"][0].weight = personalStrengthData["startingSquat"]
                     personalStrengthData["madCowLift"][1].name = "Overhead Press"
-                    personalStrengthData["madCowLift"][0].weight = personalStrengthData["startingOHP"]
                     personalStrengthData["madCowLift"][2].name = "Deadlift"
-                    personalStrengthData["madCowLift"][0].weight = personalStrengthData["startingDead"]
+                    if (weekNum != 0) {
+                        personalStrengthData["madCowLift"][0].weight = personalStrengthData["madCowLift"][0].newWeight
+                        personalStrengthData["madCowLift"][1].weight = personalStrengthData["madCowOHPNewWeight"]
+                        personalStrengthData["madCowLift"][2].weight = personalStrengthData["madCowDeadliftNewWeight"]
+                    } else if (weekNum == 0) {
+                        personalStrengthData["madCowLift"][0].weight = personalStrengthData["squat5RMax"];
+                        personalStrengthData["madCowLift"][1].weight = personalStrengthData["ohp5RMax"];
+                        personalStrengthData["madCowLift"][2].weight = personalStrengthData["deadlift5RMax"];
+                    }
                     week.children[dayNum].innerHTML += `<br> ${personalStrengthData["madCowLift"][lifts].name}`
                     for (sets = 0; sets < 4; sets++) {
                         // 3 different compounds at 4x5
                         // Squat % of 5RM is 50, 62.5, 75 and 75 //
-                        // OHP % is 62.5, 75, 87.5, and afte week 1, it repeats itself for two weeks a weight interval //
+                        // OHP % is 62.5, 75, 87.5, and after week 1, it repeats itself for two weeks a weight interval //
                         // Dead % is 62.5, 75, 87.5, and 100 // 
-                        increaseWeight = intervalWeight * sets
-                        rawWeight = personalStrengthData["madCowLift"][lifts].weight + increaseWeight
+                        increaseInterval = (.5 + (.125 * sets))
+                        rawWeight = personalStrengthData["madCowLift"][lifts].weight * increaseInterval
                         roundedWeight = (rawWeight % 5) >= 2.5 ? parseInt(rawWeight / 5) * 5 + 5 : parseInt(rawWeight / 5) * 5;
                         week.children[dayNum].innerHTML += `<br> ${roundedWeight} x 5 reps`
+                        if ((sets == 4) && (lifts == 2)){
+                            personalStrengthData["madCowDeadliftNewWeight"] = (roundedWeight + (roundedWeight * .025))
+                        }
                     }
                 } else if (dayNum == 2) {
-                    personalStrengthData["madCowLift"][0].name = "Squat"
-                    personalStrengthData["madCowLift"][0].weight = personalStrengthData["startingSquat"]
-                    personalStrengthData["madCowLift"][1].name = "Bench"
-                    personalStrengthData["madCowLift"][1].weight = personalStrengthData["startingBench"]
-                    personalStrengthData["madCowLift"][2].name = "Barbell Row"
-                    personalStrengthData["madCowLift"][2].weight = personalStrengthData["startingRow"]
+                    personalStrengthData["madCowLift"][0].name = "Squat";
+                    personalStrengthData["madCowLift"][1].name = "Bench";
+                    personalStrengthData["madCowLift"][2].name = "Barbell Row";
+                    if (weekNum != 0) {
+                        personalStrengthData["madCowLift"][0].weight = personalStrengthData["madCowLift"][0].newWeight
+                        personalStrengthData["madCowLift"][1].weight = personalStrengthData["madCowLift"][1].newWeight
+                        personalStrengthData["madCowLift"][2].weight = personalStrengthData["madCowLift"][2].newWeight
+                    } else if (weekNum == 0) {
+                        personalStrengthData["madCowLift"][0].weight = personalStrengthData["squat5RMax"];
+                        personalStrengthData["madCowLift"][1].weight = personalStrengthData["bench5RMax"];
+                        personalStrengthData["madCowLift"][2].weight = personalStrengthData["row5RMax"];
+                    }
                     week.children[dayNum].innerHTML += `<br> ${personalStrengthData["madCowLift"][lifts].name}`
                     for (sets = 0; sets < 6; sets++) {
                         // Day 1 Compounds at 4x5 1x3, 1x8
@@ -765,10 +781,13 @@ function madCowPropagation() {
                         // it hits the new heavier starting weight for 3 reps then drops to an earlier set weight for 8,
                         // reps. This new weight performed 3 times becomes the new end weight on the next Day 1 //
                         // % of 5RM goes 52.5, 65, 77.5, 90, 102.5, 77.5 //
-                        increaseWeight = intervalWeight * sets
-                        rawWeight = personalStrengthData["madCowLift"][lifts].weight + increaseWeight
+                        increaseInterval = (.5 + (.125 * sets))
+                        rawWeight = personalStrengthData["madCowLift"][lifts].weight * increaseInterval
                         roundedWeight = (rawWeight % 5) >= 2.5 ? parseInt(rawWeight / 5) * 5 + 5 : parseInt(rawWeight / 5) * 5;
                         week.children[dayNum].innerHTML += `<br> ${roundedWeight} x 5 reps`
+                        if (sets == 6){
+                            personalStrengthData["madCowLift"][lifts].newWeight = roundedWeight
+                        }
                     }
                 }
             }
@@ -776,8 +795,8 @@ function madCowPropagation() {
         week.children[0].innerHTML += "<br> Assistance - 2 sets Weighted Hyper Extension (10-12 reps), 4 sets weighted situps (10-12 reps)"
         week.children[1].innerHTML += "<br> Assistance - 3 sets situps (max reps)"
         week.children[2].innerHTML += "<br> Assistance - 3 sets Weighted Dips (5-8 reps), 3 sets Barbell Curls, (8 reps), Tricep Extensions (8 reps)"
-    }
-}
+    };
+};
 
 // Reset Lifting Calculator Function //
 
