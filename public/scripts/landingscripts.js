@@ -694,8 +694,8 @@ function strongliftPropagation() {
     };
 };
 
-// Madcow 5x5 //
-// Madcow Master Function //
+// MadCow 5x5 //
+// MadCow Master Function //
 
 function madCow() {
     getFiveRepMax()
@@ -750,6 +750,8 @@ function madCowDay2(week, dayNum, lifts) {
     };
 };
 
+// MadCow Day Three Lift Function //
+
 function madCowDay3(week, dayNum, lifts) {
     week.children[dayNum].innerHTML += `<br> ${personalStrengthData["madCowLift"][lifts].name}`
     for (sets = 0; sets < 6; sets++) {
@@ -769,7 +771,7 @@ function madCowDay3(week, dayNum, lifts) {
 };
 
 
-// Populate Lifting Program Function //
+// Populate MadCow Lifting Program Function //
 
 function madCowPropagation() {
     personalStrengthData["madCowLift"] = {};
