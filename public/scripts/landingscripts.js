@@ -168,7 +168,6 @@ function checkCalorieForm() {
         DOM["calorieCalcFormButton"].style.backgroundColor = "#e5e1e1";
         return true
     } else {
-        console.log("CALORIE FORM ERROR FILL OUT THE FORM")
         DOM["calorieCalcFormButton"].disabled = true
         DOM["calorieCalcFormButton"].style.backgroundColor = "#FFF";
         return false
@@ -220,7 +219,6 @@ function genderCheck() {
             (6.25 * personalHealthData["height"]) - (5 * personalHealthData["age"]) - 161);
         genderedFormulaResult = femaleFormula;
     } else {
-        console.log("GENDER CHECK ERROR")
         return false;
     }
 };
@@ -245,7 +243,6 @@ function activityLevelCheck() {
     } else if (activitySelection == 7) {
         calorieResults = (genderedFormulaResult * 1.9)
     } else {
-        console.log("ACTIVITY ERROR")
         return false;
     }
 };
@@ -442,9 +439,7 @@ function determineProgramVariables() {
 
 function determineMeasurement() {
     const unitSelection = DOM["liftingMeasurementSelector"].selectedIndex
-    if (unitSelection == 0) {
-        return
-    } else if (unitSelection == 1) {
+    if (unitSelection == 1) {
         personalStrengthData["squatWeight"] = (personalStrengthData["squatWeight"] * 2.20462)
         personalStrengthData["benchWeight"] = (personalStrengthData["benchWeight"] * 2.20462)
         personalStrengthData["deadliftWeight"] = (personalStrengthData["deadliftWeight"] * 2.20462)
@@ -478,7 +473,6 @@ function determineMaxRep() {
         personalStrengthData["deadliftMax"] = (parseInt(DOM["deadliftWeightInput"].value) / (1.0278 - (.0278 * (parseInt(DOM["deadliftRepInput"].value)))))
         personalStrengthData["rowMax"] = (parseInt(DOM["bbellRowWeightInput"].value) / (1.0278 - (.0278 * (parseInt(DOM["bbellRowRepInput"].value)))))
         personalStrengthData["ohpMax"] = (parseInt(DOM["ohpWeightInput"].value) / (1.0278 - (.0278 * (parseInt(DOM["ohpRepInput"].value)))))
-
     }
 };
 
@@ -572,8 +566,15 @@ function populateMaxRep() {
 // Starting Strength Master Function //
 
 function startingStrength() {
+    const unitSelection = DOM["liftingMeasurementSelector"].selectedIndex
     getFiveRepMax()
     createStartingWeight()
+    if (unitSelection == 1) {
+        personalStrengthData["startingSquat"] = ((personalStrengthData["startingSquat"] * 0.453592) % 5) >= 2.5 ? parseInt((personalStrengthData["startingSquat"] * 0.453592) / 5) * 5 + 5 : parseInt((personalStrengthData["startingSquat"] * 0.453592) / 5) * 5;
+        personalStrengthData["startingBench"] = ((personalStrengthData["startingBench"] * 0.453592) % 5) >= 2.5 ? parseInt((personalStrengthData["startingBench"] * 0.453592) / 5) * 5 + 5 : parseInt((personalStrengthData["startingBench"] * 0.453592) / 5) * 5;
+        personalStrengthData["startingDead"] = ((personalStrengthData["startingDead"] * 0.453592) % 5) >= 2.5 ? parseInt((personalStrengthData["startingDead"] * 0.453592) / 5) * 5 + 5 : parseInt((personalStrengthData["startingDead"] * 0.453592) / 5) * 5;
+        personalStrengthData["startingPowerClean"] = ((personalStrengthData["startingPowerClean"] * 0.453592) % 5) >= 2.5 ? parseInt((personalStrengthData["startingPowerClean"] * 0.453592) / 5) * 5 + 5 : parseInt((personalStrengthData["startingPowerClean"] * 0.453592) / 5) * 5;
+    }
     buildSSProgression()
 };
 
@@ -587,6 +588,7 @@ function buildSSProgression() {
 // Starting Strength Phase 1 Function //
 
 function phase1() {
+    const unitSelection = DOM["liftingMeasurementSelector"].selectedIndex
     for (weekNum = 0; weekNum < 3; weekNum++) {
         var week = DOM[`week${weekNum + 1}Container`]
         for (dayNum = 0; dayNum < 3; dayNum++) {
@@ -594,8 +596,13 @@ function phase1() {
                 lowerProgression = 0;
                 upperProgression = 0;
             } else {
-                lowerProgression = (lowerProgression + 10);
-                upperProgression = (upperProgression + 5);
+                if (unitSelection == 0) {
+                    lowerProgression = (lowerProgression + 10);
+                    upperProgression = (upperProgression + 5);
+                } else if (unitSelection == 1) {
+                    lowerProgression = (lowerProgression + 5);
+                    upperProgression = (upperProgression + 5);
+                }
             }
             week.children[dayNum].innerHTML = `Day ${dayNum + 1}`
                 + `<br>Squat - ${(personalStrengthData["startingSquat"] + lowerProgression)} x 5 reps x 3 sets`
@@ -639,16 +646,30 @@ function phase2() {
 // Stronglifts Master Function //
 
 function strongLifts() {
+    const unitSelection = DOM["liftingMeasurementSelector"].selectedIndex
     getFiveRepMax()
     createStartingWeight()
+    if (unitSelection == 1) {
+        personalStrengthData["startingSquat"] = ((personalStrengthData["startingSquat"] * 0.453592) % 5) >= 2.5 ? parseInt((personalStrengthData["startingSquat"] * 0.453592) / 5) * 5 + 5 : parseInt((personalStrengthData["startingSquat"] * 0.453592) / 5) * 5;
+        personalStrengthData["startingBench"] = ((personalStrengthData["startingBench"] * 0.453592) % 5) >= 2.5 ? parseInt((personalStrengthData["startingBench"] * 0.453592) / 5) * 5 + 5 : parseInt((personalStrengthData["startingBench"] * 0.453592) / 5) * 5;
+        personalStrengthData["startingDead"] = ((personalStrengthData["startingDead"] * 0.453592) % 5) >= 2.5 ? parseInt((personalStrengthData["startingDead"] * 0.453592) / 5) * 5 + 5 : parseInt((personalStrengthData["startingDead"] * 0.453592) / 5) * 5;
+        personalStrengthData["startingRow"] = ((personalStrengthData["startingRow"] * 0.453592) % 5) >= 2.5 ? parseInt((personalStrengthData["startingRow"] * 0.453592) / 5) * 5 + 5 : parseInt((personalStrengthData["startingRow"] * 0.453592) / 5) * 5;
+        personalStrengthData["startingOHP"] = ((personalStrengthData["startingOHP"] * 0.453592) % 5) >= 2.5 ? parseInt((personalStrengthData["startingOHP"] * 0.453592) / 5) * 5 + 5 : parseInt((personalStrengthData["startingOHP"] * 0.453592) / 5) * 5;
+    }
     strongliftPropagation()
-}
+};
 
 // Stronglift Build Propagation //
 
 function strongliftPropagation() {
-    var dailyProgression = 5;
-    var deadProgression = 10;
+    const unitSelection = DOM["liftingMeasurementSelector"].selectedIndex
+    if (unitSelection == 0) {
+        var dailyProgression = 5;
+        var deadProgression = 10;
+    } else if (unitSelection == 1) {
+        var dailyProgression = 5;
+        var deadProgression = 5;
+    }
     for (weekNum = 0; weekNum < 8; weekNum++) {
         var week = DOM[`week${weekNum + 1}Container`]
         for (dayNum = 0; dayNum < 3; dayNum++) {
@@ -656,8 +677,13 @@ function strongliftPropagation() {
                 dailyProgression = 0;
                 deadProgression = 0;
             } else {
-                dailyProgression = (dailyProgression + 5);
-                deadProgression = (deadProgression + 10);
+                if (unitSelection == 0) {
+                    dailyProgression = (dailyProgression + 5);
+                    deadProgression = (deadProgression + 10);
+                } else if (unitSelection == 1) {
+                    dailyProgression = (dailyProgression + 5);
+                    deadProgression = (deadProgression + 5);
+                }
             }
             if ((weekNum == 0) && dayNum == 1) {
                 personalStrengthData["startingSquat"] += 5
@@ -668,12 +694,12 @@ function strongliftPropagation() {
                     week.children[dayNum].innerHTML = `Day ${dayNum + 1}`
                         + `<br>Squat - ${(personalStrengthData["startingSquat"] + dailyProgression)} x 5 reps x 5 sets`
                         + `<br>Bench Press - ${(personalStrengthData["startingBench"] + dailyProgression)} x 5 reps x 5 sets`
-                        + `<br>Overhead Press - ${(personalStrengthData["startingOHP"] + dailyProgression)} x 5 reps x 5 sets`
-                }
+                        + `<br>Barbell Row - ${(personalStrengthData["startingRow"] + dailyProgression)} x 5 reps x 5 sets`
+                    }
                 else {
                     week.children[dayNum].innerHTML = `Day ${dayNum + 1}`
                         + `<br>Squat - ${(personalStrengthData["startingSquat"] + dailyProgression)} x 5 reps x 5 sets`
-                        + `<br>Barbell Row - ${(personalStrengthData["startingRow"] + dailyProgression)} x 5 reps x 5 sets`
+                        + `<br>Overhead Press - ${(personalStrengthData["startingOHP"] + dailyProgression)} x 5 reps x 5 sets`
                         + `<br>Deadlift - ${(personalStrengthData["startingDead"] + deadProgression)} x 5 reps x 1 set`
                 }
             } else {
@@ -698,9 +724,17 @@ function strongliftPropagation() {
 // MadCow Master Function //
 
 function madCow() {
+    const unitSelection = DOM["liftingMeasurementSelector"].selectedIndex
     getFiveRepMax()
+    if (unitSelection == 1) {
+        personalStrengthData["squat5RMax"] = (personalStrengthData["squat5RMax"] * 0.453592)
+        personalStrengthData["bench5RMax"] = (personalStrengthData["bench5RMax"] * 0.453592)
+        personalStrengthData["deadlift5RMax"] = (personalStrengthData["deadlift5RMax"] * 0.453592)
+        personalStrengthData["row5RMax"] = (personalStrengthData["row5RMax"] * 0.453592)
+        personalStrengthData["ohp5RMax"] = (personalStrengthData["ohp5RMax"] * 0.453592)
+    }
     madCowPropagation()
-}
+};
 
 // MadCow Object Population Functions //
 // MadCow Lift Name Function //
