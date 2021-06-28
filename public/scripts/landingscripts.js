@@ -390,8 +390,6 @@ function checkLiftingForm() {
 
 function calculateProgram() {
     const liftingSelection = DOM["liftingProgramSelector"].selectedIndex
-    determineProgramVariables()
-    determineMeasurement()
     determineMaxRep()
     populateMaxRep()
     if (liftingSelection == 1) {
@@ -403,56 +401,6 @@ function calculateProgram() {
     }
     DOM["liftingCalc"].style.display = "none"
     DOM["liftingCalcResults"].style.display = "block"
-};
-
-// Function Converting Lifting Inputs into Calculable Integers //
-
-function determineProgramVariables() {
-    const liftingSelection = DOM["liftingProgramSelector"].selectedIndex
-    // If Starting Strength //
-    if (liftingSelection == 1) {
-        personalStrengthData["squatWeight"] = (parseInt(DOM["squatWeightInput"].value))
-        personalStrengthData["squatRep"] = (parseInt(DOM["squatRepInput"].value))
-        personalStrengthData["benchWeight"] = (parseInt(DOM["benchWeightInput"].value))
-        personalStrengthData["benchRep"] = (parseInt(DOM["benchRepInput"].value))
-        personalStrengthData["deadliftWeight"] = (parseInt(DOM["deadliftWeightInput"].value))
-        personalStrengthData["deadliftRep"] = (parseInt(DOM["deadliftRepInput"].value))
-        personalStrengthData["powerCleanWeight"] = (parseInt(DOM["powerCleanWeightInput"].value))
-        personalStrengthData["powerCleanRep"] = (parseInt(DOM["powerCleanRepInput"].value))
-    }
-    // If Stronglifts or Madcow //
-    else if (liftingSelection == 2 || liftingSelection == 3) {
-        personalStrengthData["squatWeight"] = (parseInt(DOM["squatWeightInput"].value))
-        personalStrengthData["squatRep"] = (parseInt(DOM["squatRepInput"].value))
-        personalStrengthData["benchWeight"] = (parseInt(DOM["benchWeightInput"].value))
-        personalStrengthData["benchRep"] = (parseInt(DOM["benchRepInput"].value))
-        personalStrengthData["deadliftWeight"] = (parseInt(DOM["deadliftWeightInput"].value))
-        personalStrengthData["deadliftRep"] = (parseInt(DOM["deadliftRepInput"].value))
-        personalStrengthData["rowWeight"] = (parseInt(DOM["bbellRowWeightInput"].value))
-        personalStrengthData["rowRep"] = (parseInt(DOM["bbellRowRepInput"].value))
-        personalStrengthData["ohpWeight"] = (parseInt(DOM["ohpWeightInput"].value))
-        personalStrengthData["ohpRep"] = (parseInt(DOM["ohpRepInput"].value))
-    }
-};
-
-// Unit Measurement Style Selection Formula //
-
-function determineMeasurement() {
-    const unitSelection = DOM["liftingMeasurementSelector"].selectedIndex
-    if (unitSelection == 1) {
-        personalStrengthData["squatWeight"] = (personalStrengthData["squatWeight"] * 2.20462)
-        personalStrengthData["benchWeight"] = (personalStrengthData["benchWeight"] * 2.20462)
-        personalStrengthData["deadliftWeight"] = (personalStrengthData["deadliftWeight"] * 2.20462)
-        if (personalStrengthData["rowWeight"]) {
-            personalStrengthData["rowWeight"] = (personalStrengthData["rowWeight"] * 2.20462)
-        }
-        if (personalStrengthData["powerCleanWeight"]) {
-            personalStrengthData["powerCleanWeight"] = (personalStrengthData["powerCleanWeight"] * 2.20462)
-        }
-        if (personalStrengthData["ohpWeight"]) {
-            personalStrengthData["ohpWeight"] = (personalStrengthData["ohpWeight"] * 2.20462)
-        }
-    };
 };
 
 // One Rep Max Calculation Formula Based on User Input  //
@@ -566,15 +514,8 @@ function populateMaxRep() {
 // Starting Strength Master Function //
 
 function startingStrength() {
-    const unitSelection = DOM["liftingMeasurementSelector"].selectedIndex
     getFiveRepMax()
     createStartingWeight()
-    if (unitSelection == 1) {
-        personalStrengthData["startingSquat"] = ((personalStrengthData["startingSquat"] * 0.453592) % 5) >= 2.5 ? parseInt((personalStrengthData["startingSquat"] * 0.453592) / 5) * 5 + 5 : parseInt((personalStrengthData["startingSquat"] * 0.453592) / 5) * 5;
-        personalStrengthData["startingBench"] = ((personalStrengthData["startingBench"] * 0.453592) % 5) >= 2.5 ? parseInt((personalStrengthData["startingBench"] * 0.453592) / 5) * 5 + 5 : parseInt((personalStrengthData["startingBench"] * 0.453592) / 5) * 5;
-        personalStrengthData["startingDead"] = ((personalStrengthData["startingDead"] * 0.453592) % 5) >= 2.5 ? parseInt((personalStrengthData["startingDead"] * 0.453592) / 5) * 5 + 5 : parseInt((personalStrengthData["startingDead"] * 0.453592) / 5) * 5;
-        personalStrengthData["startingPowerClean"] = ((personalStrengthData["startingPowerClean"] * 0.453592) % 5) >= 2.5 ? parseInt((personalStrengthData["startingPowerClean"] * 0.453592) / 5) * 5 + 5 : parseInt((personalStrengthData["startingPowerClean"] * 0.453592) / 5) * 5;
-    }
     buildSSProgression()
 };
 
@@ -646,16 +587,8 @@ function phase2() {
 // Stronglifts Master Function //
 
 function strongLifts() {
-    const unitSelection = DOM["liftingMeasurementSelector"].selectedIndex
     getFiveRepMax()
     createStartingWeight()
-    if (unitSelection == 1) {
-        personalStrengthData["startingSquat"] = ((personalStrengthData["startingSquat"] * 0.453592) % 5) >= 2.5 ? parseInt((personalStrengthData["startingSquat"] * 0.453592) / 5) * 5 + 5 : parseInt((personalStrengthData["startingSquat"] * 0.453592) / 5) * 5;
-        personalStrengthData["startingBench"] = ((personalStrengthData["startingBench"] * 0.453592) % 5) >= 2.5 ? parseInt((personalStrengthData["startingBench"] * 0.453592) / 5) * 5 + 5 : parseInt((personalStrengthData["startingBench"] * 0.453592) / 5) * 5;
-        personalStrengthData["startingDead"] = ((personalStrengthData["startingDead"] * 0.453592) % 5) >= 2.5 ? parseInt((personalStrengthData["startingDead"] * 0.453592) / 5) * 5 + 5 : parseInt((personalStrengthData["startingDead"] * 0.453592) / 5) * 5;
-        personalStrengthData["startingRow"] = ((personalStrengthData["startingRow"] * 0.453592) % 5) >= 2.5 ? parseInt((personalStrengthData["startingRow"] * 0.453592) / 5) * 5 + 5 : parseInt((personalStrengthData["startingRow"] * 0.453592) / 5) * 5;
-        personalStrengthData["startingOHP"] = ((personalStrengthData["startingOHP"] * 0.453592) % 5) >= 2.5 ? parseInt((personalStrengthData["startingOHP"] * 0.453592) / 5) * 5 + 5 : parseInt((personalStrengthData["startingOHP"] * 0.453592) / 5) * 5;
-    }
     strongliftPropagation()
 };
 
@@ -724,15 +657,7 @@ function strongliftPropagation() {
 // MadCow Master Function //
 
 function madCow() {
-    const unitSelection = DOM["liftingMeasurementSelector"].selectedIndex
     getFiveRepMax()
-    if (unitSelection == 1) {
-        personalStrengthData["squat5RMax"] = (personalStrengthData["squat5RMax"] * 0.453592)
-        personalStrengthData["bench5RMax"] = (personalStrengthData["bench5RMax"] * 0.453592)
-        personalStrengthData["deadlift5RMax"] = (personalStrengthData["deadlift5RMax"] * 0.453592)
-        personalStrengthData["row5RMax"] = (personalStrengthData["row5RMax"] * 0.453592)
-        personalStrengthData["ohp5RMax"] = (personalStrengthData["ohp5RMax"] * 0.453592)
-    }
     madCowPropagation()
 };
 
