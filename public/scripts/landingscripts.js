@@ -4,8 +4,8 @@
 
 var personalHealthData = {},
     personalStrengthData = {},
-    lowerProgression = 10,
-    upperProgression = 5,
+    lowerProgression = 0,
+    upperProgression = 0,
     genderedFormulaResult = 0;
 
 // DOM Variables //
@@ -313,15 +313,15 @@ function selectLiftingProgram() {
     if (liftingSelection == 1) {
         DOM["liftingMeasurementSelector"].style.display = "inline"
         DOM["squatInput"].style.display = "block"
-        DOM["squatInput"].parentNode.style.display = "inline-flex"
+        DOM["squatInput"].parentNode.style.display = "block"
         DOM["benchInput"].style.display = "block"
-        DOM["benchInput"].parentNode.style.display = "inline-flex"
+        DOM["benchInput"].parentNode.style.display = "block"
         DOM["deadliftInput"].style.display = "block"
-        DOM["deadliftInput"].parentNode.style.display = "inline-flex"
+        DOM["deadliftInput"].parentNode.style.display = "block"
         DOM["bbellRowInput"].style.display = "none"
         DOM["bbellRowInput"].parentNode.style.display = "none"
         DOM["powerCleanInput"].style.display = "block"
-        DOM["powerCleanInput"].parentNode.style.display = "inline-flex"
+        DOM["powerCleanInput"].parentNode.style.display = "block"
         DOM["ohpInput"].style.display = "none"
         DOM["ohpInput"].parentNode.style.display = "none"
         DOM["liftSubmitButton"].style.display = "block"
@@ -331,17 +331,17 @@ function selectLiftingProgram() {
     else if (liftingSelection == 2 || liftingSelection == 3) {
         DOM["liftingMeasurementSelector"].style.display = "inline"
         DOM["squatInput"].style.display = "block"
-        DOM["squatInput"].parentNode.style.display = "inline-flex"
+        DOM["squatInput"].parentNode.style.display = "block"
         DOM["benchInput"].style.display = "block"
-        DOM["benchInput"].parentNode.style.display = "inline-flex"
+        DOM["benchInput"].parentNode.style.display = "block"
         DOM["deadliftInput"].style.display = "block"
-        DOM["deadliftInput"].parentNode.style.display = "inline-flex"
+        DOM["deadliftInput"].parentNode.style.display = "block"
         DOM["bbellRowInput"].style.display = "block"
-        DOM["bbellRowInput"].parentNode.style.display = "inline-flex"
+        DOM["bbellRowInput"].parentNode.style.display = "block"
         DOM["powerCleanInput"].style.display = "none"
         DOM["powerCleanInput"].parentNode.style.display = "none"
         DOM["ohpInput"].style.display = "block"
-        DOM["ohpInput"].parentNode.style.display = "inline-flex"
+        DOM["ohpInput"].parentNode.style.display = "block"
         DOM["liftSubmitButton"].style.display = "block"
         DOM["instructionText"].style.display = "block"
     }

@@ -2,7 +2,7 @@
 /* Calculator Backgrounds and Containers */
 
 #title{
-    color: #07c;
+    color: #fff;
     text-align: center;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -14,11 +14,11 @@
 }
 
 #caloriecalccontainer{
-    background-color:#fff;
+    background-color: #4db5ff;
 }
 
 #liftingcalccontainer{
-    background-color:#fff;
+    background-color:#4db5ff;
     display: none;
 }
 
@@ -30,7 +30,6 @@
 }
 
 #togglecalorie{
-    margin: auto 15px;
     padding: 5px;
     display: inline-block;
     color: #07c;
@@ -62,8 +61,8 @@
 }
 
 #calorieimage{
-    width: 50px;
-    height: 50px;
+    width: 35px;
+    height: 35px;
     background-image: url('/img/food.png');
     background-size: contain;
     background-repeat: no-repeat;
@@ -71,10 +70,10 @@
 }
 
 #liftimage{
-    width: 50px;
-    height: 50px;
+    width: 35px;
+    height: 35px;
     background-image: url('/img/lift.png');
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
     margin: auto;
 }
@@ -91,7 +90,6 @@ form {
     margin: auto;
     color: #07c;
     border: 1px solid rgba(40, 44, 52, .1);
-    border-radius: 15px;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
     background-color: #FFF;
 }
@@ -110,7 +108,7 @@ form {
 }
 
 input {
-    font-size: 10px;
+    font-size: 12px;
     padding: 10px;
     background-color:inherit;
     border: none;
@@ -134,16 +132,15 @@ label {
 }
 
 label p{
-    display: inline-block;
-    width: 75px;
+    font-size: 10px;
 }
 
 #genderselection{
     display: flex;
 }
 
-#genderselection p{
-    width: 75px;
+#gendertitle{
+    font-size: 10px;
 }
 
 #male, #female{
@@ -167,7 +164,7 @@ button {
     outline: 0;
     padding: 16px;
     border: 1px solid rgba(204, 200, 200 .8);
-    border-radius: 15px;
+    border-radius: 5px;
     transition: all 0.2s ease-in-out;
     cursor: pointer;
     background-color: #FFF;
@@ -186,7 +183,6 @@ button.submit {
     margin: 15px auto;
     color: #07c;
     border: 1px solid rgba(204, 200, 200,.8);
-
 }
 
 #cm{
@@ -205,11 +201,6 @@ option, .measurement, #activity{
     margin-top: 10px;
 }
 
-#liftingform label{
-    display: flex;
-    justify-content: center;
-}
-
 /* Calorie Calc Results */
 
 #caloriecalcresults{
@@ -224,7 +215,7 @@ option, .measurement, #activity{
 #maintainweight{
     width: 30%;
     box-shadow:  2px 2px 5px rgba(0, 0, 0, 0.25), -5px -5px 10px rgba(0, 0, 0, 0.25);
-    border-radius: 15px;
+    border-radius: 5px;
     padding: 10px;
     text-align: center;
     margin: 10px auto;
@@ -258,14 +249,14 @@ option, .measurement, #activity{
 #weightlossresults{ 
     width: 30%;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25), -5px -5px 10px rgba(0, 0, 0, 0.25);
-    border-radius: 15px;
+    border-radius: 5px;
     padding: 20px;
 }
 
 #weightgainresults{
     width: 30%;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25),  -5px -5px 10px rgba(0, 0, 0, 0.25);
-    border-radius: 15px;
+    border-radius: 5px;
     padding: 20px;
 }
 
@@ -293,16 +284,22 @@ option, .measurement, #activity{
 }
 
 .lifts{
-    text-align: center;
     margin: auto;
+    padding: 5px;
 }
 
 .lifts p{
-    margin-top: 25px;
+    margin-top: 10px;
+    font-size: 10px;
 }
 
 .lifts label{
     margin: 5px 15px;
+}
+
+#liftingform label{
+    display: inline;
+    justify-content: center;
 }
 
 #liftingcalc button{
@@ -321,6 +318,8 @@ option, .measurement, #activity{
 #instruction{
     display: none;
     text-align: center;
+    font-size: 12px;
+    font-weight: bold;
 }
 
 #squats{

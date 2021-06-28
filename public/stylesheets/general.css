@@ -4,7 +4,7 @@ html, body {
     position: relative;
     font-family: 'Open Sans', sans-serif;
     font-weight: bold;
-    background-color: #fff
+    background-color:#4db5ff;
 }
 
 .generalcontainer {
@@ -16,14 +16,14 @@ html, body {
 
 #footer{
     padding: 5px;
-    background-color:#fff;
+    background-color: #4db5ff;
     text-align: center;
-    color: #07c;
+    color: #fff;
     font-size: 10px;
 
 }
 
 #footer a{
-    color: #07c;
+    color: #fff;
     text-decoration: none; 
 }
