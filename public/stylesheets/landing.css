@@ -27,55 +27,48 @@
 #togglecontainer{
     font-size: 12px;
     text-align: center;
+    margin: auto;
+    margin-bottom: -12px;
+    width: 50%;
 }
 
 #togglecalorie{
+    width: 25%;
     padding: 5px;
     display: inline-block;
-    color: #07c;
+    color: rgba(40, 44, 52);
     background-color: #FFF;
-    border-radius: 10px;
     transition: all .6s cubic-bezier(0.25, 0.8, 0.25, 1);
     cursor: pointer;
-    border: 1px solid rgba(204, 200, 200, .8)
+    box-shadow: 0 0 0 2px #265a7f inset; 
+    border: solid 1px rgb(53, 57, 53);
+    border-bottom: 0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 #togglelift{
+    width: 25%;
     margin: auto 15px;
     padding: 5px;
     display: inline-block;
-    color: #07c;
-    background-color: #FFF;
-    border-radius: 10px;
+    color: rgba(40, 44, 52);
+    background-color: #ccc8c8;
     transition: all .6s cubic-bezier(0.25, 0.8, 0.25, 1);
     cursor: pointer;
-    border: 1px solid rgba(204, 200, 200, .8)
+    box-shadow: 0 0 0 2px #265a7f inset; 
+    border: solid 1px rgb(53, 57, 53);
+    border-bottom: 0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 #togglecalorie:hover{
-   background-color: #ccc8c8;
+   background-color: #FFF !important;;
 }
 
 #togglelift:hover{
-    background-color: #ccc8c8;
-}
-
-#calorieimage{
-    width: 35px;
-    height: 35px;
-    background-image: url('/img/food.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    margin: auto;
-}
-
-#liftimage{
-    width: 35px;
-    height: 35px;
-    background-image: url('/img/lift.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    margin: auto;
+    background-color: #FFF !important;;
 }
 
 /* Calculator Input Design */
@@ -88,15 +81,17 @@
 form {
     width: auto;
     margin: auto;
-    color: #07c;
+    color: rgba(40, 44, 52);
     border: 1px solid rgba(40, 44, 52, .1);
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
     background-color: #FFF;
 }
 
 #caloriecalcform{
     font-size: 12px;
     padding: 20px;
+    box-shadow: 0 0 0 4px #265a7f inset; 
+    border: solid 1px rgb(53, 57, 53);
+    border-radius: 5px;
 }
 
 #caloriecalcformbutton{
@@ -104,7 +99,10 @@ form {
 }
 
 #liftingform{
-    padding: 5px;
+    padding: 20px;
+    box-shadow: 0 0 0 4px #265a7f inset; 
+    border: solid 1px rgb(53, 57, 53);
+    border-radius: 5px;
 }
 
 input {
@@ -122,7 +120,7 @@ input[type="number"]::-webkit-outer-spin-button{
 }
 
 .calorieinputs[type="number"]{
-    color: #07c;
+    color: rgba(40, 44, 52);
     width: 60px;
 }
 
@@ -137,6 +135,7 @@ label p{
 
 #genderselection{
     display: flex;
+    margin: 5px auto;
 }
 
 #gendertitle{
@@ -174,7 +173,7 @@ button:hover {
     background-color: #ccc8c8 !important;
 }
 
-button:active {
+button:focus {
     box-shadow: inset 1px 1px 2px #FFF, inset -1px -1px 2px #FFF !important;
 }
 
@@ -194,11 +193,20 @@ button.submit {
 }
 
 option, .measurement, #activity{
-    color: #07c;
+    color: rgba(40, 44, 52);
+}
+
+.measurementtitle{
+    margin: 5px auto;
+    font-size: 10px;
 }
 
 .measurement{
-    margin-top: 10px;
+    display: flex;
+}
+
+.imperial, .metric{
+    margin: 2px 10px;
 }
 
 /* Calorie Calc Results */
@@ -208,18 +216,20 @@ option, .measurement, #activity{
     text-align: center;
     padding: 25px;
     width: auto;
-    color: #07c;
+    color: rgba(40, 44, 52);
     margin: 0 auto;
 }
 
 #maintainweight{
     width: 30%;
-    box-shadow:  2px 2px 5px rgba(0, 0, 0, 0.25), -5px -5px 10px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
     padding: 10px;
     text-align: center;
     margin: 10px auto;
     background-color:#FFF;
+    box-shadow: 0 0 0 4px #265a7f inset; 
+    border: solid 1px rgb(53, 57, 53);
+    border-radius: 5px;
 }
 
 .results{
@@ -230,7 +240,7 @@ option, .measurement, #activity{
 
 .resultstitle{
     text-align: center;
-    font-size: 12px;
+    font-size: 14px;
     padding: 10px;
     border-bottom: 1px solid rgba(204, 200, 200, .8);
 }
@@ -248,16 +258,20 @@ option, .measurement, #activity{
 
 #weightlossresults{ 
     width: 30%;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25), -5px -5px 10px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
     padding: 20px;
+    box-shadow: 0 0 0 4px #265a7f inset; 
+    border: solid 1px rgb(53, 57, 53);
+    border-radius: 5px;
 }
 
 #weightgainresults{
     width: 30%;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25),  -5px -5px 10px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
     padding: 20px;
+    box-shadow: 0 0 0 4px #265a7f inset; 
+    border: solid 1px rgb(53, 57, 53);
+    border-radius: 5px;
 }
 
 #caloriecalcresults button{
@@ -275,12 +289,11 @@ option, .measurement, #activity{
 #programcontainer{
     display: block;
     text-align: center;
-    margin: 20px 0;
 }
 
 #program{
     border-radius: 0;
-    color: #07c;
+    color: rgba(40, 44, 52);
 }
 
 .lifts{
@@ -311,15 +324,15 @@ option, .measurement, #activity{
     text-align: center;
     padding: 25px;
     width: auto;
-    color: #07c;
+    color: rgba(40, 44, 52);
     margin: 0 auto;
 }
 
 #instruction{
+    margin-top: 10px;
     display: none;
     text-align: center;
-    font-size: 12px;
-    font-weight: bold;
+    font-size: 14px;
 }
 
 #squats{
@@ -359,7 +372,6 @@ option, .measurement, #activity{
 /* Lifting Results */
 
 .maxresults{
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25), -5px -5px 10px rgba(0, 0, 0, 0.25);
     padding: 10px;
     text-align: center;
     margin: 10px auto;
@@ -379,6 +391,6 @@ option, .measurement, #activity{
     text-align: center;
     padding: 25px;
     width: auto;
-    color: #07c;
+    color: rgba(40, 44, 52);
     margin: 0 auto;
 }

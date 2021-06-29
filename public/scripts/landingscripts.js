@@ -37,6 +37,8 @@ const DOM = {
     weightGainResults: document.getElementById("weightgain").getElementsByClassName("resultsnumber")[0],
     majorWeightGainResults: document.getElementById("majorweightgain").getElementsByClassName("resultsnumber")[0],
     liftingCalcContainer: document.getElementById('liftingcalccontainer'),
+    calorieCalcMeasurementTitle: document.getElementsByClassName("measurementtitle")[0],
+    liftingCalcMeasurementTitle: document.getElementsByClassName("measurementtitle")[1],
     footer: document.getElementById('footer'),
     navbarCalcButton: document.getElementById("calcbutton"),
     navbarLiftButton: document.getElementById("liftbutton"),
@@ -79,6 +81,7 @@ const DOM = {
     liftCalcResultsReset: document.getElementById("liftreset"),
     calorieCalcInputs: document.getElementById("caloriecalcform").querySelectorAll("input"),
     calorieCalcSelects: document.getElementById("caloriecalcform").querySelectorAll("select"),
+    liftingForm: document.getElementById("liftingform"),
     liftingCalcInputs: document.getElementById("liftingform").querySelectorAll("input"),
     liftingCalcSelects: document.getElementById("liftingform").querySelectorAll("select"),
     liftDataRows: document.getElementsByClassName("lifts"),
@@ -98,12 +101,30 @@ const DOM = {
 
 // Calorie Calculator Forumlas //
 
+// Toggle Filter Function // 
+
+function toggleButtonGreyout(e) {
+    if (e.target.className == "togglebutton") {
+        var selectedTarget = e.target.getAttribute("data-button");
+        var selectedButton = document.getElementById("toggle" + selectedTarget)
+        if(selectedButton == DOM["calorieToggle"]){
+            selectedButton.style.backgroundColor = "#FFF";
+            DOM["liftToggle"].style.backgroundColor = "#ccc8c8";
+        } else if (selectedButton == DOM["liftToggle"]){
+            selectedButton.style.backgroundColor = "#FFF";
+            DOM["calorieToggle"].style.backgroundColor = "#ccc8c8";
+        }
+    };
+};
+
+
 // Calorie Calculator Event Listeners //
 
 DOM["calorieMeasurementSelector"].addEventListener("click", measurementCheck)
 DOM["calorieCalcFormButton"].addEventListener("click", measureCalories)
 DOM["calorieCalcResultsReset"].addEventListener("click", resetCalories)
 DOM["calorieToggle"].addEventListener("click", toggleCalc)
+DOM["calorieToggle"].addEventListener("click", toggleButtonGreyout)
 
 for (i = 0; i < DOM["calorieCalcInputs"].length; i++) {
     DOM["calorieCalcInputs"][i].addEventListener("input", checkCalorieForm)
@@ -124,20 +145,20 @@ function toggleCalc() {
     DOM["calorieCalcContainer"].style.display = DOM["calorieCalcContainer"].style.display == 'block' ? 'block' : 'block';
     DOM["liftingCalcContainer"].style.display = DOM["liftingCalcContainer"].style.display == 'block' ? 'none' : 'none';
     DOM["calorieCalcFormButton"].disabled = true;
+    DOM["liftingCalcMeasurementTitle"].style.display = DOM["liftingCalcMeasurementTitle"].style.display == 'block' ? 'none' : 'none';
     DOM["title"].innerHTML = "Calorie Calculator";
 };
 
 // Unit Measurement Style Selection Formula //
 
 function measurementCheck() {
-    var selection = DOM["calorieMeasurementSelector"].selectedIndex
-    if (selection == 0) {
+    if (document.getElementById('calorieimp').checked) {
         DOM["footHeightMeasurement"].style.display = "inline-block"
         DOM["inchHeightMeasurement"].style.display = "inline-block"
         DOM["cmHeightMeasurement"].style.display = "none"
         DOM["poundWeightMeasurement"].style.display = "inline-block"
         DOM["kgWeightMeasurement"].style.display = "none"
-    } else if (selection == 1) {
+    } else if (document.getElementById('caloriekg').checked) {
         DOM["footHeightMeasurement"].style.display = "none"
         DOM["inchHeightMeasurement"].style.display = "none"
         DOM["cmHeightMeasurement"].style.display = "inline-block"
@@ -151,7 +172,8 @@ function measurementCheck() {
 // Function Checking Every Form is Filled on Calorie Calculator //
 
 function checkCalorieForm() {
-    var selection = DOM["calorieMeasurementSelector"].selectedIndex
+    var impChecked =  document.getElementById('calorieimp').checked
+    var metricChecked =  document.getElementById('caloriekg').checked
     var activitySelection = DOM["activityMeasurementSelector"].selectedIndex
     var ageInputFilled = (!isNaN(parseInt(DOM["ageMeasurement"].value)) && (parseInt(DOM["ageMeasurement"].value) > 0) && (parseInt(DOM["ageMeasurement"].value) < 99))
     var footInputFilled = (!isNaN(parseInt(DOM["footHeightMeasurement"].value)) && (parseInt(DOM["footHeightMeasurement"].value) > 3) && (parseInt(DOM["footHeightMeasurement"].value) < 8))
@@ -159,11 +181,11 @@ function checkCalorieForm() {
     var poundInputFilled = (!isNaN(parseInt(DOM["poundWeightMeasurement"].value)) && (parseInt(DOM["poundWeightMeasurement"].value) > 0))
     var cmInputFilled = (!isNaN(parseInt(DOM["cmHeightMeasurement"].value)) && (parseInt(DOM["cmHeightMeasurement"].value) > 0) && (parseInt(DOM["cmHeightMeasurement"].value) < 255))
     var kgInputFilled = (!isNaN(parseInt(DOM["kgWeightMeasurement"].value)) && (parseInt(DOM["kgWeightMeasurement"].value) > 0))
-    if (selection == 0 && activitySelection != 0 && ageInputFilled && footInputFilled && inchInputFilled && poundInputFilled) {
+    if ((impChecked || metricChecked ) && activitySelection != 0 && ageInputFilled && footInputFilled && inchInputFilled && poundInputFilled) {
         DOM["calorieCalcFormButton"].disabled = false
         DOM["calorieCalcFormButton"].style.backgroundColor = "#e5e1e1";
         return true
-    } else if (selection == 1 && activitySelection != 0 && ageInputFilled && cmInputFilled && kgInputFilled) {
+    } else if ((impChecked || metricChecked ) && activitySelection != 0 && ageInputFilled && cmInputFilled && kgInputFilled) {
         DOM["calorieCalcFormButton"].disabled = false
         DOM["calorieCalcFormButton"].style.backgroundColor = "#e5e1e1";
         return true
@@ -190,16 +212,15 @@ function measureCalories() {
 // Formula Standardizing Personal Metric Data into the Calorie Data Object //
 
 function personalMetrics() {
-    var selection = DOM["calorieMeasurementSelector"].selectedIndex
     personalHealthData["age"] = parseInt(DOM["ageMeasurement"].value)
-    if (selection == 0) {
+    if (document.getElementById('calorieimp').checked) {
         var feetToInches = (parseInt(DOM["footHeightMeasurement"].value) * 12)
         var totalInches = (parseInt(DOM["inchHeightMeasurement"].value) + feetToInches)
         var inchesToCM = (totalInches * 2.54)
         personalHealthData["height"] = inchesToCM
         var lbsToKG = (parseInt(DOM["poundWeightMeasurement"].value) * .453592)
         personalHealthData["weight"] = lbsToKG
-    } else if (selection == 1) {
+    } else if (document.getElementById('caloriekg').checked) {
         personalHealthData["height"] = parseInt(DOM["cmHeightMeasurement"].value)
         personalHealthData["weight"] = parseInt(DOM["kgWeightMeasurement"].value)
     }
@@ -279,6 +300,7 @@ function resetCalories() {
 // Lifting Calculator Event Listeners // 
 
 DOM["liftToggle"].addEventListener("click", toggleLift)
+DOM["liftToggle"].addEventListener("click", toggleButtonGreyout)
 DOM["liftingProgramSelector"].addEventListener("change", selectLiftingProgram)
 DOM["liftSubmitButton"].addEventListener("click", calculateProgram)
 DOM["liftCalcResultsReset"].addEventListener("click", resetLifts)
@@ -298,7 +320,9 @@ function toggleLift() {
     DOM["liftingCalcContainer"].style.display = DOM["liftingCalcContainer"].style.display == 'block' ? 'block' : 'block';
     DOM["calorieCalcContainer"].style.display = DOM["calorieCalcContainer"].style.display == 'block' ? 'none' : 'none';
     DOM["title"].innerHTML = "Lifting Calculator";
+    DOM["liftingForm"].style.width = "350px";
     DOM["liftSubmitButton"].disabled = true;
+    DOM["liftingCalcMeasurementTitle"].style.display = "none";
     for (i = 0; i < DOM["liftDataRows"].length; i++) {
         DOM["liftDataRows"][i].style.display = "none";
     }
@@ -311,6 +335,8 @@ function selectLiftingProgram() {
     const liftingSelection = DOM["liftingProgramSelector"].selectedIndex
     // If Starting Strength //
     if (liftingSelection == 1) {
+        DOM["liftingForm"].style.width = "revert";
+        DOM["liftingCalcMeasurementTitle"].style.display = "block"
         DOM["liftingMeasurementSelector"].style.display = "inline"
         DOM["squatInput"].style.display = "block"
         DOM["squatInput"].parentNode.style.display = "block"
@@ -329,6 +355,8 @@ function selectLiftingProgram() {
     }
     // If Stronglifts or Madcow //
     else if (liftingSelection == 2 || liftingSelection == 3) {
+        DOM["liftingForm"].style.width = "revert";
+        DOM["liftingCalcMeasurementTitle"].style.display = "block"
         DOM["liftingMeasurementSelector"].style.display = "inline"
         DOM["squatInput"].style.display = "block"
         DOM["squatInput"].parentNode.style.display = "block"
@@ -353,6 +381,8 @@ function selectLiftingProgram() {
 // Function Checking if All Lifting Form Fields are Filled //
 
 function checkLiftingForm() {
+    var impCheck = document.getElementById('liftimp').checked
+    var metricCheck = document.getElementById('liftkg').checked
     const liftingSelection = DOM["liftingProgramSelector"].selectedIndex
     const squatInputFilled = (!isNaN(parseInt(DOM["squatWeightInput"].value)) && (parseInt(DOM["squatWeightInput"].value) > 0)
         && (!isNaN(parseInt(DOM["squatRepInput"].value)) && (DOM["squatRepInput"].value) > 0))
@@ -366,19 +396,18 @@ function checkLiftingForm() {
         && (!isNaN(parseInt(DOM["powerCleanRepInput"].value)) && (DOM["powerCleanRepInput"].value) > 0))
     const ohpInputFilled = (!isNaN(parseInt(DOM["ohpWeightInput"].value)) && (parseInt(DOM["ohpWeightInput"].value) > 0)
         && (!isNaN(parseInt(DOM["ohpRepInput"].value)) && (DOM["ohpRepInput"].value) > 0))
-    if ((liftingSelection == 1) && squatInputFilled && benchInputFilled && deadliftInputFilled
+    if ((impCheck || metricCheck) && (liftingSelection == 1) && squatInputFilled && benchInputFilled && deadliftInputFilled
         && powerCleanInputFilled) {
         DOM["liftSubmitButton"].disabled = false
         DOM["liftSubmitButton"].style.backgroundColor = "#e5e1e1";
         return true
-    } else if ((liftingSelection == 2 || liftingSelection == 3) && squatInputFilled && benchInputFilled &&
+    } else if ((impCheck || metricCheck) && (liftingSelection == 2 || liftingSelection == 3) && squatInputFilled && benchInputFilled &&
         deadliftInputFilled && rowInputFilled && ohpInputFilled) {
         DOM["liftSubmitButton"].disabled = false
         DOM["liftSubmitButton"].style.backgroundColor = "#e5e1e1";
         return true
     }
     else {
-        console.log("LIFTING FORM ERROR FILL OUT THE FORM")
         DOM["liftSubmitButton"].disabled = true
         DOM["liftSubmitButton"].style.backgroundColor = "#FFF";
         return false
@@ -529,7 +558,6 @@ function buildSSProgression() {
 // Starting Strength Phase 1 Function //
 
 function phase1() {
-    const unitSelection = DOM["liftingMeasurementSelector"].selectedIndex
     for (weekNum = 0; weekNum < 3; weekNum++) {
         var week = DOM[`week${weekNum + 1}Container`]
         for (dayNum = 0; dayNum < 3; dayNum++) {
@@ -537,10 +565,10 @@ function phase1() {
                 lowerProgression = 0;
                 upperProgression = 0;
             } else {
-                if (unitSelection == 0) {
+                if (document.getElementById('liftimp').checked) {
                     lowerProgression = (lowerProgression + 10);
                     upperProgression = (upperProgression + 5);
-                } else if (unitSelection == 1) {
+                } else if (document.getElementById('liftkg').checked) {
                     lowerProgression = (lowerProgression + 5);
                     upperProgression = (upperProgression + 5);
                 }
@@ -595,11 +623,10 @@ function strongLifts() {
 // Stronglift Build Propagation //
 
 function strongliftPropagation() {
-    const unitSelection = DOM["liftingMeasurementSelector"].selectedIndex
-    if (unitSelection == 0) {
+    if (document.getElementById('liftimp').checked) {
         var dailyProgression = 5;
         var deadProgression = 10;
-    } else if (unitSelection == 1) {
+    } else if (document.getElementById('liftkg').checked) {
         var dailyProgression = 5;
         var deadProgression = 5;
     }
@@ -610,10 +637,10 @@ function strongliftPropagation() {
                 dailyProgression = 0;
                 deadProgression = 0;
             } else {
-                if (unitSelection == 0) {
+                if (document.getElementById('liftimp').checked) {
                     dailyProgression = (dailyProgression + 5);
                     deadProgression = (deadProgression + 10);
-                } else if (unitSelection == 1) {
+                } else if (document.getElementById('liftkg').checked) {
                     dailyProgression = (dailyProgression + 5);
                     deadProgression = (deadProgression + 5);
                 }

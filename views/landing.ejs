@@ -3,21 +3,26 @@
     <div class="generalcontainer">
         <div id="title">Fitness Assistant</div>
         <div id="togglecontainer">
-            <div id="togglecalorie">
-                <div id="calorieimage"></div>
+            <div id="togglecalorie" class="togglebutton" data-button="calorie">
+                Calorie Calculator
             </div>
-            <div id="togglelift">
-                <div id=liftimage></div>
+            <div id="togglelift" class="togglebutton" data-button="lift">
+                Lifting Calculator
             </div>
         </div>
         <div id="caloriecalccontainer">
             <div id="caloriecalc">
                 <form id="caloriecalcform">
                     <label>
-                        <select class="measurement" name="measurement">
-                            <option selected="true" value="us">U.S. Measurements</option>
-                            <option value="kg">Measurements Used by Everyone Else</option>
-                        </select>
+                        <p class="measurementtitle">Measurement:</p>
+                        <div class="measurement">
+                            <input selected="true" class="imperial" value="us" type="radio" name="measurement"
+                                id="calorieimp">
+                            <label for="us">Imperial</label>
+                            <input selected="true" class="metric" value="kg" type="radio" name="measurement"
+                                id="caloriekg">
+                            <label for="kg">Metric</option>
+                        </div>
                     </label>
                     <p id="gendertitle">Gender:</p>
                     <div id="genderselection">
@@ -37,13 +42,13 @@
                             required />
                         <input class="calorieinputs" type="number" placeholder="Inches" id="inches" min="1" max="11"
                             required />
-                        <input class="calorieinputs" type="number" placeholder="cm" id="cm" min="1" max="250"
+                        <input class="calorieinputs" type="number" placeholder="Centimeters" id="cm" min="1" max="250"
                             required />
                     </label>
                     <label>
                         <p>Weight:</p>
                         <input class="calorieinputs" type="number" placeholder="Pounds" id="lbs" min="1" required />
-                        <input class="calorieinputs" type="number" placeholder="kg" id="kg" min="1" required />
+                        <input class="calorieinputs" type="number" placeholder="Kilograms" id="kg" min="1" required />
                     </label>
                     <label>
                         <select id="activity" name="activity" required>
@@ -111,10 +116,15 @@
                     </div>
                     <div id="instruction">Enter Your Last Heaviest Lift</div>
                     <label>
-                        <select class="measurement" name="measurement">
-                            <option selected="true" value="us">U.S. Measurements</option>
-                            <option value="kg">Measurements Used by Everyone Else</option>
-                        </select>
+                        <p class="measurementtitle">Measurement:</p>
+                        <div class="measurement">
+                            <input selected="true" class="imperial" value="us" type="radio" name="measurement"
+                                id="liftimp">
+                            <label for="us">Imperial</label>
+                            <input selected="true" class="metric" value="kg" type="radio" name="measurement"
+                                id="liftkg">
+                            <label for="kg">Metric</option>
+                        </div>
                     </label>
                     <div class="lifts">
                         <div id="squats">
@@ -205,42 +215,42 @@
                     <div class="liftmax"></div>
                 </div>
                 <form id="liftingprogramlayout">
-                    <div id="week1">Week 1
+                    <div id="week1" class="weekcontainer">Week 1
                         <div class="day1"></div>
                         <div class="day2"></div>
                         <div class="day3"></div>
                     </div>
-                    <div id="week2">Week 2
+                    <div id="week2" class="weekcontainer">Week 2
                         <div class="day1"></div>
                         <div class="day2"></div>
                         <div class="day3"></div>
                     </div>
-                    <div id="week3">Week 3
+                    <div id="week3" class="weekcontainer">Week 3
                         <div class="day1"></div>
                         <div class="day2"></div>
                         <div class="day3"></div>
                     </div>
-                    <div id="week4">Week 4
+                    <div id="week4" class="weekcontainer">Week 4
                         <div class="day1"></div>
                         <div class="day2"></div>
                         <div class="day3"></div>
                     </div>
-                    <div id="week5">Week 5
+                    <div id="week5" class="weekcontainer">Week 5
                         <div class="day1"></div>
                         <div class="day2"></div>
                         <div class="day3"></div>
                     </div>
-                    <div id="week6">Week 6
+                    <div id="week6" class="weekcontainer">Week 6
                         <div class="day1"></div>
                         <div class="day2"></div>
                         <div class="day3"></div>
                     </div>
-                    <div id="week7">Week 7
+                    <div id="week7" class="weekcontainer">Week 7
                         <div class="day1"></div>
                         <div class="day2"></div>
                         <div class="day3"></div>
                     </div>
-                    <div id="week8">Week 8
+                    <div id="week8" class="weekcontainer">Week 8
                         <div class="day1"></div>
                         <div class="day2"></div>
                         <div class="day3"></div>
