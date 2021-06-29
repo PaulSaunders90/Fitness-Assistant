@@ -271,6 +271,8 @@ function activityLevelCheck() {
 // Calorie Data Results Population Function //
 
 function populateResults() {
+    DOM["calorieToggle"].style.display = "none"
+    DOM["liftToggle"].style.display = "none"
     DOM["maintainWeightResults"].innerHTML = Math.round(calorieResults) + " calories"
     DOM["mildWeightLossResults"].innerHTML = (Math.round(calorieResults) - 250) + " calories"
     DOM["weightLossResults"].innerHTML = (Math.round(calorieResults) - 500) + " calories"
@@ -285,6 +287,8 @@ function populateResults() {
 function resetCalories() {
     DOM["calorieCalc"].style.display = "flex";
     DOM["calorieCalcResults"].style.display = "none";
+    DOM["calorieToggle"].style.display = "inline-block"
+    DOM["liftToggle"].style.display = "inline-block"
     DOM["ageMeasurement"].value = "";
     DOM["footHeightMeasurement"].value = "";
     DOM["inchHeightMeasurement"].value = "";
@@ -320,7 +324,7 @@ function toggleLift() {
     DOM["liftingCalcContainer"].style.display = DOM["liftingCalcContainer"].style.display == 'block' ? 'block' : 'block';
     DOM["calorieCalcContainer"].style.display = DOM["calorieCalcContainer"].style.display == 'block' ? 'none' : 'none';
     DOM["title"].innerHTML = "Lifting Calculator";
-    DOM["liftingForm"].style.width = "350px";
+    DOM["liftingForm"].style.width = "50%";
     DOM["liftSubmitButton"].disabled = true;
     DOM["liftingCalcMeasurementTitle"].style.display = "none";
     for (i = 0; i < DOM["liftDataRows"].length; i++) {
@@ -335,18 +339,17 @@ function selectLiftingProgram() {
     const liftingSelection = DOM["liftingProgramSelector"].selectedIndex
     // If Starting Strength //
     if (liftingSelection == 1) {
-        DOM["liftingForm"].style.width = "revert";
         DOM["liftingCalcMeasurementTitle"].style.display = "block"
         DOM["liftingMeasurementSelector"].style.display = "inline"
-        DOM["squatInput"].style.display = "block"
+        DOM["squatInput"].style.display = "flex"
         DOM["squatInput"].parentNode.style.display = "block"
-        DOM["benchInput"].style.display = "block"
+        DOM["benchInput"].style.display = "flex"
         DOM["benchInput"].parentNode.style.display = "block"
-        DOM["deadliftInput"].style.display = "block"
+        DOM["deadliftInput"].style.display = "flex"
         DOM["deadliftInput"].parentNode.style.display = "block"
         DOM["bbellRowInput"].style.display = "none"
         DOM["bbellRowInput"].parentNode.style.display = "none"
-        DOM["powerCleanInput"].style.display = "block"
+        DOM["powerCleanInput"].style.display = "flex"
         DOM["powerCleanInput"].parentNode.style.display = "block"
         DOM["ohpInput"].style.display = "none"
         DOM["ohpInput"].parentNode.style.display = "none"
@@ -355,20 +358,19 @@ function selectLiftingProgram() {
     }
     // If Stronglifts or Madcow //
     else if (liftingSelection == 2 || liftingSelection == 3) {
-        DOM["liftingForm"].style.width = "revert";
         DOM["liftingCalcMeasurementTitle"].style.display = "block"
         DOM["liftingMeasurementSelector"].style.display = "inline"
-        DOM["squatInput"].style.display = "block"
+        DOM["squatInput"].style.display = "flex"
         DOM["squatInput"].parentNode.style.display = "block"
-        DOM["benchInput"].style.display = "block"
+        DOM["benchInput"].style.display = "flex"
         DOM["benchInput"].parentNode.style.display = "block"
-        DOM["deadliftInput"].style.display = "block"
+        DOM["deadliftInput"].style.display = "flex"
         DOM["deadliftInput"].parentNode.style.display = "block"
-        DOM["bbellRowInput"].style.display = "block"
+        DOM["bbellRowInput"].style.display = "flex"
         DOM["bbellRowInput"].parentNode.style.display = "block"
         DOM["powerCleanInput"].style.display = "none"
         DOM["powerCleanInput"].parentNode.style.display = "none"
-        DOM["ohpInput"].style.display = "block"
+        DOM["ohpInput"].style.display = "flex"
         DOM["ohpInput"].parentNode.style.display = "block"
         DOM["liftSubmitButton"].style.display = "block"
         DOM["instructionText"].style.display = "block"
@@ -430,6 +432,8 @@ function calculateProgram() {
     }
     DOM["liftingCalc"].style.display = "none"
     DOM["liftingCalcResults"].style.display = "block"
+    DOM["calorieToggle"].style.display = "none"
+    DOM["liftToggle"].style.display = "none"
 };
 
 // One Rep Max Calculation Formula Based on User Input  //
@@ -739,18 +743,18 @@ function madCowDay2(week, dayNum, lifts) {
 // MadCow Day Three Lift Function //
 
 function madCowDay3(week, dayNum, lifts) {
-    week.children[dayNum].innerHTML += `<br> ${personalStrengthData["madCowLift"][lifts].name}`
+    week.children[dayNum].innerHTML += `<br>${personalStrengthData["madCowLift"][lifts].name}`
     for (sets = 0; sets < 6; sets++) {
         increaseInterval = (sets < 5) ? (.525 + (.125 * sets)) : .775
         rawWeight = personalStrengthData["madCowLift"][lifts].weight * increaseInterval
         roundedWeight = (rawWeight % 5) >= 2.5 ? parseInt(rawWeight / 5) * 5 + 5 : parseInt(rawWeight / 5) * 5;
         if (sets < 4) {
-            week.children[dayNum].innerHTML += `<br> ${roundedWeight} x 5 reps`
+            week.children[dayNum].innerHTML += `<br>${roundedWeight} x 5 reps`
         } else if (sets == 4) {
-            week.children[dayNum].innerHTML += `<br> ${roundedWeight} x 3 reps`
+            week.children[dayNum].innerHTML += `<br>${roundedWeight} x 3 reps`
             newMax = roundedWeight
         } else if (sets == 5) {
-            week.children[dayNum].innerHTML += `<br> ${roundedWeight} x 8 reps`
+            week.children[dayNum].innerHTML += `<br>${roundedWeight} x 8 reps`
         }
     };
     personalStrengthData["madCowLift"][lifts].newWeight = newMax
@@ -818,6 +822,8 @@ function madCowPropagation() {
 
 function resetLifts() {
     DOM["liftingCalc"].style.display = "flex"
+    DOM["calorieToggle"].style.display = "inline-block"
+    DOM["liftToggle"].style.display = "inline-block"
     DOM["liftingCalcResults"].style.display = "none"
     DOM["squatInput"].style.display = "none"
     DOM["benchInput"].style.display = "none"
@@ -829,7 +835,7 @@ function resetLifts() {
     DOM["instructionText"].style.display = "none"
     DOM["liftingMeasurementSelector"].style.display = "none"
     for (i = 0; i < DOM["liftDataRows"].length; i++) {
-        DOM["liftDataRows"][i].style.display = "none";
+        DOM["liftDataRows"][i].style.display = "none"
     }
     DOM["squatWeightInput"].value = ""
     DOM["squatRepInput"].value = ""
@@ -843,8 +849,9 @@ function resetLifts() {
     DOM["powerCleanRepInput"].value = ""
     DOM["ohpWeightInput"].value = ""
     DOM["ohpRepInput"].value = ""
-    DOM["liftSubmitButton"].style.backgroundColor = "#FFF";
-    DOM["liftingProgramSelector"].selectedIndex = 0;
-    DOM["liftingMeasurementSelector"].selectedIndex = 0;
-    personalStrengthData = {};
+    DOM["liftSubmitButton"].style.backgroundColor = "#FFF"
+    DOM["liftingProgramSelector"].selectedIndex = 0
+    DOM["liftingMeasurementSelector"].selectedIndex = 0
+    DOM["liftingCalcMeasurementTitle"].style.display = "none"
+    personalStrengthData = {}
 };
