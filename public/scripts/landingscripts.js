@@ -579,9 +579,9 @@ function phase1() {
                 }
             }
             week.children[dayNum].innerHTML =
-                `Squat - ${(personalStrengthData["startingSquat"] + lowerProgression)} x 5 reps x 3 sets`
-                + `<br>Bench Press - ${(personalStrengthData["startingBench"] + upperProgression)} x 5 reps x 3 sets`
-                + `<br>Deadlift - ${(personalStrengthData["startingDead"] + lowerProgression)} x 5 reps x 1 set`
+                `<p>Squat</p>${(personalStrengthData["startingSquat"] + lowerProgression)} x 5 reps x 3 sets<br>`
+                + `<br><p>Bench Press</p>${(personalStrengthData["startingBench"] + upperProgression)} x 5 reps x 3 sets<br>`
+                + `<br><p>Deadlift</p>${(personalStrengthData["startingDead"] + lowerProgression)} x 5 reps x 1 set<br>`
         }
     };
 };
@@ -597,20 +597,20 @@ function phase2() {
             upperProgression = (upperProgression + 5);
             if (dayNum == 1 && weekNum == 0) {
                 week.children[dayNum].innerHTML =
-                    `Squat - ${(personalStrengthData["startingSquat"] + lowerProgression)} x 5 reps x 3 sets`
-                    + `<br>Bench Press - ${(personalStrengthData["startingBench"] + upperProgression)} x 5 reps x 3 sets`
-                    + `<br>Power Clean - ${(personalStrengthData["startingPowerClean"])} x 5 reps x 1 set`
+                    `<p>Squat</p>${(personalStrengthData["startingSquat"] + lowerProgression)} x 5 reps x 3 sets<br>`
+                    + `<br><p>Bench Press</p>${(personalStrengthData["startingBench"] + upperProgression)} x 5 reps x 3 sets<br>`
+                    + `<br><p>Deadlift</p>${(personalStrengthData["startingPowerClean"])} x 5 reps x 1 set<br>`
             } else if (dayNum == 1 && weekNum != 0) {
                 cleanProgression += 10
                 week.children[dayNum].innerHTML =
-                    `Squat - ${(personalStrengthData["startingSquat"] + lowerProgression)} x 5 reps x 3 sets`
-                    + `<br>Bench Press - ${(personalStrengthData["startingBench"] + upperProgression)} x 5 reps x 3 sets`
-                    + `<br>Power Clean - ${(personalStrengthData["startingPowerClean"] + cleanProgression)} x 5 reps x 1 set`
+                    `<p>Squat</p>${(personalStrengthData["startingSquat"] + lowerProgression)} x 5 reps x 3 sets<br>`
+                    + `<br><p>Bench Press</p>${(personalStrengthData["startingBench"] + upperProgression)} x 5 reps x 3 sets<br>`
+                    + `<br><p>Power Clean</p>${(personalStrengthData["startingPowerClean"] + cleanProgression)} x 5 reps x 1 set<br>`
             } else {
                 week.children[dayNum].innerHTML =
-                    `Squat - ${(personalStrengthData["startingSquat"] + lowerProgression)} x 5 reps x 3 sets`
-                    + `<br>Bench Press - ${(personalStrengthData["startingBench"] + upperProgression)} x 5 reps x 3 sets`
-                    + `<br>Deadlift - ${(personalStrengthData["startingDead"] + lowerProgression)} x 5 reps x 1 set`
+                    `<p>Squat</p>${(personalStrengthData["startingSquat"] + lowerProgression)} x 5 reps x 3 sets<br>`
+                    + `<br><p>Bench Press</p>${(personalStrengthData["startingBench"] + upperProgression)} x 5 reps x 3 sets<br>`
+                    + `<br><p>Deadlift</p>${(personalStrengthData["startingDead"] + lowerProgression)} x 5 reps x 1 set<br>`
             }
         }
     };
@@ -657,28 +657,28 @@ function strongliftPropagation() {
             if ((weekNum + 1) % 2 == 0) {
                 if (dayNum == 0 || dayNum == 2) {
                     week.children[dayNum].innerHTML =
-                        `Squat - ${(personalStrengthData["startingSquat"] + dailyProgression)} x 5 reps x 5 sets`
-                        + `<br>Bench Press - ${(personalStrengthData["startingBench"] + dailyProgression)} x 5 reps x 5 sets`
-                        + `<br>Barbell Row - ${(personalStrengthData["startingRow"] + dailyProgression)} x 5 reps x 5 sets`
+                        `<p>Squat</p>${(personalStrengthData["startingSquat"] + dailyProgression)} x 5 reps x 5 sets<br>`
+                        + `<br><p>Bench Press</p>${(personalStrengthData["startingBench"] + dailyProgression)} x 5 reps x 5 sets<br>`
+                        + `<br><p>Barbell Row</p>${(personalStrengthData["startingRow"] + dailyProgression)} x 5 reps x 5 sets<br>`
                 }
                 else {
                     week.children[dayNum].innerHTML =
-                        `Squat - ${(personalStrengthData["startingSquat"] + dailyProgression)} x 5 reps x 5 sets`
-                        + `<br>Overhead Press - ${(personalStrengthData["startingOHP"] + dailyProgression)} x 5 reps x 5 sets`
-                        + `<br>Deadlift - ${(personalStrengthData["startingDead"] + deadProgression)} x 5 reps x 1 set`
+                        `<p>Squat</p>${(personalStrengthData["startingSquat"] + dailyProgression)} x 5 reps x 5 sets<br>`
+                        + `<br><p>Overhead Press</p>${(personalStrengthData["startingOHP"] + dailyProgression)} x 5 reps x 5 sets<br>`
+                        + `<br><p>Deadlift</p>${(personalStrengthData["startingDead"] + deadProgression)} x 5 reps x 1 set<br>`
                 }
             } else {
                 if (dayNum == 0 || dayNum == 2) {
                     week.children[dayNum].innerHTML =
-                        `Squat - ${(personalStrengthData["startingSquat"] + dailyProgression)} x 5 reps x 5 sets`
-                        + `<br>Overhead Press - ${(personalStrengthData["startingOHP"] + dailyProgression)} x 5 reps x 5 sets`
-                        + `<br>Deadlift - ${(personalStrengthData["startingDead"] + deadProgression)} x 5 reps x 1 set`
+                        `<p>Squat</p>${(personalStrengthData["startingSquat"] + dailyProgression)} x 5 reps x 5 sets<br>`
+                        + `<br><p>Overhead Press</p>${(personalStrengthData["startingOHP"] + dailyProgression)} x 5 reps x 5 sets<br>`
+                        + `<br><p>Deadlift</p>${(personalStrengthData["startingDead"] + deadProgression)} x 5 reps x 1 set<br>`
                 }
                 else {
                     week.children[dayNum].innerHTML =
-                        `Squat - ${(personalStrengthData["startingSquat"] + dailyProgression)} x 5 reps x 5 sets`
-                        + `<br>Bench Press - ${(personalStrengthData["startingBench"] + dailyProgression)} x 5 reps x 5 sets`
-                        + `<br>Barbell Row - ${(personalStrengthData["startingRow"] + dailyProgression)} x 5 reps x 5 sets`
+                        `<p>Squat</p>${(personalStrengthData["startingSquat"] + dailyProgression)} x 5 reps x 5 sets<br>`
+                        + `<br><p>Bench Press</p>${(personalStrengthData["startingBench"] + dailyProgression)} x 5 reps x 5 sets<br>`
+                        + `<br><p>Barbell Row</p>${(personalStrengthData["startingRow"] + dailyProgression)} x 5 reps x 5 sets<br>`
                 }
             }
         }
@@ -714,15 +714,22 @@ function populatePSDMadCowWeight(personalStrengthData, weights) {
 
 function madCowDay1(week, dayNum, lifts) {
     if (lifts == 0) {
-        week.children[dayNum].innerHTML += `${personalStrengthData["madCowLift"][lifts].name}`
+        week.children[dayNum].innerHTML += `<p>${personalStrengthData["madCowLift"][lifts].name}</p>`
     } else {
-        week.children[dayNum].innerHTML += `<br> ${personalStrengthData["madCowLift"][lifts].name}`
+        week.children[dayNum].innerHTML += `<br><p>${personalStrengthData["madCowLift"][lifts].name}</p>`
     }
     for (sets = 0; sets < 5; sets++) {
         increaseInterval = (.5 + (.125 * sets))
         rawWeight = personalStrengthData["madCowLift"][lifts].weight * increaseInterval
         roundedWeight = (rawWeight % 5) >= 2.5 ? parseInt(rawWeight / 5) * 5 + 5 : parseInt(rawWeight / 5) * 5;
-        week.children[dayNum].innerHTML += `<br> ${roundedWeight} x 5 reps`
+        if (sets == 0) {
+            week.children[dayNum].innerHTML += `${roundedWeight} x 5 reps`
+        }
+        else if (sets == 4) {
+            week.children[dayNum].innerHTML += `<br> ${roundedWeight} x 5 reps <br>`
+        } else {
+            week.children[dayNum].innerHTML += `<br> ${roundedWeight} x 5 reps`
+        }
     };
 };
 
@@ -730,15 +737,22 @@ function madCowDay1(week, dayNum, lifts) {
 
 function madCowDay2(week, dayNum, lifts) {
     if (lifts == 0) {
-        week.children[dayNum].innerHTML += `${personalStrengthData["madCowLift"][lifts].name}`
+        week.children[dayNum].innerHTML += `<p>${personalStrengthData["madCowLift"][lifts].name}</p>`
     } else {
-        week.children[dayNum].innerHTML += `<br> ${personalStrengthData["madCowLift"][lifts].name}`
+        week.children[dayNum].innerHTML += `<br> <p>${personalStrengthData["madCowLift"][lifts].name}</p>`
     } for (sets = 0; sets < 4; sets++) {
         squatInterval = (sets != 3) ? (.5 + (.125 * sets)) : .75
         day2Interval = (.625 + (.125 * sets))
         rawWeight = (lifts == 0) ? personalStrengthData["madCowLift"][lifts].weight * squatInterval : personalStrengthData["madCowLift"][lifts].weight * day2Interval
         roundedWeight = (rawWeight % 5) >= 2.5 ? parseInt(rawWeight / 5) * 5 + 5 : parseInt(rawWeight / 5) * 5;
-        week.children[dayNum].innerHTML += `<br> ${roundedWeight} x 5 reps`
+        if (sets == 0) {
+            week.children[dayNum].innerHTML += `${roundedWeight} x 5 reps`
+        } else if (sets == 3){
+            week.children[dayNum].innerHTML += `<br> ${roundedWeight} x 5 reps <br>`
+        }
+        else {
+            week.children[dayNum].innerHTML += `<br> ${roundedWeight} x 5 reps`
+        }
         if ((lifts == 1) && (sets == 3) && (weekNum % 2 == 0)) {
             personalStrengthData["madCowOHPNewWeight"] = (roundedWeight + (roundedWeight * .025))
         }
@@ -752,20 +766,23 @@ function madCowDay2(week, dayNum, lifts) {
 
 function madCowDay3(week, dayNum, lifts) {
     if (lifts == 0) {
-        week.children[dayNum].innerHTML += `${personalStrengthData["madCowLift"][lifts].name}`
+        week.children[dayNum].innerHTML += `<p>${personalStrengthData["madCowLift"][lifts].name}</p>`
     } else {
-        week.children[dayNum].innerHTML += `<br> ${personalStrengthData["madCowLift"][lifts].name}`
+        week.children[dayNum].innerHTML += `<br><p>${personalStrengthData["madCowLift"][lifts].name}</p>`
     } for (sets = 0; sets < 6; sets++) {
         increaseInterval = (sets < 5) ? (.525 + (.125 * sets)) : .775
         rawWeight = personalStrengthData["madCowLift"][lifts].weight * increaseInterval
         roundedWeight = (rawWeight % 5) >= 2.5 ? parseInt(rawWeight / 5) * 5 + 5 : parseInt(rawWeight / 5) * 5;
-        if (sets < 4) {
+        if(sets == 0){
+            week.children[dayNum].innerHTML += `${roundedWeight} x 5 reps`
+        }
+        else if (sets < 4) {
             week.children[dayNum].innerHTML += `<br>${roundedWeight} x 5 reps`
         } else if (sets == 4) {
             week.children[dayNum].innerHTML += `<br>${roundedWeight} x 3 reps`
             newMax = roundedWeight
         } else if (sets == 5) {
-            week.children[dayNum].innerHTML += `<br>${roundedWeight} x 8 reps`
+            week.children[dayNum].innerHTML += `<br>${roundedWeight} x 8 reps <br>`
         }
     };
     personalStrengthData["madCowLift"][lifts].newWeight = newMax
@@ -827,7 +844,7 @@ function madCowPropagation() {
         assistance.innerHTML += "<p>Assistance Workouts</p>"
         assistance.innerHTML += "Day 1 - 2 sets Weighted Hyper Extension (10-12 reps), 4 sets weighted situps (10-12 reps) <br>"
         assistance.innerHTML += "Day 2 - 3 sets situps (max reps) <br>"
-        assistance.innerHTML += "Day 3 - 3 sets Weighted Dips (5-8 reps), 3 sets Barbell Curls, (8 reps), Tricep Extensions (8 reps)"   
+        assistance.innerHTML += "Day 3 - 3 sets Weighted Dips (5-8 reps), 3 sets Barbell Curls, (8 reps), Tricep Extensions (8 reps)"
         DOM["liftingProgramLayout"].insertBefore(assistance, DOM[`week${weekNum + 2}Container`])
     };
 };
@@ -856,7 +873,7 @@ function resetLifts() {
             DOM[`day${i + 1}Container`][x].innerHTML = ""
         }
     }
-    for(i = 0; i < DOM["assistances"].length; i++){
+    for (i = 0; i < DOM["assistances"].length; i++) {
         DOM["assistances"][i].style.display = "none"
         DOM["assistances"][i].innerHTML = ""
     }
