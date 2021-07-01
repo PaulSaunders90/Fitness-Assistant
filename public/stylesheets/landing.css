@@ -443,7 +443,7 @@ option, .measurement, #activity{
     padding: 10px;
     border-bottom: 1px solid rgba(204, 200, 200, .8);
     text-align: left;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .assistance:last-of-type{
@@ -453,6 +453,10 @@ option, .measurement, #activity{
 .assistance p{
     font-size: 16px;
     text-align: center;
+    width: 25%;
+    border-bottom: 1px solid rgba(204, 200, 200, .8);
+    font-size: 16px;
+    margin: auto;
 }
 
 .liftmax{
