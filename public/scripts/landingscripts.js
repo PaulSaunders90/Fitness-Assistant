@@ -97,6 +97,7 @@ const DOM = {
     day1Container: document.getElementsByClassName("day1"),
     day2Container: document.getElementsByClassName("day2"),
     day3Container: document.getElementsByClassName("day3"),
+    assistances: document.getElementsByClassName("assistance")
 };
 
 // Calorie Calculator Forumlas //
@@ -107,10 +108,10 @@ function toggleButtonGreyout(e) {
     if (e.target.className == "togglebutton") {
         var selectedTarget = e.target.getAttribute("data-button");
         var selectedButton = document.getElementById("toggle" + selectedTarget)
-        if(selectedButton == DOM["calorieToggle"]){
+        if (selectedButton == DOM["calorieToggle"]) {
             selectedButton.style.backgroundColor = "#FFF";
             DOM["liftToggle"].style.backgroundColor = "#ccc8c8";
-        } else if (selectedButton == DOM["liftToggle"]){
+        } else if (selectedButton == DOM["liftToggle"]) {
             selectedButton.style.backgroundColor = "#FFF";
             DOM["calorieToggle"].style.backgroundColor = "#ccc8c8";
         }
@@ -172,8 +173,8 @@ function measurementCheck() {
 // Function Checking Every Form is Filled on Calorie Calculator //
 
 function checkCalorieForm() {
-    var impChecked =  document.getElementById('calorieimp').checked
-    var metricChecked =  document.getElementById('caloriekg').checked
+    var impChecked = document.getElementById('calorieimp').checked
+    var metricChecked = document.getElementById('caloriekg').checked
     var activitySelection = DOM["activityMeasurementSelector"].selectedIndex
     var ageInputFilled = (!isNaN(parseInt(DOM["ageMeasurement"].value)) && (parseInt(DOM["ageMeasurement"].value) > 0) && (parseInt(DOM["ageMeasurement"].value) < 99))
     var footInputFilled = (!isNaN(parseInt(DOM["footHeightMeasurement"].value)) && (parseInt(DOM["footHeightMeasurement"].value) > 3) && (parseInt(DOM["footHeightMeasurement"].value) < 8))
@@ -181,11 +182,11 @@ function checkCalorieForm() {
     var poundInputFilled = (!isNaN(parseInt(DOM["poundWeightMeasurement"].value)) && (parseInt(DOM["poundWeightMeasurement"].value) > 0))
     var cmInputFilled = (!isNaN(parseInt(DOM["cmHeightMeasurement"].value)) && (parseInt(DOM["cmHeightMeasurement"].value) > 0) && (parseInt(DOM["cmHeightMeasurement"].value) < 255))
     var kgInputFilled = (!isNaN(parseInt(DOM["kgWeightMeasurement"].value)) && (parseInt(DOM["kgWeightMeasurement"].value) > 0))
-    if ((impChecked || metricChecked ) && activitySelection != 0 && ageInputFilled && footInputFilled && inchInputFilled && poundInputFilled) {
+    if ((impChecked || metricChecked) && activitySelection != 0 && ageInputFilled && footInputFilled && inchInputFilled && poundInputFilled) {
         DOM["calorieCalcFormButton"].disabled = false
         DOM["calorieCalcFormButton"].style.backgroundColor = "#e5e1e1";
         return true
-    } else if ((impChecked || metricChecked ) && activitySelection != 0 && ageInputFilled && cmInputFilled && kgInputFilled) {
+    } else if ((impChecked || metricChecked) && activitySelection != 0 && ageInputFilled && cmInputFilled && kgInputFilled) {
         DOM["calorieCalcFormButton"].disabled = false
         DOM["calorieCalcFormButton"].style.backgroundColor = "#e5e1e1";
         return true
@@ -577,8 +578,8 @@ function phase1() {
                     upperProgression = (upperProgression + 5);
                 }
             }
-            week.children[dayNum].innerHTML = 
-                `<br>Squat - ${(personalStrengthData["startingSquat"] + lowerProgression)} x 5 reps x 3 sets`
+            week.children[dayNum].innerHTML =
+                `Squat - ${(personalStrengthData["startingSquat"] + lowerProgression)} x 5 reps x 3 sets`
                 + `<br>Bench Press - ${(personalStrengthData["startingBench"] + upperProgression)} x 5 reps x 3 sets`
                 + `<br>Deadlift - ${(personalStrengthData["startingDead"] + lowerProgression)} x 5 reps x 1 set`
         }
@@ -595,19 +596,19 @@ function phase2() {
             lowerProgression = (lowerProgression + 5);
             upperProgression = (upperProgression + 5);
             if (dayNum == 1 && weekNum == 0) {
-                week.children[dayNum].innerHTML = 
-                    `<br>Squat - ${(personalStrengthData["startingSquat"] + lowerProgression)} x 5 reps x 3 sets`
+                week.children[dayNum].innerHTML =
+                    `Squat - ${(personalStrengthData["startingSquat"] + lowerProgression)} x 5 reps x 3 sets`
                     + `<br>Bench Press - ${(personalStrengthData["startingBench"] + upperProgression)} x 5 reps x 3 sets`
                     + `<br>Power Clean - ${(personalStrengthData["startingPowerClean"])} x 5 reps x 1 set`
             } else if (dayNum == 1 && weekNum != 0) {
                 cleanProgression += 10
-                week.children[dayNum].innerHTML = 
-                    `<br>Squat - ${(personalStrengthData["startingSquat"] + lowerProgression)} x 5 reps x 3 sets`
+                week.children[dayNum].innerHTML =
+                    `Squat - ${(personalStrengthData["startingSquat"] + lowerProgression)} x 5 reps x 3 sets`
                     + `<br>Bench Press - ${(personalStrengthData["startingBench"] + upperProgression)} x 5 reps x 3 sets`
                     + `<br>Power Clean - ${(personalStrengthData["startingPowerClean"] + cleanProgression)} x 5 reps x 1 set`
             } else {
-                week.children[dayNum].innerHTML = 
-                    `<br>Squat - ${(personalStrengthData["startingSquat"] + lowerProgression)} x 5 reps x 3 sets`
+                week.children[dayNum].innerHTML =
+                    `Squat - ${(personalStrengthData["startingSquat"] + lowerProgression)} x 5 reps x 3 sets`
                     + `<br>Bench Press - ${(personalStrengthData["startingBench"] + upperProgression)} x 5 reps x 3 sets`
                     + `<br>Deadlift - ${(personalStrengthData["startingDead"] + lowerProgression)} x 5 reps x 1 set`
             }
@@ -655,27 +656,27 @@ function strongliftPropagation() {
             // Odd Weeks Go ABA, Even Weeks Go BAB // 
             if ((weekNum + 1) % 2 == 0) {
                 if (dayNum == 0 || dayNum == 2) {
-                    week.children[dayNum].innerHTML = 
-                        `<br>Squat - ${(personalStrengthData["startingSquat"] + dailyProgression)} x 5 reps x 5 sets`
+                    week.children[dayNum].innerHTML =
+                        `Squat - ${(personalStrengthData["startingSquat"] + dailyProgression)} x 5 reps x 5 sets`
                         + `<br>Bench Press - ${(personalStrengthData["startingBench"] + dailyProgression)} x 5 reps x 5 sets`
                         + `<br>Barbell Row - ${(personalStrengthData["startingRow"] + dailyProgression)} x 5 reps x 5 sets`
-                    }
+                }
                 else {
-                    week.children[dayNum].innerHTML = 
-                        `<br>Squat - ${(personalStrengthData["startingSquat"] + dailyProgression)} x 5 reps x 5 sets`
+                    week.children[dayNum].innerHTML =
+                        `Squat - ${(personalStrengthData["startingSquat"] + dailyProgression)} x 5 reps x 5 sets`
                         + `<br>Overhead Press - ${(personalStrengthData["startingOHP"] + dailyProgression)} x 5 reps x 5 sets`
                         + `<br>Deadlift - ${(personalStrengthData["startingDead"] + deadProgression)} x 5 reps x 1 set`
                 }
             } else {
                 if (dayNum == 0 || dayNum == 2) {
-                    week.children[dayNum].innerHTML = 
-                        `<br>Squat - ${(personalStrengthData["startingSquat"] + dailyProgression)} x 5 reps x 5 sets`
+                    week.children[dayNum].innerHTML =
+                        `Squat - ${(personalStrengthData["startingSquat"] + dailyProgression)} x 5 reps x 5 sets`
                         + `<br>Overhead Press - ${(personalStrengthData["startingOHP"] + dailyProgression)} x 5 reps x 5 sets`
                         + `<br>Deadlift - ${(personalStrengthData["startingDead"] + deadProgression)} x 5 reps x 1 set`
                 }
-                else {  
-                    week.children[dayNum].innerHTML = 
-                        `<br>Squat - ${(personalStrengthData["startingSquat"] + dailyProgression)} x 5 reps x 5 sets`
+                else {
+                    week.children[dayNum].innerHTML =
+                        `Squat - ${(personalStrengthData["startingSquat"] + dailyProgression)} x 5 reps x 5 sets`
                         + `<br>Bench Press - ${(personalStrengthData["startingBench"] + dailyProgression)} x 5 reps x 5 sets`
                         + `<br>Barbell Row - ${(personalStrengthData["startingRow"] + dailyProgression)} x 5 reps x 5 sets`
                 }
@@ -712,7 +713,11 @@ function populatePSDMadCowWeight(personalStrengthData, weights) {
 // MadCow Day One Lift Function //
 
 function madCowDay1(week, dayNum, lifts) {
-    week.children[dayNum].innerHTML += `<br> ${personalStrengthData["madCowLift"][lifts].name}`
+    if (lifts == 0) {
+        week.children[dayNum].innerHTML += `${personalStrengthData["madCowLift"][lifts].name}`
+    } else {
+        week.children[dayNum].innerHTML += `<br> ${personalStrengthData["madCowLift"][lifts].name}`
+    }
     for (sets = 0; sets < 5; sets++) {
         increaseInterval = (.5 + (.125 * sets))
         rawWeight = personalStrengthData["madCowLift"][lifts].weight * increaseInterval
@@ -724,8 +729,11 @@ function madCowDay1(week, dayNum, lifts) {
 // MadCow Day Two Lift Function //
 
 function madCowDay2(week, dayNum, lifts) {
-    week.children[dayNum].innerHTML += `<br> ${personalStrengthData["madCowLift"][lifts].name}`
-    for (sets = 0; sets < 4; sets++) {
+    if (lifts == 0) {
+        week.children[dayNum].innerHTML += `${personalStrengthData["madCowLift"][lifts].name}`
+    } else {
+        week.children[dayNum].innerHTML += `<br> ${personalStrengthData["madCowLift"][lifts].name}`
+    } for (sets = 0; sets < 4; sets++) {
         squatInterval = (sets != 3) ? (.5 + (.125 * sets)) : .75
         day2Interval = (.625 + (.125 * sets))
         rawWeight = (lifts == 0) ? personalStrengthData["madCowLift"][lifts].weight * squatInterval : personalStrengthData["madCowLift"][lifts].weight * day2Interval
@@ -743,8 +751,11 @@ function madCowDay2(week, dayNum, lifts) {
 // MadCow Day Three Lift Function //
 
 function madCowDay3(week, dayNum, lifts) {
-    week.children[dayNum].innerHTML += `<br>${personalStrengthData["madCowLift"][lifts].name}`
-    for (sets = 0; sets < 6; sets++) {
+    if (lifts == 0) {
+        week.children[dayNum].innerHTML += `${personalStrengthData["madCowLift"][lifts].name}`
+    } else {
+        week.children[dayNum].innerHTML += `<br> ${personalStrengthData["madCowLift"][lifts].name}`
+    } for (sets = 0; sets < 6; sets++) {
         increaseInterval = (sets < 5) ? (.525 + (.125 * sets)) : .775
         rawWeight = personalStrengthData["madCowLift"][lifts].weight * increaseInterval
         roundedWeight = (rawWeight % 5) >= 2.5 ? parseInt(rawWeight / 5) * 5 + 5 : parseInt(rawWeight / 5) * 5;
@@ -811,9 +822,13 @@ function madCowPropagation() {
                 }
             }
         }
-        week.children[0].innerHTML += "<div class='assistance'> Assistance - 2 sets Weighted Hyper Extension (10-12 reps), 4 sets weighted situps (10-12 reps) </div>"
-        week.children[1].innerHTML += "<div class='assistance'> Assistance - 3 sets situps (max reps) </div>"
-        week.children[2].innerHTML += "<div class='assistance'> Assistance - 3 sets Weighted Dips (5-8 reps), 3 sets Barbell Curls, (8 reps), Tricep Extensions (8 reps) </div>"
+        let assistance = document.createElement("div")
+        assistance.className = "assistance"
+        assistance.innerHTML += "<p>Assistance Workouts</p>"
+        assistance.innerHTML += "Day 1 - 2 sets Weighted Hyper Extension (10-12 reps), 4 sets weighted situps (10-12 reps) <br>"
+        assistance.innerHTML += "Day 2 - 3 sets situps (max reps) <br>"
+        assistance.innerHTML += "Day 3 - 3 sets Weighted Dips (5-8 reps), 3 sets Barbell Curls, (8 reps), Tricep Extensions (8 reps)"   
+        DOM["liftingProgramLayout"].insertBefore(assistance, DOM[`week${weekNum + 2}Container`])
     };
 };
 
@@ -835,6 +850,15 @@ function resetLifts() {
     DOM["liftingMeasurementSelector"].style.display = "none"
     for (i = 0; i < DOM["liftDataRows"].length; i++) {
         DOM["liftDataRows"][i].style.display = "none"
+    }
+    for (i = 0; i < 3; i++) {
+        for (x = 0; x < 8; x++) {
+            DOM[`day${i + 1}Container`][x].innerHTML = ""
+        }
+    }
+    for(i = 0; i < DOM["assistances"].length; i++){
+        DOM["assistances"][i].style.display = "none"
+        DOM["assistances"][i].innerHTML = ""
     }
     DOM["squatWeightInput"].value = ""
     DOM["squatRepInput"].value = ""

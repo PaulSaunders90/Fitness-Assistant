@@ -203,6 +203,7 @@ option, .measurement, #activity{
     width: 50%;
     color: rgba(40, 44, 52);
     margin: 0 auto;
+    padding: 0 20px;
     background-color:#FFF;
 }
 
@@ -220,13 +221,13 @@ option, .measurement, #activity{
 
 .resultstitle{
     text-align: center;
-    font-size: 22px;
+    font-size: 18px;
     padding: 10px;
     border-bottom: 1px solid rgba(204, 200, 200, .8);
 }
 
 .resultsnumber{
-    font-size: 18px;
+    font-size: 16px;
     padding: 10px;
 }
 
@@ -367,15 +368,19 @@ option, .measurement, #activity{
 }
 
 .weekcontainer{
+    width: -webkit-fill-available;
     padding: 10px;
     margin-top: 5px;
     display: inline-flex;
     border-bottom: 1px solid rgba(204, 200, 200, .8);
 }
 
+.weekcontainer:last-of-type{
+    border-bottom: none;
+}
+
 #daylabelcontainer{
     display: flex;
-    width: 100%;
     justify-content: space-evenly;
     padding: 10px;
     border-bottom: 1px solid rgba(204, 200, 200, .8);
@@ -387,24 +392,42 @@ option, .measurement, #activity{
 
 .day1{
     display: block;
+    width: 25%;
+    margin-left: 20px;
     padding: 5px;
     font-size: 14px;
+    border-right: 1px solid rgba(204, 200, 200, .8);
 }
 
 .day2{
     display: block;
+    width: 25%;
     padding: 5px;
     font-size: 14px;
+    border-right: 1px solid rgba(204, 200, 200, .8);
 }
 
 .day3{
     display: block;
+    width: 25%;
     padding: 5px;
     font-size: 14px;
 }
 
 .assistance{
-    display: block;
+    padding: 10px;
+    border-bottom: 1px solid rgba(204, 200, 200, .8);
+    text-align: left;
+    font-size: 14px;
+}
+
+.assistance:last-of-type{
+    border-bottom: none;
+}
+
+.assistance p{
+    font-size: 16px;
+    text-align: center;
 }
 
 .liftmax{
