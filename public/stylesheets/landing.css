@@ -307,10 +307,15 @@ option, .measurement, #activity{
 #liftingcalcresults{
     display: none;
     text-align: center;
-    padding: 25px;
     width: auto;
     color: rgba(40, 44, 52);
     margin: 0 auto;
+}
+
+@media(min-width: 700px){
+    #liftingcalcresults{
+        padding: 25px;
+    }
 }
 
 #instruction{
@@ -381,7 +386,7 @@ option, .measurement, #activity{
 .weekcontainer{
     width: -webkit-fill-available;
     padding: 10px;
-    font-size: 20px;
+    font-size: 12px;
     margin-top: 5px;
     display: inline-flex;
     border-bottom: 1px solid rgba(204, 200, 200, .8);
@@ -427,7 +432,11 @@ option, .measurement, #activity{
 }
 
 .day1 p, .day2 p, .day3 p{
+    width: 65%;
+    text-align: center;
+    border-bottom: 1px solid rgba(204, 200, 200, .8);
     font-size: 16px;
+    margin: auto;
 }
 
 .assistance{
