@@ -341,7 +341,7 @@ function selectLiftingProgram() {
     // If Starting Strength //
     if (liftingSelection == 1) {
         DOM["liftingCalcMeasurementTitle"].style.display = "block"
-        DOM["liftingMeasurementSelector"].style.display = "inline"
+        DOM["liftingMeasurementSelector"].style.display = "flex"
         DOM["squatInput"].style.display = "flex"
         DOM["squatInput"].parentNode.style.display = "block"
         DOM["benchInput"].style.display = "flex"
@@ -360,7 +360,7 @@ function selectLiftingProgram() {
     // If Stronglifts or Madcow //
     else if (liftingSelection == 2 || liftingSelection == 3) {
         DOM["liftingCalcMeasurementTitle"].style.display = "block"
-        DOM["liftingMeasurementSelector"].style.display = "inline"
+        DOM["liftingMeasurementSelector"].style.display = "flex"
         DOM["squatInput"].style.display = "flex"
         DOM["squatInput"].parentNode.style.display = "block"
         DOM["benchInput"].style.display = "flex"
