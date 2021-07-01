@@ -577,8 +577,8 @@ function phase1() {
                     upperProgression = (upperProgression + 5);
                 }
             }
-            week.children[dayNum].innerHTML = `Day ${dayNum + 1}`
-                + `<br>Squat - ${(personalStrengthData["startingSquat"] + lowerProgression)} x 5 reps x 3 sets`
+            week.children[dayNum].innerHTML = 
+                `<br>Squat - ${(personalStrengthData["startingSquat"] + lowerProgression)} x 5 reps x 3 sets`
                 + `<br>Bench Press - ${(personalStrengthData["startingBench"] + upperProgression)} x 5 reps x 3 sets`
                 + `<br>Deadlift - ${(personalStrengthData["startingDead"] + lowerProgression)} x 5 reps x 1 set`
         }
@@ -595,19 +595,19 @@ function phase2() {
             lowerProgression = (lowerProgression + 5);
             upperProgression = (upperProgression + 5);
             if (dayNum == 1 && weekNum == 0) {
-                week.children[dayNum].innerHTML = `Day ${dayNum + 1}`
-                    + `<br>Squat - ${(personalStrengthData["startingSquat"] + lowerProgression)} x 5 reps x 3 sets`
+                week.children[dayNum].innerHTML = 
+                    `<br>Squat - ${(personalStrengthData["startingSquat"] + lowerProgression)} x 5 reps x 3 sets`
                     + `<br>Bench Press - ${(personalStrengthData["startingBench"] + upperProgression)} x 5 reps x 3 sets`
                     + `<br>Power Clean - ${(personalStrengthData["startingPowerClean"])} x 5 reps x 1 set`
             } else if (dayNum == 1 && weekNum != 0) {
                 cleanProgression += 10
-                week.children[dayNum].innerHTML = `Day ${dayNum + 1}`
-                    + `<br>Squat - ${(personalStrengthData["startingSquat"] + lowerProgression)} x 5 reps x 3 sets`
+                week.children[dayNum].innerHTML = 
+                    `<br>Squat - ${(personalStrengthData["startingSquat"] + lowerProgression)} x 5 reps x 3 sets`
                     + `<br>Bench Press - ${(personalStrengthData["startingBench"] + upperProgression)} x 5 reps x 3 sets`
                     + `<br>Power Clean - ${(personalStrengthData["startingPowerClean"] + cleanProgression)} x 5 reps x 1 set`
             } else {
-                week.children[dayNum].innerHTML = `Day ${dayNum + 1}`
-                    + `<br>Squat - ${(personalStrengthData["startingSquat"] + lowerProgression)} x 5 reps x 3 sets`
+                week.children[dayNum].innerHTML = 
+                    `<br>Squat - ${(personalStrengthData["startingSquat"] + lowerProgression)} x 5 reps x 3 sets`
                     + `<br>Bench Press - ${(personalStrengthData["startingBench"] + upperProgression)} x 5 reps x 3 sets`
                     + `<br>Deadlift - ${(personalStrengthData["startingDead"] + lowerProgression)} x 5 reps x 1 set`
             }
@@ -655,27 +655,27 @@ function strongliftPropagation() {
             // Odd Weeks Go ABA, Even Weeks Go BAB // 
             if ((weekNum + 1) % 2 == 0) {
                 if (dayNum == 0 || dayNum == 2) {
-                    week.children[dayNum].innerHTML = `Day ${dayNum + 1}`
-                        + `<br>Squat - ${(personalStrengthData["startingSquat"] + dailyProgression)} x 5 reps x 5 sets`
+                    week.children[dayNum].innerHTML = 
+                        `<br>Squat - ${(personalStrengthData["startingSquat"] + dailyProgression)} x 5 reps x 5 sets`
                         + `<br>Bench Press - ${(personalStrengthData["startingBench"] + dailyProgression)} x 5 reps x 5 sets`
                         + `<br>Barbell Row - ${(personalStrengthData["startingRow"] + dailyProgression)} x 5 reps x 5 sets`
                     }
                 else {
-                    week.children[dayNum].innerHTML = `Day ${dayNum + 1}`
-                        + `<br>Squat - ${(personalStrengthData["startingSquat"] + dailyProgression)} x 5 reps x 5 sets`
+                    week.children[dayNum].innerHTML = 
+                        `<br>Squat - ${(personalStrengthData["startingSquat"] + dailyProgression)} x 5 reps x 5 sets`
                         + `<br>Overhead Press - ${(personalStrengthData["startingOHP"] + dailyProgression)} x 5 reps x 5 sets`
                         + `<br>Deadlift - ${(personalStrengthData["startingDead"] + deadProgression)} x 5 reps x 1 set`
                 }
             } else {
                 if (dayNum == 0 || dayNum == 2) {
-                    week.children[dayNum].innerHTML = `Day ${dayNum + 1}`
-                        + `<br>Squat - ${(personalStrengthData["startingSquat"] + dailyProgression)} x 5 reps x 5 sets`
+                    week.children[dayNum].innerHTML = 
+                        `<br>Squat - ${(personalStrengthData["startingSquat"] + dailyProgression)} x 5 reps x 5 sets`
                         + `<br>Overhead Press - ${(personalStrengthData["startingOHP"] + dailyProgression)} x 5 reps x 5 sets`
                         + `<br>Deadlift - ${(personalStrengthData["startingDead"] + deadProgression)} x 5 reps x 1 set`
                 }
-                else {
-                    week.children[dayNum].innerHTML = `Day ${dayNum + 1}`
-                        + `<br>Squat - ${(personalStrengthData["startingSquat"] + dailyProgression)} x 5 reps x 5 sets`
+                else {  
+                    week.children[dayNum].innerHTML = 
+                        `<br>Squat - ${(personalStrengthData["startingSquat"] + dailyProgression)} x 5 reps x 5 sets`
                         + `<br>Bench Press - ${(personalStrengthData["startingBench"] + dailyProgression)} x 5 reps x 5 sets`
                         + `<br>Barbell Row - ${(personalStrengthData["startingRow"] + dailyProgression)} x 5 reps x 5 sets`
                 }
@@ -771,7 +771,6 @@ function madCowPropagation() {
     for (weekNum = 0; weekNum < 8; weekNum++) {
         var week = DOM[`week${weekNum + 1}Container`]
         for (dayNum = 0; dayNum < 3; dayNum++) {
-            week.children[dayNum].innerHTML += `Day ${dayNum + 1}`
             for (lifts = 0; lifts < 3; lifts++) {
                 if (dayNum == 0) {
                     populatePSDMadCowName(personalStrengthData, ["Squat", "Bench", "Barbell Row"])
@@ -812,9 +811,9 @@ function madCowPropagation() {
                 }
             }
         }
-        week.children[0].innerHTML += "<br> Assistance - 2 sets Weighted Hyper Extension (10-12 reps), 4 sets weighted situps (10-12 reps)"
-        week.children[1].innerHTML += "<br> Assistance - 3 sets situps (max reps)"
-        week.children[2].innerHTML += "<br> Assistance - 3 sets Weighted Dips (5-8 reps), 3 sets Barbell Curls, (8 reps), Tricep Extensions (8 reps)"
+        week.children[0].innerHTML += "<div class='assistance'> Assistance - 2 sets Weighted Hyper Extension (10-12 reps), 4 sets weighted situps (10-12 reps) </div>"
+        week.children[1].innerHTML += "<div class='assistance'> Assistance - 3 sets situps (max reps) </div>"
+        week.children[2].innerHTML += "<div class='assistance'> Assistance - 3 sets Weighted Dips (5-8 reps), 3 sets Barbell Curls, (8 reps), Tricep Extensions (8 reps) </div>"
     };
 };
 

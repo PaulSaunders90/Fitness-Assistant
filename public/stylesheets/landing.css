@@ -30,7 +30,7 @@
 }
 
 #togglecalorie{
-    width: calc(25% + 5px);
+    width: calc(25% + 8px);
     padding: 5px;
     display: inline-block;
     color: rgba(40, 44, 52);
@@ -40,7 +40,7 @@
 }
 
 #togglelift{
-    width: calc(25% + 5px);
+    width: calc(25% + 8px);
     padding: 5px;
     display: inline-block;
     color: rgba(40, 44, 52);
@@ -104,10 +104,6 @@ input[type="number"]::-webkit-outer-spin-button{
 .calorieinputs[type="number"]{
     color: rgba(40, 44, 52);
     width: 70px;
-}
-
-label {
-    margin-bottom: 15px;
 }
 
 label p{
@@ -191,6 +187,7 @@ option, .measurement, #activity{
 
 .measurement{
     display: flex;
+    margin-bottom: 10px;
 }
 
 .imperial, .metric{
@@ -202,30 +199,28 @@ option, .measurement, #activity{
 #caloriecalcresults{
     display: none;
     text-align: center;
-    padding: 25px;
-    width: auto;
+    margin: 32px auto auto auto;
+    width: 50%;
     color: rgba(40, 44, 52);
     margin: 0 auto;
+    background-color:#FFF;
 }
 
 #maintainweight{
-    width: 30%;
-    border-radius: 5px;
+    width: 50%;
     padding: 10px;
     text-align: center;
     margin: 10px auto;
-    background-color:#FFF;
 }
 
 .results{
     display: inline-block;
     margin: 10px;
-    background-color:#FFF;
 }
 
 .resultstitle{
     text-align: center;
-    font-size: 18px;
+    font-size: 22px;
     padding: 10px;
     border-bottom: 1px solid rgba(204, 200, 200, .8);
 }
@@ -237,20 +232,28 @@ option, .measurement, #activity{
 
 .resultslabel{
     display: block;
-    font-size: 16px;
+    font-size: 14px;
     text-align: center;
+    font-weight: normal;
 }
 
 #weightlossresults{ 
-    width: 30%;
-    border-radius: 5px;
-    padding: 20px;
+    width: 40%;
+    margin: auto 10px 10px auto;
+}
+
+#weightlossresults::after{
+    content: '';
+    position: absolute;
+    bottom: 20%;
+    left: calc(50% - 5px);
+    height: calc(40% - 20px);
+    border: 1px solid rgba(204, 200, 200, .3);
 }
 
 #weightgainresults{
-    width: 30%;
-    border-radius: 5px;
-    padding: 20px;
+    width: 40%;
+    margin: auto 10px 10px auto;
 }
 
 #caloriecalcresults button{
@@ -370,6 +373,18 @@ option, .measurement, #activity{
     border-bottom: 1px solid rgba(204, 200, 200, .8);
 }
 
+#daylabelcontainer{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    padding: 10px;
+    border-bottom: 1px solid rgba(204, 200, 200, .8);
+}
+
+#day2head{
+    margin: 0 30px;
+}
+
 .day1{
     display: block;
     padding: 5px;
@@ -386,6 +401,10 @@ option, .measurement, #activity{
     display: block;
     padding: 5px;
     font-size: 14px;
+}
+
+.assistance{
+    display: block;
 }
 
 .liftmax{
