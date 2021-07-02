@@ -437,17 +437,17 @@ option, .measurement, #activity{
 }
 
 #maxreptitle{
-    font-size: 18px;
+    font-size: 16px;
     margin-bottom: 10px;
 }
 
 .maxresults{
-    font-size: 16px;
+    font-size: 14px;
     margin: auto 10px;
 }
 
 .liftmax{
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .weekcontainer{
