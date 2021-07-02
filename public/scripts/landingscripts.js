@@ -333,7 +333,6 @@ function toggleLift() {
     DOM["liftingCalcContainer"].style.display = DOM["liftingCalcContainer"].style.display == 'block' ? 'block' : 'block';
     DOM["calorieCalcContainer"].style.display = DOM["calorieCalcContainer"].style.display == 'block' ? 'none' : 'none';
     DOM["title"].innerHTML = "Lifting Calculator";
-    DOM["liftingForm"].style.width = "50%";
     DOM["liftSubmitButton"].disabled = true;
     DOM["liftingCalcMeasurementTitle"].style.display = "none";
     for (i = 0; i < DOM["liftDataRows"].length; i++) {
