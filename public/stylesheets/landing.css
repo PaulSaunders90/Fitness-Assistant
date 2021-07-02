@@ -457,6 +457,19 @@ option, .measurement, #activity{
     border-bottom: 1px solid rgba(204, 200, 200, .8);
 }
 
+@media(min-width: 360px){
+    #daylabelcontainer{
+    margin-left: 60px;
+    }
+}
+
+@media(min-width: 600px){
+    #daylabelcontainer{
+    margin-left: 30px;
+    }
+}
+
+
 #day2head{
     margin: 0 30px;
 }
