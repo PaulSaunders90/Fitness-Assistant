@@ -12,12 +12,8 @@
     font-size: 22px;
 }
 
-#caloriecalccontainer{
-    background-color: #4db5ff;
-}
 
 #liftingcalccontainer{
-    background-color:#4db5ff;
     display: none;
 }
 
@@ -111,17 +107,18 @@ label p{
     font-size: 14px;
 }
 
-#genderselection{
+.genderselection{
     display: flex;
-    margin: 5px auto;
+    margin-bottom: 5px;
 }
 
 #gendertitle{
+    margin: 5px auto;
     font-size: 14px;
 }
 
 #male, #female{
-    margin: 5px 10px;
+    margin: 5px;
 }
 
 @media(min-width: 700px){
@@ -139,7 +136,6 @@ select{
 }
   
 button {
-    color: #07c;
     border: 0;
     outline: 0;
     padding: 16px;
@@ -147,21 +143,13 @@ button {
     border-radius: 5px;
     transition: all 0.2s ease-in-out;
     cursor: pointer;
-    background-color: #FFF;
-}
-
-button:hover {
-    background-color: #ccc8c8 !important;
-}
-
-button:focus {
-    box-shadow: inset 1px 1px 2px #FFF, inset -1px -1px 2px #FFF !important;
 }
 
 button.submit {
     width: 100%;
     margin: 15px auto;
-    color: #07c;
+    background-color: #0997FB;
+    color: #FFF;
     border: 1px solid rgba(204, 200, 200,.8);
 }
 
@@ -189,11 +177,11 @@ option, .measurement, #activity{
 
 .measurement{
     display: flex;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .imperial, .metric{
-    margin: 5px 10px;
+    margin: 5px;
 }
 
 /* Calorie Calc Results */
@@ -205,7 +193,7 @@ option, .measurement, #activity{
     width: 50%;
     color: rgba(40, 44, 52);
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 20px 20px 20px;
     background-color:#FFF;
 }
 
@@ -260,6 +248,7 @@ option, .measurement, #activity{
 }
 
 #caloriecalcresults button{
+    display: block;
     margin: 15px auto;
 }
 
@@ -301,6 +290,7 @@ option, .measurement, #activity{
 }
 
 #liftingcalc button{
+    display: none;
     margin: 15px auto;
 }
 
@@ -355,9 +345,8 @@ option, .measurement, #activity{
 }
 
 #liftprogramsubmit{
-    background-color: #FFF;
+    display: block;
     border: 1px solid rgba(204, 200, 200,.8);
-    display: none;
 }
 
 .weightinput, .repinput{
@@ -366,13 +355,8 @@ option, .measurement, #activity{
 
 /* Lifting Results */
 
-#liftprogramlayout{
-    display: none;
-    text-align: center;
-    padding: 25px;
-    width: auto;
-    color: rgba(40, 44, 52);
-    margin: 0 auto;
+#liftingprogramlayout{
+    border-bottom: none;
 }
 
 .maxresults{
@@ -461,6 +445,12 @@ option, .measurement, #activity{
 
 .liftmax{
     border-bottom: 1px solid rgba(235,222,194, .1);
+}
+
+#liftresetcontainer{
+    display: block;
+    background-color: #FFF;
+    padding: 10px;
 }
 
 #liftreset{

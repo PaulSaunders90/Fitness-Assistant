@@ -20,8 +20,11 @@ const DOM = {
     calorieCalcFormButton: document.getElementById("caloriecalcformbutton"),
     calorieCalcContainer: document.getElementById('caloriecalccontainer'),
     calorieCalcResultsReset: document.getElementById("caloriereset"),
-    calorieMeasurementSelector: document.getElementsByClassName("measurement")[0],
-    liftingMeasurementSelector: document.getElementsByClassName("measurement")[1],
+    measurementSelectors: document.getElementsByClassName("measurement"),
+    calorieMeasurementSelector1: document.getElementsByClassName("measurement")[0],
+    calorieMeasurementSelecto2: document.getElementsByClassName("measurement")[1],
+    liftingMeasurementSelector1: document.getElementsByClassName("measurement")[2],
+    liftingMeasurementSelector2: document.getElementsByClassName("measurement")[3],
     ageMeasurement: document.getElementById("age"),
     footHeightMeasurement: document.getElementById("feet"),
     inchHeightMeasurement: document.getElementById("inches"),
@@ -121,7 +124,9 @@ function toggleButtonGreyout(e) {
 
 // Calorie Calculator Event Listeners //
 
-DOM["calorieMeasurementSelector"].addEventListener("click", measurementCheck)
+for(i = 0; i < 2; i++){
+    DOM["measurementSelectors"][i].addEventListener("click", measurementCheck)
+}
 DOM["calorieCalcFormButton"].addEventListener("click", measureCalories)
 DOM["calorieCalcResultsReset"].addEventListener("click", resetCalories)
 DOM["calorieToggle"].addEventListener("click", toggleCalc)
@@ -184,15 +189,15 @@ function checkCalorieForm() {
     var kgInputFilled = (!isNaN(parseInt(DOM["kgWeightMeasurement"].value)) && (parseInt(DOM["kgWeightMeasurement"].value) > 0))
     if ((impChecked || metricChecked) && activitySelection != 0 && ageInputFilled && footInputFilled && inchInputFilled && poundInputFilled) {
         DOM["calorieCalcFormButton"].disabled = false
-        DOM["calorieCalcFormButton"].style.backgroundColor = "#e5e1e1";
+        DOM["calorieCalcFormButton"].style.display = "block";
         return true
     } else if ((impChecked || metricChecked) && activitySelection != 0 && ageInputFilled && cmInputFilled && kgInputFilled) {
         DOM["calorieCalcFormButton"].disabled = false
-        DOM["calorieCalcFormButton"].style.backgroundColor = "#e5e1e1";
+        DOM["calorieCalcFormButton"].style.display = "block";
         return true
     } else {
         DOM["calorieCalcFormButton"].disabled = true
-        DOM["calorieCalcFormButton"].style.backgroundColor = "#FFF";
+        DOM["calorieCalcFormButton"].style.display = "block";
         return false
     }
 };
@@ -290,15 +295,18 @@ function resetCalories() {
     DOM["calorieCalcResults"].style.display = "none";
     DOM["calorieToggle"].style.display = "inline-block"
     DOM["liftToggle"].style.display = "inline-block"
+    DOM["calorieCalcFormButton"].style.display = "block";
+    document.getElementById('calorieimp').checked = false;
+    document.getElementById('caloriekg').checked = false;
+    document.getElementById('male').checked = false;
+    document.getElementById('female').checked = false;
     DOM["ageMeasurement"].value = "";
     DOM["footHeightMeasurement"].value = "";
     DOM["inchHeightMeasurement"].value = "";
     DOM["cmHeightMeasurement"].value = "";
     DOM["poundWeightMeasurement"].value = "";
     DOM["kgWeightMeasurement"].value = "";
-    DOM["calorieMeasurementSelector"].selectedIndex = 0;
     DOM["activityMeasurementSelector"].selectedIndex = 0;
-    DOM["calorieCalcFormButton"].style.backgroundColor = "#FFF";
     personalHealthData = {};
 };
 
@@ -341,7 +349,8 @@ function selectLiftingProgram() {
     // If Starting Strength //
     if (liftingSelection == 1) {
         DOM["liftingCalcMeasurementTitle"].style.display = "block"
-        DOM["liftingMeasurementSelector"].style.display = "flex"
+        DOM["liftingMeasurementSelector1"].style.display = "flex"
+        DOM["liftingMeasurementSelector2"].style.display = "flex"
         DOM["squatInput"].style.display = "flex"
         DOM["squatInput"].parentNode.style.display = "block"
         DOM["benchInput"].style.display = "flex"
@@ -354,13 +363,14 @@ function selectLiftingProgram() {
         DOM["powerCleanInput"].parentNode.style.display = "block"
         DOM["ohpInput"].style.display = "none"
         DOM["ohpInput"].parentNode.style.display = "none"
-        DOM["liftSubmitButton"].style.display = "block"
         DOM["instructionText"].style.display = "block"
+        DOM["liftSubmitButton"].style.display = "block"
     }
     // If Stronglifts or Madcow //
     else if (liftingSelection == 2 || liftingSelection == 3) {
         DOM["liftingCalcMeasurementTitle"].style.display = "block"
-        DOM["liftingMeasurementSelector"].style.display = "flex"
+        DOM["liftingMeasurementSelector1"].style.display = "flex"
+        DOM["liftingMeasurementSelector2"].style.display = "flex"
         DOM["squatInput"].style.display = "flex"
         DOM["squatInput"].parentNode.style.display = "block"
         DOM["benchInput"].style.display = "flex"
@@ -373,11 +383,12 @@ function selectLiftingProgram() {
         DOM["powerCleanInput"].parentNode.style.display = "none"
         DOM["ohpInput"].style.display = "flex"
         DOM["ohpInput"].parentNode.style.display = "block"
-        DOM["liftSubmitButton"].style.display = "block"
         DOM["instructionText"].style.display = "block"
+        DOM["liftSubmitButton"].style.display = "block"
     }
     else {
-        DOM["liftingMeasurementSelector"].style.display = "none"
+        DOM["liftingMeasurementSelector1"].style.display = "none"
+        DOM["liftingMeasurementSelector2"].style.display = "none"
     }
 };
 
@@ -402,17 +413,17 @@ function checkLiftingForm() {
     if ((impCheck || metricCheck) && (liftingSelection == 1) && squatInputFilled && benchInputFilled && deadliftInputFilled
         && powerCleanInputFilled) {
         DOM["liftSubmitButton"].disabled = false
-        DOM["liftSubmitButton"].style.backgroundColor = "#e5e1e1";
+        DOM["liftSubmitButton"].style.display = "block";
         return true
     } else if ((impCheck || metricCheck) && (liftingSelection == 2 || liftingSelection == 3) && squatInputFilled && benchInputFilled &&
         deadliftInputFilled && rowInputFilled && ohpInputFilled) {
         DOM["liftSubmitButton"].disabled = false
-        DOM["liftSubmitButton"].style.backgroundColor = "#e5e1e1";
+        DOM["liftSubmitButton"].style.display = "block";
         return true
     }
     else {
         DOM["liftSubmitButton"].disabled = true
-        DOM["liftSubmitButton"].style.backgroundColor = "#FFF";
+        DOM["liftSubmitButton"].style.display = "block";
         return false
     }
 };
@@ -863,8 +874,12 @@ function resetLifts() {
     DOM["powerCleanInput"].style.display = "none"
     DOM["ohpInput"].style.display = "none"
     DOM["liftSubmitButton"].style.display = "none"
+    DOM["liftSubmitButton"].disabled = true;
     DOM["instructionText"].style.display = "none"
-    DOM["liftingMeasurementSelector"].style.display = "none"
+    DOM["liftingMeasurementSelector1"].style.display = "none"
+    DOM["liftingMeasurementSelector2"].style.display = "none"
+    document.getElementById('liftimp').checked = false;
+    document.getElementById('liftkg').checked = false;
     for (i = 0; i < DOM["liftDataRows"].length; i++) {
         DOM["liftDataRows"][i].style.display = "none"
     }
@@ -889,9 +904,7 @@ function resetLifts() {
     DOM["powerCleanRepInput"].value = ""
     DOM["ohpWeightInput"].value = ""
     DOM["ohpRepInput"].value = ""
-    DOM["liftSubmitButton"].style.backgroundColor = "#FFF"
     DOM["liftingProgramSelector"].selectedIndex = 0
-    DOM["liftingMeasurementSelector"].selectedIndex = 0
     DOM["liftingCalcMeasurementTitle"].style.display = "none"
     personalStrengthData = {}
 };

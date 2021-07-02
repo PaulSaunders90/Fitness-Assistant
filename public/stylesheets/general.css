@@ -4,7 +4,13 @@ html, body {
     position: relative;
     font-family: 'Open Sans', sans-serif;
     font-weight: bold;
-    background-color:#4db5ff;
+}
+
+html{
+    background-image: url("/img/background.jpg");
+    background-position: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .generalcontainer {
@@ -16,7 +22,6 @@ html, body {
 
 #footer{
     padding: 5px;
-    background-color: #4db5ff;
     text-align: center;
     color: #fff;
     font-size: 10px;

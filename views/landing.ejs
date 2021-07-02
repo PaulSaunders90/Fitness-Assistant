@@ -19,15 +19,19 @@
                             <input selected="true" class="imperial" value="us" type="radio" name="measurement"
                                 id="calorieimp">
                             <label for="us">Imperial</label>
+                        </div>
+                        <div class="measurement">
                             <input selected="true" class="metric" value="kg" type="radio" name="measurement"
                                 id="caloriekg">
                             <label for="kg">Metric</option>
                         </div>
                     </label>
                     <p id="gendertitle">Gender:</p>
-                    <div id="genderselection">
+                    <div class="genderselection">
                         <input class="calorieinputs" type="radio" id="male" name="gender" value="male" required>
                         <label for="male">Male</label>
+                    </div>
+                    <div class="genderselection">
                         <input class="calorieinputs" type="radio" id="female" name="gender" value="female">
                         <label for="female">Female</label>
                     </div>
@@ -121,6 +125,8 @@
                             <input selected="true" class="imperial" value="us" type="radio" name="measurement"
                                 id="liftimp">
                             <label for="us">Imperial</label>
+                        </div>
+                        <div class="measurement">
                             <input selected="true" class="metric" value="kg" type="radio" name="measurement"
                                 id="liftkg">
                             <label for="kg">Metric</option>
@@ -262,7 +268,9 @@
                         <div class="day3"></div>
                     </div>
                 </form>
+            <div id="liftresetcontainer">
                 <button id="liftreset" class="submit" type="button">Reset</button>
+            </div>
             </div>
         </div>
     </div>
