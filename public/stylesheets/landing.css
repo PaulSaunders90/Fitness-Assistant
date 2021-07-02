@@ -260,13 +260,13 @@ option, .measurement, #activity{
 
 .results{
     display: inline-block;
+    vertical-align: top;
     margin: 10px;
 }
 
 .resultstitle{
     text-align: center;
     font-size: 18px;
-    padding: 10px;
     border-bottom: 1px solid rgba(204, 200, 200, .8);
 }
 
@@ -290,9 +290,9 @@ option, .measurement, #activity{
 #weightlossresults::after{
     content: '';
     position: absolute;
-    bottom: 20%;
+    bottom: 30%;
     left: calc(50% - 5px);
-    height: calc(40% - 20px);
+    height: 30%;
     border: 1px solid rgba(204, 200, 200, .3);
 }
 
