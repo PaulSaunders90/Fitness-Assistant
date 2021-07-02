@@ -289,11 +289,12 @@ option, .measurement, #activity{
 
 #weightlossresults::after{
     content: '';
+    width: 1px;
     position: absolute;
-    bottom: 30%;
+    bottom: calc(40% - 2vh);
     left: calc(50% - 5px);
-    height: 30%;
-    border: 1px solid rgba(204, 200, 200, .3);
+    height: 35%;
+    background-color: rgba(204, 200, 200, .3);
 }
 
 #weightgainresults{
