@@ -726,7 +726,7 @@ function madCowDay1(week, dayNum, lifts) {
     if (lifts == 0) {
         week.children[dayNum].innerHTML += `<p>${personalStrengthData["madCowLift"][lifts].name}</p>`
     } else {
-        week.children[dayNum].innerHTML += `<br><p>${personalStrengthData["madCowLift"][lifts].name}</p>`
+        week.children[dayNum].innerHTML += `<br><br><p>${personalStrengthData["madCowLift"][lifts].name}</p>`
     }
     for (sets = 0; sets < 5; sets++) {
         increaseInterval = (.5 + (.125 * sets))
@@ -749,7 +749,7 @@ function madCowDay2(week, dayNum, lifts) {
     if (lifts == 0) {
         week.children[dayNum].innerHTML += `<p>${personalStrengthData["madCowLift"][lifts].name}</p>`
     } else {
-        week.children[dayNum].innerHTML += `<br> <p>${personalStrengthData["madCowLift"][lifts].name}</p>`
+        week.children[dayNum].innerHTML += `<br><br><br><p>${personalStrengthData["madCowLift"][lifts].name}</p>`
     } for (sets = 0; sets < 4; sets++) {
         squatInterval = (sets != 3) ? (.5 + (.125 * sets)) : .75
         day2Interval = (.625 + (.125 * sets))
