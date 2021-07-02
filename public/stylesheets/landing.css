@@ -283,17 +283,18 @@ option, .measurement, #activity{
 }
 
 #weightlossresults{ 
+    position: relative;
     width: 40%;
     margin: auto 10px 10px auto;
 }
 
 #weightlossresults::after{
-    content: '';
-    width: 1px;
     position: absolute;
-    bottom: calc(40% - 2vh);
-    left: calc(50% - 5px);
-    height: 35%;
+    content: '';
+    height: 100%;
+    width: 1px;
+    top:0;
+    right: -7px;
     background-color: rgba(204, 200, 200, .3);
 }
 
